@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  results: MyText
+  videotimemillis: 1
+  hashstring: MyString
+  matcheditem: MyString
+  colors: MyString
+  imagepath: MyString
+  video: 
+
+two:
+  results: MyText
+  videotimemillis: 1
+  hashstring: MyString
+  matcheditem: MyString
+  colors: MyString
+  imagepath: MyString
+  video: 
