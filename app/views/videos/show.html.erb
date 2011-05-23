@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @video.name %>
+</p>
+
+<p>
+  <b>Lengthmillis:</b>
+  <%= @video.lengthmillis %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @video.description %>
+</p>
+
+<p>
+  <b>Hashstring:</b>
+  <%= @video.hashstring %>
+</p>
+
+<h2>List Images</h2>
+<%= render :partial => "iqeinfos/iqeinfo",
+           :collection => @video.iqeinfos %>
+
+<h2>Add Images</h2>
+<%= form_for([@video, @video.iqeinfos.build]) do |f| %>
+  <div class="field">
+    <%= f.label :results %><br />
+    <%= f.text_area :results %>
+  </div>
+  <div class="field">
+    <%= f.label :videotimemillis %><br />
+    <%= f.text_field :videotimemillis %>
+  </div>
+  <div class="field">
+    <%= f.label :matcheditem %><br />
+    <%= f.text_field :matcheditem %>
+  </div>
+  <div class="field">
+    <%= f.label :colors %><br />
+    <%= f.text_field :colors %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+<%= link_to 'Edit', edit_video_path(@video) %> |
+<%= link_to 'Back', videos_path %>
