@@ -1,4 +1,13 @@
 class VideosController < ApplicationController
+
+  #Process Video function is used to send the video data for this video to the various third parties for processing
+
+#  def processvideo
+    #@video = Video.find(params[:id])
+#    logger.info "testtest "  
+#    redirect_to videos_url+'/'
+#  end
+
   # GET /videos
   # GET /videos.xml
   def index
@@ -60,6 +69,7 @@ class VideosController < ApplicationController
 
     respond_to do |format|
       if @video.update_attributes(params[:video])
+        logger.info 'Updating Video with id ' + params[:id].to_s
         format.html { redirect_to(@video, :notice => 'Video was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -80,4 +90,5 @@ class VideosController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
 end

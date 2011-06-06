@@ -21,3 +21,6 @@
   <%= @iqeinfo.results %>
 </p>
 
+<%= link_to 'Edit', videos_path + "/" + @iqeinfo.video_id.to_s + '/iqeinfos/' + @iqeinfo.id.to_s + '/edit' %> |
+<%= link_to 'Back', videos_path + "/" + @iqeinfo.video_id.to_s + '/iqeinfos/' %>
+

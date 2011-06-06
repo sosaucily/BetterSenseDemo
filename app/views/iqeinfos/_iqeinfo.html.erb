@@ -1,12 +1,10 @@
+  <% if iqeinfo.matcheditem != "Dark | " && iqeinfo.matcheditem != "Blank | " %> 
   <p>
-    <b>Processed Image</b>
-    <img src="<%= iqeinfo.imagepath %>" />
+    <b>Image</b>
+    <img src="<%= iqeinfo.imagepath %>">
   </p> 
-  <p>
-    <b>IQEngine Results:</b>
-    <%= iqeinfo.results %>
-  </p>
   <p>
     <b>IQEngine Matched Item(s):</b>
     <%= iqeinfo.matcheditem %>
   </p>
+  <% end %>
