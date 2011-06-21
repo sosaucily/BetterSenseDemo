@@ -27,21 +27,103 @@
   <%= @video.filepath %>
 </p>
 
-<h2>Extracted Images from Video</h2><br />
-<%= render :partial => "iqeinfos/iqeinfo",
-           :collection => @video.iqeinfos %>
+<p>
+  <b>Video:</b><br />
+  <a 
+    href="<%= @video.filepath %>" 
+    style="display:block;width:<%= @video.res_x.to_s %>px;height:<%= @video.res_y.to_s %>px"
+    id="player">
+  </a>
+  <script language="JavaScript">
 
+    var imageData = new Array();
+    <% @video.iqeinfos.each do |iqe|
+     if (iqe.imagepath != nil)
+       begin
+         patharray = iqe.imagepath.split("/")
+         seq = patharray[patharray.length-1][6..-4]
+       rescue => msg
+         logger.info ("caught exception in video.show when iterating through iqeinfo images: " + msg)
+       end
+     end
+     if (seq != nil && iqe.matcheditem != nil)
+     %>
+       imageData[<%= (seq.to_i * 2) - 5  %>] = "<%= iqe.matcheditem[0..-4] %>";
+     <%
+     end
+   end %>
+
+    flowplayer("player", "/flash/flowplayer-3.2.7.swf", {
+      clip: {
+      // stop at the first frame and start buffering
+      autoPlay: false,
+      autoBuffering: false,
+      onStart: function() {
+        var self = this;
+        //var timer = setInterval(function() {
+        //  document.getElementById('videoTime').innerHTML = self.getTime();
+          
+          // when playback is stopped clear timer
+          //if (self.getState() == 5) clearInterval(timer);
+        //}, 1000);
+          
+        $f().onCuepoint(
+          getCuepoints($f().getClip(0)),
+          function(clip, cuepoint) {
+            <!-- document.getElementById('videoTime').innerHTML = cuepoint / 1000; -->
+            if ( (cuepoint/1000) in imageData)
+            {
+              Effect.Fade('detectedData',{ 
+                duration:0.3, 
+                afterFinish: function(){ 
+                  $('detectedData').innerHTML = imageData[cuepoint / 1000];
+                  Effect.Appear('detectedData',{duration:0.3}); 
+                } 
+              }); 
+            }
+          });
+      } 
+      }
+});
+
+    function getCuepoints(clip) {
+      i = 0;
+      var cuepoints = new Array();
+      for (i=0; i < clip.duration; i++)
+      {
+        cuepoints [i] = i*1000;
+      }
+      return cuepoints;
+    }
+    
+  </script>
+</p>
+<!--  <object type="application/x-shockwave-flash" data="
+  <object> <embed src="<%= @video.filepath %>" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" /> </object>
+-->
+</p>  
+<p>
+<div id="itemsHolder" style="font-size: large">
+<span id="itemsHeader">Detected Items - </span>
+<span id="detectedData"></span>
+<!-- <span id="videoTime"></span> -->
+</p>
+<br />
+<!-- <h2>Extracted Images from Video</h2><br /> -->
+<!--
+ # render :partial => "iqeinfos/iqeinfo",
+    #       :collection => @video.iqeinfos -->
+      
 <h2>Video Commands</h2><br />
 <%= form_for([@video, @video.iqeinfos.build]) do |f| %>
   <div class="actions">
-    <input name="videoAction[]" type="checkbox" value="200importImages" />Import Images on this video <br />
-    <input name="videoAction[]" type="checkbox" value="100clearImages" />Clear Images on this video <br />
-    <input name="videoAction[]" type="checkbox" value="300iqeprocess" />Process Through IQEngines <br />
-    <input name="videoAction[]" type="checkbox" value="400iqeprocessmissing" />Process Missing Through IQEngines <br />
+    <input name="videoAction[]" type="checkbox" value="200importImages" />Import Images on this video<br />
+    <input name="videoAction[]" type="checkbox" value="100clearImages" />Clear Images on this video<br />
+    <input name="videoAction[]" type="checkbox" value="300iqeprocess" />Analyze Images<br />
+    <input name="videoAction[]" type="checkbox" value="400iqeprocessmissing" />Analyze Missing Images<br />
     <%= f.submit  "Send selected commands" %>
   </div> 
 <% end %>
-
 
 <%= link_to 'Edit', edit_video_path(@video) %> |
 <%= link_to 'Back', videos_path %>

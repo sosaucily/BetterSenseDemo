@@ -1,29 +1,42 @@
-<h1>Listing videos</h1>
+<%= render "shared/header" %>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Lengthmillis</th>
-    <th>Description</th>
-    <th>Hashstring</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<h1>Videos</h1>
 
+<table id="ver-minimalist">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Lengthmillis</th>
+      <th scope="col">Description</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Lengthmillis</th>
+      <th scope="col">Description</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </tfoot>
+  <tbody>
+  
 <% @videos.each do |video| %>
-  <tr>
-    <td><%= video.name %></td>
-    <td><%= video.lengthmillis %></td>
-    <td><%= video.description %></td>
-    <td><%= video.hashstring %></td>
-    <td><%= link_to 'Show', video %></td>
-    <td><%= link_to 'Edit', edit_video_path(video) %></td>
-    <td><%= link_to 'Destroy', video, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+    <tr class="<%= cycle('odd', 'even') %>">
+      <td><%= video.name %></td>
+      <td><%= video.lengthmillis %></td>
+      <td><%= video.description %></td>
+      <td><%= link_to 'View', video %></td>
+      <td><%= link_to 'Edit', edit_video_path(video) %></td>
+    </tr>
 <% end %>
+  </tbody>
 </table>
 
 <br />
 
 <%= link_to 'New Video', new_video_path %>
+
+<%= render "shared/footer" %>

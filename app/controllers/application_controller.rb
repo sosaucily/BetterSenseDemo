@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   IQE_KEY = '2fd276e7f0ac4a5f948f244fa127cd22'
   IQE_SECRET = '5de565aa46c6464a81fe92c3389a7a0b'
-  HOOKBASEURL = 'http://184.72.217.146:3000/'
+  HOOKBASEURL = 'http://184.72.217.146/'
 
   def process_video (video)
     logger.info 'processing video at path ' + video[:name]
@@ -40,6 +40,7 @@ class ApplicationController < ActionController::Base
       api = IQEngines.Api(IQE_KEY,IQE_SECRET)
       qid, response = api.send_query("./public" + iqe.imagepath, extra=nil, webhook=hookurl, device_id='test123', multiple_results=true, modules=nil, json=true)
       logger.info "api.send_query(./public#{iqe.imagepath}, extra=nil, webhook=#{hookurl}, device_id='test123', multiple_results=true, modules=nil, json=true)"
+      sleep 5
     end
   end
 
