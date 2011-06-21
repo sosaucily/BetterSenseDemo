@@ -1,4 +1,9 @@
 BetterSenseDemo::Application.routes.draw do
+
+  get "contact/index"
+
+  match "videos/:video_id/iqeinfos/:id/:action", :controller => 'iqeinfos', :action => /[a-zA-Z]+/i
+
   resources :videos do
     resources :iqeinfos
   end
