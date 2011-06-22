@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   validates :password, :confirmation => true
   attr_accessor :password_confirmation
   attr_reader :password
-  validate :password_must_be_present private
+  validate :password_must_be_present 
 
   def User.encrypt_password(password, salt)
     Digest::SHA2.hexdigest(password + "wibble" + salt)
