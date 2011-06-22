@@ -2,7 +2,7 @@
 
 <table>
   <tr>
-    <th> name</th>
+    <th>name</th>
     <th>Hashed password</th>
     <th>Salt</th>
     <th></th>
@@ -12,7 +12,7 @@
 
 <% @users.each do |user| %>
   <tr>
-    <td><%= user. name %></td>
+    <td><%= user.name %></td>
     <td><%= user.hashed_password %></td>
     <td><%= user.salt %></td>
     <td><%= link_to 'Show', user %></td>
