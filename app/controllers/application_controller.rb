@@ -1,7 +1,6 @@
 require 'iqengines'
 
 class ApplicationController < ActionController::Base
-#  before_filter :authorize
   protect_from_forgery
 
   PROCESSEDVIDEOPATH = "processedVideos"
@@ -81,13 +80,4 @@ class ApplicationController < ActionController::Base
     doing_process = 1
     "videos/" + video[:id]
   end
-
-
-#  protected
-#    def authorize 
-#      unless User.find_by_id(session[:user_id])
-#        redirect_to login_url, :notice => "Please log in"
-#      end
-#    end 
-
 end
