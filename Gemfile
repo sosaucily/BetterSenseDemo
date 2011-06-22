@@ -6,8 +6,14 @@ gem 'rails', '3.0.7'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
-
+group :production do
+  gem 'pg'
+end
 gem 'rake', '~> 0.8.7'
+
+gem 'ruby-hmac', '~> 0.4.0'
+
+gem 'rest-client', '~>1.6.1'
 
 # Use unicorn as the web server
 # gem 'unicorn'
