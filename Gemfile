@@ -11,6 +11,7 @@ group :production do
 end
 gem 'rake', '~> 0.8.7'
 
+gem 'yaml_db'
 # Use unicorn as the web server
 # gem 'unicorn'
 
