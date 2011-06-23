@@ -9,7 +9,9 @@
       <th scope="col">Lengthmillis</th>
       <th scope="col">Description</th>
       <th scope="col"></th>
-      <th scope="col"></th>
+      <% if (user_signed_in?) %>
+        <th scope="col"></th>
+      <% end %>
     </tr>
   </thead>
   <tfoot>
@@ -18,7 +20,9 @@
       <th scope="col">Lengthmillis</th>
       <th scope="col">Description</th>
       <th scope="col"></th>
-      <th scope="col"></th>
+      <% if (user_signed_in?) %>
+        <th scope="col"></th>
+      <% end %>
     </tr>
   </tfoot>
   <tbody>
@@ -29,7 +33,9 @@
       <td><%= video.lengthmillis %></td>
       <td><%= video.description %></td>
       <td><%= link_to 'View', video %></td>
-      <td><%= link_to 'Edit', edit_video_path(video) %></td>
+      <% if (user_signed_in?) %>
+        <td><%= link_to 'Edit', edit_video_path(video) %></td>
+      <% end %>
     </tr>
 <% end %>
   </tbody>

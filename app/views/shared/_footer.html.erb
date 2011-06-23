@@ -4,6 +4,12 @@
   <!-- end #page --> 
   </div> 
   <div id="footer"> 
-    <p>Copyright (c) 2010 bettersense.com. All rights reserved. - <a href="/contact/index">Contact</a></p> 
+    <p>Copyright (c) 2010 bettersense.com. All rights reserved. - <a href="/contact/index">Contact</a> - 
+    <% if (user_signed_in?) %>
+      Signed in as <%= current_user.email %>.  <%= link_to "Sign out", destroy_user_session_path %>
+    <% else %>
+      <%= link_to "Sign in", new_user_session_path %>
+    <% end %>
+    </p> 
   </div> 
   <!-- end #footer --> 

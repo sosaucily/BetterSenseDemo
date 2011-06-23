@@ -105,6 +105,10 @@ a:hover {
 	background: url(../images/bettersense_logo_490.jpg) no-repeat left top;
 }
 
+#headerbar {
+	text-align: right;
+}
+
 /* Logo */
 
 #logo {

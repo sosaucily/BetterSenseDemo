@@ -113,19 +113,21 @@
 <!--
  # render :partial => "iqeinfos/iqeinfo",
     #       :collection => @video.iqeinfos -->
-      
-<h2>Video Commands</h2><br />
-<%= form_for([@video, @video.iqeinfos.build]) do |f| %>
-  <div class="actions">
-    <input name="videoAction[]" type="checkbox" value="200importImages" />Import Images on this video<br />
-    <input name="videoAction[]" type="checkbox" value="100clearImages" />Clear Images on this video<br />
-    <input name="videoAction[]" type="checkbox" value="300iqeprocess" />Analyze Images<br />
-    <input name="videoAction[]" type="checkbox" value="400iqeprocessmissing" />Analyze Missing Images<br />
-    <%= f.submit  "Send selected commands" %>
-  </div> 
+ 
+<% if (user_signed_in?) %>
+  <h2>Video Commands</h2><br />
+  <%= form_for([@video, @video.iqeinfos.build]) do |f| %>
+    <div class="actions">
+      <input name="videoAction[]" type="checkbox" value="200importImages" />Import Images on this video<br />
+      <input name="videoAction[]" type="checkbox" value="100clearImages" />Clear Images on this video<br />
+      <input name="videoAction[]" type="checkbox" value="300iqeprocess" />Analyze Images<br />
+      <input name="videoAction[]" type="checkbox" value="400iqeprocessmissing" />Analyze Missing Images<br />
+      <%= f.submit  "Send selected commands" %>
+    </div> 
+  <% end %>
+  <%= link_to 'Edit', edit_video_path(@video) %> |
 <% end %>
 
-<%= link_to 'Edit', edit_video_path(@video) %> |
 <%= link_to 'Back', videos_path %>
 
 <%= render "shared/footer" %>
