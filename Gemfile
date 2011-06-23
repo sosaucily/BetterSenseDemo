@@ -16,7 +16,6 @@ gem 'ruby-hmac', '~> 0.4.0'
 gem 'rest-client', '~>1.6.1'
 
 gem 'yaml_db'
-
 # Use unicorn as the web server
 # gem 'unicorn'
 
