@@ -28,6 +28,7 @@
   <tbody>
   
 <% @videos.each do |video| %>
+  <% if (video.viewable? or user_signed_in?) %>
     <tr class="<%= cycle('odd', 'even') %>">
       <td><%= video.name %></td>
       <td><%= video.lengthmillis %></td>
@@ -37,6 +38,7 @@
         <td><%= link_to 'Edit', edit_video_path(video) %></td>
       <% end %>
     </tr>
+  <% end %>
 <% end %>
   </tbody>
 </table>
