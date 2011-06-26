@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   IQE_KEY = '2fd276e7f0ac4a5f948f244fa127cd22'
   IQE_SECRET = '5de565aa46c6464a81fe92c3389a7a0b'
-  HOOKBASEURL = 'http://184.72.217.146/'
+  HOOKBASEURL = 'http://184.72.217.146:3000/'
 
   def process_video (video)
     logger.info 'processing video at path ' + video[:name]

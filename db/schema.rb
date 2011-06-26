@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110623020805) do
+ActiveRecord::Schema.define(:version => 20110626205318) do
 
   create_table "iqeinfos", :force => true do |t|
     t.text     "results"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(:version => 20110623020805) do
     t.string   "filepath"
     t.integer  "res_x",        :default => 480
     t.integer  "res_y",        :default => 360
+    t.boolean  "viewable",     :default => false
   end
 
 end
