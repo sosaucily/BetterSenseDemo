@@ -6,7 +6,6 @@
   <thead>
     <tr>
       <th scope="col">Name</th>
-      <th scope="col">Lengthmillis</th>
       <th scope="col">Description</th>
       <th scope="col"></th>
       <% if (user_signed_in?) %>
@@ -17,7 +16,6 @@
   <tfoot>
     <tr>
       <th scope="col">Name</th>
-      <th scope="col">Lengthmillis</th>
       <th scope="col">Description</th>
       <th scope="col"></th>
       <% if (user_signed_in?) %>
@@ -31,7 +29,6 @@
   <% if (video.viewable? or user_signed_in?) %>
     <tr class="<%= cycle('odd', 'even') %>">
       <td><%= video.name %></td>
-      <td><%= video.lengthmillis %></td>
       <td><%= video.description %></td>
       <td><%= link_to 'View', video %></td>
       <% if (user_signed_in?) %>
