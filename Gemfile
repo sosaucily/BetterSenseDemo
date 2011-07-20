@@ -19,6 +19,9 @@ gem 'yaml_db'
 
 gem 'devise'
 
+gem 'algorithms'
+
+gem 'fastercsv'
 # Use unicorn as the web server
 # gem 'unicorn'
 
