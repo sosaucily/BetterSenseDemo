@@ -22,6 +22,7 @@
   <script language="JavaScript">
 
     var imageData = new Array();
+    var keywordCat = new Array();
     <% @video.iqeinfos.each do |iqe|
      if (iqe.imagepath != nil)
        begin
@@ -34,6 +35,7 @@
      if (seq != nil && iqe.matcheditem != nil)
      %>
        imageData[<%= (seq.to_i * 2) - 5  %>] = "<%= iqe.matcheditem[0..-4] %>";
+       keywordCat[<%= (seq.to_i * 2) - 5  %>] = "<%= getAdCategories(iqe.matcheditem[0..-4]) %>";
      <%
      end
    end %>
@@ -62,6 +64,7 @@
                 duration:0.3, 
                 afterFinish: function(){ 
                   $('detectedData').innerHTML = imageData[cuepoint / 1000];
+                  $('categories').innerHTML = keywordCat[cuepoint / 1000];
                   Effect.Appear('detectedData',{duration:0.3}); 
                 } 
               }); 
@@ -93,8 +96,9 @@
 Items Detected In Video <span id="infoTip1" title="bettersense uses a combination of state-of-the-art CV (Computer Vision) and crowdsourcing systems to locate important objects in videos." style="font-size:10pt; font-weight:normal; color:#FF6699;"><b>how?</b></span>
 </td></tr>
 <tr style="height: 40px;"><td style="padding-left:5px; color:#000000; font-size:14pt; font-weight:bold; border-color:#868686; border:1px solid #868686;" >
-<span id="detectedData">&nbsp;</span>
+<span style="font-weight:normal;">Matched Items(s):&nbsp;</span><span id="detectedData">&nbsp;</span>
 </td></tr>
+<tr><td>Advertising Categories: <br/><span id="categories"></span></td></tr>
 </table>
 <script type="text/javascript">
 //Tool Tip for image recognition
