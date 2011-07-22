@@ -39,10 +39,13 @@ module VideosHelper
 
     if (wordResults[0].empty?) then return end #No ad categories for this keyword
 
-    wordResults.flatten!
-    wordResults.each do |word|
-      logger.info "now getting categories for " + word
-      results.push ($adWordTrie.get(word))
+    #wordResults.flatten!
+    wordResults.each do |cat|
+      cat.each do |word|
+        logger.info "now getting categories for " + word
+        cats = $adWordTrie.get(word)
+        results.push (cats.each_with_index.map {|c,i| if (i!=cats.length-1) then c.to_s + "->" else c.to_s end })
+      end
     end
     result_string = ""
     results.uniq.each do |cat|
