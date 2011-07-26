@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110626205318) do
+ActiveRecord::Schema.define(:version => 20110726003504) do
 
   create_table "iqeinfos", :force => true do |t|
     t.text     "results"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(:version => 20110626205318) do
     t.integer  "video_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "iqx"
+    t.integer  "iqy"
+    t.integer  "iqwidth"
+    t.integer  "iqheight"
+    t.integer  "cx"
+    t.integer  "cy"
+    t.integer  "cwidth"
+    t.integer  "xheight"
+    t.boolean  "send_to_crowd"
+    t.datetime "processing"
+    t.boolean  "complete"
   end
 
   create_table "users", :force => true do |t|

@@ -1,8 +1,16 @@
 BetterSenseDemo::Application.routes.draw do
 
+  get "betterpic/list"
+
+  get "betterpic/info"
+
+  match "betterpic", :controller => 'betterpic', :action => 'index'
+
   devise_for :users
 
   get "contact/index"
+
+  match "contact", :controller => 'contact', :action => 'index'
 
   match "videos/:video_id/iqeinfos/:id/:action", :controller => 'iqeinfos', :action => /[a-zA-Z]+/i
 
