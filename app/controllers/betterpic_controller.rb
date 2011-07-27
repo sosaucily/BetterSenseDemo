@@ -28,13 +28,13 @@ class BetterpicController < ApplicationController
 
   def update
     @currIQE = Iqeinfo.find(params[:iqeinfo_id])
-    logger.info 'Updating pic with id ' + params[:iqeinfo_id].to_s
     if @currIQE.update_attributes(params[:iqeinfo])
-      @currIQE.save
       logger.info 'Successfully updated pic with id ' + params[:iqeinfo_id].to_s
+      @currIQE.complete = true
+      @currIQE.save
+      redirect_to("/betterpic")
     else
       redirect_to("/",:notice => 'There was an error updating the pic')
     end
-    redirect_to("/betterpic") 
   end
 end

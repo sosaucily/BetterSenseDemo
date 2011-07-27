@@ -50,8 +50,8 @@
     coords = $('layer1').cumulativeOffset();
     x -= coords[0]
     y -= coords[1]
-    $('xc').value = x;
-    $('yc').value = y;
+    $('iqeinfo_cx').value = x;
+    $('iqeinfo_cy').value = y;
     
     drawSelectionCircle(x,y,myCanvas, selectedTool);
 
@@ -78,14 +78,14 @@ Choose selector type: <table id="drawOptions" cellspacing="8">
 <form id="cImageInfo" accept-charset="UTF-8" action="/betterpic/<%= @image_for_crowd.id %>" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="_method" type="hidden" value="put" /><input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" /></div>
   <div class="field">
   <table id="imageInfo">
-    <tr><td>X Coord: <input type="text" name="xc" id="xc" placeholder="0"></td></tr>
-    <tr><td>Y Coord: <input type="text" name="yc" id="yc" placeholder="0"></td></tr>
-    <tr><td><input type="text" name="cdescription" id="cdescription" size="50" placeholder="Describe the Image"></td></tr>
-    <tr><td><input type="text" name="ccompanyurl" id="ccompanyurl" size="50" placeholder="Web site for company"></td></tr>
-    <tr><td><input type="text" name="cproducturl" id="cproducturl" size="50" placeholder="Web site for product"></td></tr>
+    <tr><td>X Coord: <input type="text" name="iqeinfo[cx]" id="iqeinfo_cx" placeholder="0"></td></tr>
+    <tr><td>Y Coord: <input type="text" name="iqeinfo[cy]" id="iqeinfo_cy" placeholder="0"></td></tr>
+    <tr><td><input type="text" name="iqeinfo[cdescription]" id="iqeinfo_cdescription" size="50" placeholder="Describe the Image"></td></tr>
+    <tr><td><input type="text" name="iqeinfo[ccompanyurl]" id="iqeinfo_ccompanyurl" size="50" placeholder="Web site for company"></td></tr>
+    <tr><td><input type="text" name="iqeinfo[cproducturl]" id="iqeinfo_cproducturl" size="50" placeholder="Web site for product"></td></tr>
   </table>
   </div>
-    <input type="hidden" id="cradius" name="cradius">
+    <input type="hidden" name="iqeinfo[cradius]" id="iqeinfo_cradius" />
   <div class="actions">
     <input id="betterpic_submit" name="commit" type="submit" value="Update pic!" />
   </div>
@@ -96,21 +96,21 @@ Choose selector type: <table id="drawOptions" cellspacing="8">
     Event.observe('circleToolBox1','click', function () {
       clearSelectionBoxes();
       selectedTool = 1;
-      $('cradius').value = 10 + (15*selectedTool);
+      $('iqeinfo_cradius').value = 10 + (15*selectedTool);
       $('circleToolBox1').style.border = "solid #000 4px";
     });
 
     Event.observe('circleToolBox2','click',function () {
       clearSelectionBoxes();
       selectedTool = 2;
-      $('cradius').value = 10 + (15*selectedTool);
+      $('iqeinfo_cradius').value = 10 + (15*selectedTool);
       $('circleToolBox2').style.border = "solid #000 4px";
     });
 
     Event.observe('circleToolBox3','click',function () {
       clearSelectionBoxes();
       selectedTool = 3;
-      $('cradius').value = 10 + (15*selectedTool);
+      $('iqeinfo_cradius').value = 10 + (15*selectedTool);
       $('circleToolBox3').style.border = "solid #000 4px";
     });
   });
