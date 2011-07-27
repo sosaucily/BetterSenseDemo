@@ -4,18 +4,25 @@
   imageh = Video.find(@image_for_crowd.video_id).res_y
 %>  
 <h1>Welcome to the Betterpic Interface</h1>
-
+<br />
 <div style="position: relative;">
 
   <canvas id="layer1" width="<%= imagew %>" height="<%= imageh %>">
   </canvas>
-<!-- <canvas id="layer2" width="100" height="100" 
-   style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
+<!--
+  <canvas id="layer2" width="<%= imagew %>" height="<%= imageh %>">
+  </canvas>
 -->
 </div>
 <script>
+
+  var selectedTool = 1;
   var gCanvasElement = document.getElementById('layer1');
   var myCanvas = gCanvasElement.getContext('2d');
+
+ // var gCanvasElement2 = document.getElementById('layer2');
+ // var myCanvas2 = gCanvasElement2.getContext('2d');
+
   var betterpic = new Image();
   betterpic.onload = function() {
     myCanvas.drawImage(betterpic,0,0, <%= imagew %>, <%= imageh %>);
@@ -45,45 +52,69 @@
     y -= coords[1]
     $('xcoord').value = x;
     $('ycoord').value = y;
-
-  }
-
-
-  function drawSelectOptions()
-  {
     
+    drawSelectionCircle(x,y,myCanvas, selectedTool);
+
   }
+
+function drawSelectionCircle(x, y, canvasContext, selectionToolID)
+{
+  canvasContext.clearRect(0, 0, <%= imagew  %>, <%= imageh %>);
+  myCanvas.drawImage(betterpic,0,0, <%= imagew %>, <%= imageh %>);
+  canvasContext.beginPath();
+  canvasContext.arc(x, y, 30 + (10*selectionToolID), 0, Math.PI * 2, false);
+  canvasContext.closePath();
+  canvasContext.strokeStyle = "#E89";
+  canvasContext.lineWidth = "4";
+  canvasContext.stroke();
+}
 
 </script>
-
-Choose selector type: <table id="drawOptions">
-<tr><td id="circle1" style="padding: 10px; border: solid #000 1px; background-image:url('images/drawCircle.jpg'); width:20px; height:20px;"><div id="drawCircle1">&nbsp;</div></td><td style="padding: 5px; border: solid #000 1px;"><div id="drawCircle2"><img width="30" height="30" src="images/drawCircle.jpg"></div></td><td style="border: solid #000 1px;"><div id="drawCircle3"><img width="40" height="40" src="images/drawCircle.jpg"></div></td></tr>
+Choose selector type: <table id="drawOptions" cellspacing="8">
+<tr><td id="circleToolBox1" style="padding: 10px; border: solid #000 4px;"><img src="images/drawCircle.jpg" width="20" height="20"></td><td id="circleToolBox2" style="padding: 5px; border: solid #000 1px;"><img width="30" height="30" src="images/drawCircle.jpg"></td><td id="circleToolBox3" style="border: solid #000 1px;"><img width="40" height="40" src="images/drawCircle.jpg"></td></tr>
 </table>
 <br />
 <form id="cImageInfo">
   <div>
   <table id="imageInfo">
-    <tr><td>X Coord: <input type="text" name="xcoord" id="xcoord" placeholder="0.00"></td></tr>
-    <tr><td>Y Coord: <input type="text" name="ycoord" id="ycoord" placeholder="0.00"></td></tr>
+    <tr><td>X Coord: <input type="text" name="xcoord" id="xcoord" placeholder="0"></td></tr>
+    <tr><td>Y Coord: <input type="text" name="ycoord" id="ycoord" placeholder="0"></td></tr>
     <tr><td><input type="text" name="imagedesc" id="imagedesc" size="50" placeholder="Describe the Image"></td></tr>
+    <tr><td><input type="text" name="companyurl" id="companyurl" size="50" placeholder="Web site for company"></td></tr>
+    <tr><td><input type="text" name="producturl" id="producturl" size="50" placeholder="Web site for product"></td></tr>
   </table>
   </div>
 </form>
 
 <script>
-  selectedTool = 1;
   Event.observe(window, 'load', function() {
-    Event.observe('drawCircle1','click', function () {
-      alert (Event.element(event).value);
-      $('circle1').style.border = "solid #000 4px";
+    Event.observe('circleToolBox1','click', function () {
+      clearSelectionBoxes();
+      selectedTool = 1;
+      $('circleToolBox1').style.border = "solid #000 4px";
     });
-    Event.observe('drawCircle2','click',function () {
-      alert (Event.element(event).innerHTML);
+
+    Event.observe('circleToolBox2','click',function () {
+      clearSelectionBoxes();
+      selectedTool = 2;
+      $('circleToolBox2').style.border = "solid #000 4px";
     });
+
+    Event.observe('circleToolBox3','click',function () {
+      clearSelectionBoxes();
+      selectedTool = 3;
+      $('circleToolBox3').style.border = "solid #000 4px";
+    });
+
   });
-  function selectDrawOption(event2)
+
+  function clearSelectionBoxes()
   {
-    alert (Event.element(event2).value);
+    $('circleToolBox1').style.border = "solid #000 1px";
+    $('circleToolBox2').style.border = "solid #000 1px";
+    $('circleToolBox3').style.border = "solid #000 1px";
   }
+
 </script>
 <%= render "shared/footer" %>
+
