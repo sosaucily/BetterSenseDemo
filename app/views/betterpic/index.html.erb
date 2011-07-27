@@ -50,8 +50,8 @@
     coords = $('layer1').cumulativeOffset();
     x -= coords[0]
     y -= coords[1]
-    $('xcoord').value = x;
-    $('ycoord').value = y;
+    $('xc').value = x;
+    $('yc').value = y;
     
     drawSelectionCircle(x,y,myCanvas, selectedTool);
 
@@ -62,7 +62,7 @@ function drawSelectionCircle(x, y, canvasContext, selectionToolID)
   canvasContext.clearRect(0, 0, <%= imagew  %>, <%= imageh %>);
   myCanvas.drawImage(betterpic,0,0, <%= imagew %>, <%= imageh %>);
   canvasContext.beginPath();
-  canvasContext.arc(x, y, 30 + (10*selectionToolID), 0, Math.PI * 2, false);
+  canvasContext.arc(x, y, 10 + (15*selectionToolID), 0, Math.PI * 2, false);
   canvasContext.closePath();
   canvasContext.strokeStyle = "#E89";
   canvasContext.lineWidth = "4";
@@ -71,18 +71,23 @@ function drawSelectionCircle(x, y, canvasContext, selectionToolID)
 
 </script>
 Choose selector type: <table id="drawOptions" cellspacing="8">
-<tr><td id="circleToolBox1" style="padding: 10px; border: solid #000 4px;"><img src="images/drawCircle.jpg" width="20" height="20"></td><td id="circleToolBox2" style="padding: 5px; border: solid #000 1px;"><img width="30" height="30" src="images/drawCircle.jpg"></td><td id="circleToolBox3" style="border: solid #000 1px;"><img width="40" height="40" src="images/drawCircle.jpg"></td></tr>
+<tr><td id="circleToolBox1" style="padding: 10px; border: solid #000 4px;"><img src="/images/drawCircle.jpg" width="20" height="20"></td><td id="circleToolBox2" style="padding: 5px; border: solid #000 1px;"><img width="30" height="30" src="/images/drawCircle.jpg"></td><td id="circleToolBox3" style="border: solid #000 1px;"><img width="40" height="40" src="/images/drawCircle.jpg"></td></tr>
 </table>
 <br />
-<form id="cImageInfo">
-  <div>
+
+<form id="cImageInfo" accept-charset="UTF-8" action="/betterpic/<%= @image_for_crowd.id %>" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="_method" type="hidden" value="put" /><input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" /></div>
+  <div class="field">
   <table id="imageInfo">
-    <tr><td>X Coord: <input type="text" name="xcoord" id="xcoord" placeholder="0"></td></tr>
-    <tr><td>Y Coord: <input type="text" name="ycoord" id="ycoord" placeholder="0"></td></tr>
-    <tr><td><input type="text" name="imagedesc" id="imagedesc" size="50" placeholder="Describe the Image"></td></tr>
-    <tr><td><input type="text" name="companyurl" id="companyurl" size="50" placeholder="Web site for company"></td></tr>
-    <tr><td><input type="text" name="producturl" id="producturl" size="50" placeholder="Web site for product"></td></tr>
+    <tr><td>X Coord: <input type="text" name="xc" id="xc" placeholder="0"></td></tr>
+    <tr><td>Y Coord: <input type="text" name="yc" id="yc" placeholder="0"></td></tr>
+    <tr><td><input type="text" name="cdescription" id="cdescription" size="50" placeholder="Describe the Image"></td></tr>
+    <tr><td><input type="text" name="ccompanyurl" id="ccompanyurl" size="50" placeholder="Web site for company"></td></tr>
+    <tr><td><input type="text" name="cproducturl" id="cproducturl" size="50" placeholder="Web site for product"></td></tr>
   </table>
+  </div>
+    <input type="hidden" id="cradius" name="cradius">
+  <div class="actions">
+    <input id="betterpic_submit" name="commit" type="submit" value="Update pic!" />
   </div>
 </form>
 
@@ -91,21 +96,23 @@ Choose selector type: <table id="drawOptions" cellspacing="8">
     Event.observe('circleToolBox1','click', function () {
       clearSelectionBoxes();
       selectedTool = 1;
+      $('cradius').value = 10 + (15*selectedTool);
       $('circleToolBox1').style.border = "solid #000 4px";
     });
 
     Event.observe('circleToolBox2','click',function () {
       clearSelectionBoxes();
       selectedTool = 2;
+      $('cradius').value = 10 + (15*selectedTool);
       $('circleToolBox2').style.border = "solid #000 4px";
     });
 
     Event.observe('circleToolBox3','click',function () {
       clearSelectionBoxes();
       selectedTool = 3;
+      $('cradius').value = 10 + (15*selectedTool);
       $('circleToolBox3').style.border = "solid #000 4px";
     });
-
   });
 
   function clearSelectionBoxes()

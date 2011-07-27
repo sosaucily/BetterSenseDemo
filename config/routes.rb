@@ -5,6 +5,7 @@ BetterSenseDemo::Application.routes.draw do
   get "betterpic/info"
 
   match "betterpic", :controller => 'betterpic', :action => 'index'
+  match "betterpic/:iqeinfo_id", :controller => 'betterpic', :action => 'update'
 
   devise_for :users
 
