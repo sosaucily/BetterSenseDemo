@@ -30,9 +30,9 @@ ActiveRecord::Schema.define(:version => 20110726003504) do
     t.integer  "cy"
     t.integer  "cwidth"
     t.integer  "xheight"
-    t.boolean  "send_to_crowd"
-    t.datetime "processing"
-    t.boolean  "complete"
+    t.boolean  "send_to_crowd",   :default => false
+    t.datetime "processing",      :default => '2011-07-26 05:10:25'
+    t.boolean  "complete",        :default => false
   end
 
   create_table "users", :force => true do |t|

@@ -9,7 +9,7 @@ class AddCrowdInfoToIqeinfo < ActiveRecord::Migration
     add_column :iqeinfos, :cwidth, :integer
     add_column :iqeinfos, :xheight, :integer
     add_column :iqeinfos, :send_to_crowd, :boolean, :default => false
-    add_column :iqeinfos, :processing, :datetime
+    add_column :iqeinfos, :processing, :datetime, :default => Time.now
     add_column :iqeinfos, :complete, :boolean, :default => false
   end
 
