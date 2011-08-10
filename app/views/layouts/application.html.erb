@@ -2,8 +2,14 @@
 <html>
 <head>
   <title>BetterSenseDemo</title>
-  <%= stylesheet_link_tag :all %>
+  <%= stylesheet_link_tag 'scaffold.css' %>
+  <%= stylesheet_link_tag 'tooltips.css' %>
+  <%= stylesheet_link_tag 'style.css' %>
+  <%= stylesheet_link_tag 'screen.css', :media => 'screen, projection' %>
+  <%= stylesheet_link_tag 'print.css', :media => 'print' %>
+  <!--[if lt IE 8]><%= stylesheet_link_tag 'ie.css', :media => 'screen, projection' %><![endif]-->
   <%= javascript_include_tag :all %>
+  <script type="text/javascript" src="http://www.bettersensekaltura.com/p/100/sp/10000/embedIframeJs/uiconf_id/4421494/partner_id/100"></script>
   <%= csrf_meta_tag %>
 </head>
 <body>

@@ -22,6 +22,8 @@ gem 'devise'
 gem 'algorithms'
 
 gem 'fastercsv'
+
+gem "compass", "~> 0.11.5"
 # Use unicorn as the web server
 # gem 'unicorn'
 

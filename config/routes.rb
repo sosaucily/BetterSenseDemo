@@ -1,5 +1,8 @@
 BetterSenseDemo::Application.routes.draw do
 
+  get "kalturademo/index"
+  match "kalturademo", :controller => 'kalturademo', :action => 'index'
+
   get "betterpic/list"
 
   get "betterpic/info"
