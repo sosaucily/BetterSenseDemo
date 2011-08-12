@@ -1,0 +1,51 @@
+
+@mixin video-table {
+  #ver-minimalist
+  {
+        font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+        font-size: 12px;
+        margin: 0px;
+        width: 100%;
+        text-align: left;
+        border-collapse: collapse;
+  }
+  #ver-minimalist th
+  {
+        padding: 4px 2px;
+        font-weight: normal;
+        font-size: 12px;
+        border-bottom: 2px solid #6678b1;
+        border-right: 10px solid #fff;
+        border-left: 10px solid #fff;
+        color: #039;
+  }
+  #ver-minimalist td
+  {
+        padding: 6px 2px 0px 2px;
+        border-right: 10px solid #fff;
+        border-left: 10px solid #fff;
+        color: #669;
+  }
+
+  #ver-minimalist .vodd
+  {
+        background: #e8edff;
+  }
+
+  #ver-minimalist .veven
+  {
+        background: #ffffff;
+  }
+
+  #ver-minimalist thead th 
+  {
+        background: #ffffff; 
+  }
+
+  #ver-minimalist tfoot th
+  {
+        font-style: normal;
+  }
+
+
+}

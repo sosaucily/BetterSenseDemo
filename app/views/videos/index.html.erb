@@ -27,7 +27,7 @@
   
 <% @videos.each do |video| %>
   <% if (video.viewable? or user_signed_in?) %>
-    <tr class="<%= cycle('odd', 'even') %>">
+    <tr class="<%= cycle('vodd', 'veven') %>">
       <td><%= video.name %></td>
       <td><%= video.description %></td>
       <td><%= link_to 'View', video %></td>

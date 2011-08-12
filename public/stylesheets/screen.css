@@ -57,6 +57,55 @@ a img {
   border: none;
 }
 
+/* line 4, ../../app/stylesheets/partials/_tables.scss */
+#ver-minimalist {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  font-size: 12px;
+  margin: 0px;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+/* line 13, ../../app/stylesheets/partials/_tables.scss */
+#ver-minimalist th {
+  padding: 4px 2px;
+  font-weight: normal;
+  font-size: 12px;
+  border-bottom: 2px solid #6678b1;
+  border-right: 10px solid #fff;
+  border-left: 10px solid #fff;
+  color: #039;
+}
+
+/* line 23, ../../app/stylesheets/partials/_tables.scss */
+#ver-minimalist td {
+  padding: 6px 2px 0px 2px;
+  border-right: 10px solid #fff;
+  border-left: 10px solid #fff;
+  color: #669;
+}
+
+/* line 31, ../../app/stylesheets/partials/_tables.scss */
+#ver-minimalist .vodd {
+  background: #e8edff;
+}
+
+/* line 36, ../../app/stylesheets/partials/_tables.scss */
+#ver-minimalist .veven {
+  background: #ffffff;
+}
+
+/* line 41, ../../app/stylesheets/partials/_tables.scss */
+#ver-minimalist thead th {
+  background: #ffffff;
+}
+
+/* line 46, ../../app/stylesheets/partials/_tables.scss */
+#ver-minimalist tfoot th {
+  font-style: normal;
+}
+
 /* line 20, ../../app/stylesheets/screen.scss */
 body.bp {
   line-height: 1.5;
@@ -313,70 +362,6 @@ body.bp .showgrid {
   background-size: 100% 18px, auto;
   background-position: left top;
 }
-/* line 4, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
-body.bp .feedback, body.bp .error, body.bp .alert, body.bp .notice, body.bp .success, body.bp .info {
-  padding: 0.8em;
-  margin-bottom: 1em;
-  border: 2px solid #dddddd;
-}
-/* line 5, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
-body.bp .error, body.bp .alert {
-  background: #fbe3e4;
-  color: #8a1f11;
-  border-color: #fbc2c4;
-}
-/* line 27, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
-body.bp .error a, body.bp .alert a {
-  color: #8a1f11;
-}
-/* line 7, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
-body.bp .notice {
-  background: #fff6bf;
-  color: #514721;
-  border-color: #ffd324;
-}
-/* line 36, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
-body.bp .notice a {
-  color: #514721;
-}
-/* line 8, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
-body.bp .success {
-  background: #e6efc2;
-  color: #264409;
-  border-color: #c6d880;
-}
-/* line 45, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
-body.bp .success a {
-  color: #264409;
-}
-/* line 9, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
-body.bp .info {
-  background: #d5edf8;
-  color: #205791;
-  border-color: #92cae4;
-}
-/* line 54, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
-body.bp .info a {
-  color: #205791;
-}
-/* line 10, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
-body.bp .hide {
-  display: none;
-}
-/* line 11, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
-body.bp .highlight {
-  background: yellow;
-}
-/* line 12, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
-body.bp .added {
-  background: #006600;
-  color: white;
-}
-/* line 13, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_interaction.scss */
-body.bp .removed {
-  background: #990000;
-  color: white;
-}
 
 /* line 18, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_form.scss */
 form.bp label {
@@ -493,14 +478,14 @@ form.bp form.inline p {
   margin-bottom: 0;
 }
 
-/* line 36, ../../app/stylesheets/screen.scss */
+/* line 37, ../../app/stylesheets/screen.scss */
 body.two-col #container {
   width: 950px;
   margin: 0 auto;
   overflow: hidden;
   *zoom: 1;
 }
-/* line 38, ../../app/stylesheets/screen.scss */
+/* line 39, ../../app/stylesheets/screen.scss */
 body.two-col #header, body.two-col #footer {
   display: inline;
   float: left;
@@ -511,7 +496,7 @@ body.two-col #header, body.two-col #footer {
 * html body.two-col #header, * html body.two-col #footer {
   overflow-x: hidden;
 }
-/* line 40, ../../app/stylesheets/screen.scss */
+/* line 41, ../../app/stylesheets/screen.scss */
 body.two-col #sidebar {
   display: inline;
   float: left;
@@ -522,7 +507,7 @@ body.two-col #sidebar {
 * html body.two-col #sidebar {
   overflow-x: hidden;
 }
-/* line 44, ../../app/stylesheets/screen.scss */
+/* line 45, ../../app/stylesheets/screen.scss */
 body.two-col #content {
   display: inline;
   float: left;
@@ -532,4 +517,116 @@ body.two-col #content {
 /* line 147, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html body.two-col #content {
   overflow-x: hidden;
+}
+
+/* line 9, ../../app/stylesheets/partials/_bettersense.scss */
+body.one-col .container {
+  width: 950px;
+  margin: 0 auto;
+  overflow: hidden;
+  *zoom: 1;
+}
+/* line 11, ../../app/stylesheets/partials/_bettersense.scss */
+body.one-col .header {
+  display: inline;
+  float: left;
+  margin-right: 0;
+  width: 950px;
+}
+/* line 147, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html body.one-col .header {
+  overflow-x: hidden;
+}
+/* line 13, ../../app/stylesheets/partials/_bettersense.scss */
+body.one-col .logo {
+  display: inline;
+  float: left;
+  margin-right: 0;
+  width: 470px;
+  display: inline;
+  float: left;
+  position: relative;
+  margin: 0 -240px 1.5em 240px;
+  height: 104px;
+  background: url(../images/bettersense-logo-grid.jpg) no-repeat top left;
+}
+/* line 147, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html body.one-col .logo {
+  overflow-x: hidden;
+}
+/* line 21, ../../app/stylesheets/partials/_bettersense.scss */
+body.one-col .footer {
+  width: 100%;
+  height: 50px;
+  margin: 0 auto;
+  padding: 0px 0 15px 0;
+  background: #ECECEC;
+  border-top: 1px solid #DEDEDE;
+  font-family: Arial, Helvetica, sans-serif;
+}
+/* line 29, ../../app/stylesheets/partials/_bettersense.scss */
+body.one-col .footer p {
+  margin: 0;
+  padding-top: 20px;
+  line-height: normal;
+  font-size: 9px;
+  text-transform: uppercase;
+  text-align: center;
+  color: #A0A0A0;
+}
+/* line 37, ../../app/stylesheets/partials/_bettersense.scss */
+body.one-col .footer a {
+  color: #8A8A8A;
+}
+/* line 38, ../../app/stylesheets/partials/_bettersense.scss */
+body.one-col .content {
+  display: inline;
+  float: left;
+  margin-right: 0;
+  width: 630px;
+  padding-right: 160px;
+  padding-left: 160px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color: #787878;
+}
+/* line 147, ../../../../../../usr/lib/ruby/gems/1.8/gems/compass-0.11.5/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html body.one-col .content {
+  overflow-x: hidden;
+}
+/* line 48, ../../app/stylesheets/partials/_bettersense.scss */
+body.one-col pre {
+  margin: 0;
+  padding: 0;
+  background: #FFFFFF;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color: #787878;
+}
+/* line 55, ../../app/stylesheets/partials/_bettersense.scss */
+body.one-col h1, body.one-col h2, body.one-col h3 {
+  font-weight: normal;
+  color: #000000;
+}
+/* line 58, ../../app/stylesheets/partials/_bettersense.scss */
+body.one-col h1 {
+  font-size: 2em;
+}
+/* line 59, ../../app/stylesheets/partials/_bettersense.scss */
+body.one-col h2 {
+  font-size: 2.4em;
+}
+/* line 60, ../../app/stylesheets/partials/_bettersense.scss */
+body.one-col h3 {
+  font-size: 1.6em;
+}
+/* line 61, ../../app/stylesheets/partials/_bettersense.scss */
+body.one-col p, body.one-col ul, body.one-col ol {
+  margin-top: 0;
+  line-height: 180%;
+}
+/* line 64, ../../app/stylesheets/partials/_bettersense.scss */
+body.one-col a {
+  text-decoration: none;
+  color: #82050B;
 }
