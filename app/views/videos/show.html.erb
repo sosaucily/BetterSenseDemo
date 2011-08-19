@@ -48,7 +48,7 @@
       onStart: function() {
         var self = this;
         //var timer = setInterval(function() {
-        //  document.getElementById('videoTime').innerHTML = self.getTime();
+        //  document.getElementById('videoTime').html(self.getTime());
           
           // when playback is stopped clear timer
           //if (self.getState() == 5) clearInterval(timer);
@@ -57,22 +57,19 @@
         $f().onCuepoint(
           getCuepoints($f().getClip(0)),
           function(clip, cuepoint) {
-            <!-- document.getElementById('videoTime').innerHTML = cuepoint / 1000; -->
+            <!-- document.getElementById('videoTime').html(cuepoint / 1000); -->
             if ( (cuepoint/1000) in imageData)
             {
-              Effect.Fade('detectedData',{ 
-                duration:0.3, 
-                afterFinish: function(){ 
-                  $('detectedData').innerHTML = imageData[cuepoint / 1000];
-                  $('categories').innerHTML = keywordCat[cuepoint / 1000];
-                  Effect.Appear('detectedData',{duration:0.3}); 
-                } 
-              }); 
+              $('#detectedData').fadeOut('fast', function() { 
+                $('#detectedData').html(imageData[cuepoint / 1000]);
+                $('#categories').html(keywordCat[cuepoint / 1000]);
+                $('#detectedData').fadeIn('slow'); 
+              });  
             }
           });
       } 
       }
-});
+    });
 
     function getCuepoints(clip) {
       i = 0;
@@ -102,9 +99,7 @@ Items Detected In Video <span id="infoTip1" title="bettersense uses a combinatio
 </table>
 <script type="text/javascript">
 //Tool Tip for image recognition
-    $$('#infoTip1').each ( function(elem) {
-      new Tooltip(elem, {mouseFollow: false, backgroundColor: "#FFFFFF", opacity: 1});
-    });
+    $('#infoTip1').qtip();
 </script>
 <!-- <span id="videoTime"></span> -->
 <% @video.iqeinfos.each do |iqe|

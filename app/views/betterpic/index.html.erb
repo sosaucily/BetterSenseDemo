@@ -2,7 +2,12 @@
 <% 
   imagew = Video.find(@image_for_crowd.video_id).res_x
   imageh = Video.find(@image_for_crowd.video_id).res_y
-%>  
+%>
+<script type="text/javascript">
+  var imagew = <%=imagew%>;
+  var imageh = <%=imageh%>;
+  var imagepath = '<%= @image_for_crowd.imagepath %>';
+</script>
 <h1>Welcome to the Betterpic Interface</h1>
 <br />
 <div style="position: relative;">
@@ -14,114 +19,27 @@
   </canvas>
 -->
 </div>
-<script>
 
-  var selectedTool = 1;
-  var gCanvasElement = document.getElementById('layer1');
-  var myCanvas = gCanvasElement.getContext('2d');
-
- // var gCanvasElement2 = document.getElementById('layer2');
- // var myCanvas2 = gCanvasElement2.getContext('2d');
-
-  var betterpic = new Image();
-  betterpic.onload = function() {
-    myCanvas.drawImage(betterpic,0,0, <%= imagew %>, <%= imageh %>);
-    };
-  betterpic.src = '<%= @image_for_crowd.imagepath %>'
-  gCanvasElement.addEventListener("click", halmaOnClick, false);
-
-  function halmaOnClick(e) {
-    var x;
-    var y;
-    if (e.pageX != undefined && e.pageY != undefined) {
-	x = e.pageX;
-	y = e.pageY;
-    }
-    else {
-	x = e.clientX + document.body.scrollLeft +
-            document.documentElement.scrollLeft;
-	y = e.clientY + document.body.scrollTop +
-            document.documentElement.scrollTop;
-    }
-
-    x -= gCanvasElement.offsetLeft;
-    y -= gCanvasElement.offsetTop;
-
-    coords = $('layer1').cumulativeOffset();
-    x -= coords[0]
-    y -= coords[1]
-    $('iqeinfo_cx').value = x;
-    $('iqeinfo_cy').value = y;
-    
-    drawSelectionCircle(x,y,myCanvas, selectedTool);
-
-  }
-
-function drawSelectionCircle(x, y, canvasContext, selectionToolID)
-{
-  canvasContext.clearRect(0, 0, <%= imagew  %>, <%= imageh %>);
-  myCanvas.drawImage(betterpic,0,0, <%= imagew %>, <%= imageh %>);
-  canvasContext.beginPath();
-  canvasContext.arc(x, y, 10 + (15*selectionToolID), 0, Math.PI * 2, false);
-  canvasContext.closePath();
-  canvasContext.strokeStyle = "#E89";
-  canvasContext.lineWidth = "4";
-  canvasContext.stroke();
-}
-
-</script>
 Choose selector type: <table id="drawOptions" cellspacing="8">
-<tr><td id="circleToolBox1" style="padding: 10px; border: solid #000 4px;"><img src="/images/drawCircle.jpg" width="20" height="20"></td><td id="circleToolBox2" style="padding: 5px; border: solid #000 1px;"><img width="30" height="30" src="/images/drawCircle.jpg"></td><td id="circleToolBox3" style="border: solid #000 1px;"><img width="40" height="40" src="/images/drawCircle.jpg"></td></tr>
+<tr><td id="circleToolBox1" class="toolselector" style="padding: 10px; border: solid #000 4px;"><img src="/images/drawCircle.jpg" width="20" height="20"></td><td id="circleToolBox2" class="toolselector" style="padding: 5px; border: solid #000 1px;"><img width="30" height="30" src="/images/drawCircle.jpg"></td><td id="circleToolBox3" class="toolselector" style="border: solid #000 1px;"><img width="40" height="40" src="/images/drawCircle.jpg"></td></tr>
 </table>
 <br />
 
-<form id="cImageInfo" accept-charset="UTF-8" action="/betterpic/<%= @image_for_crowd.id %>" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="_method" type="hidden" value="put" /><input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" /></div>
+<%= form_for (@image_for_crowd, :url => "/betterpic/#{@image_for_crowd.id}", :html=>{ :id=>'cImageInfo'}, :remote=>true) do |image| %>
   <div class="field">
-  <table id="imageInfo">
-    <tr><td>X Coord: <input type="text" name="iqeinfo[cx]" id="iqeinfo_cx" placeholder="0"></td></tr>
-    <tr><td>Y Coord: <input type="text" name="iqeinfo[cy]" id="iqeinfo_cy" placeholder="0"></td></tr>
-    <tr><td><input type="text" name="iqeinfo[cdescription]" id="iqeinfo_cdescription" size="50" placeholder="Describe the Image"></td></tr>
-    <tr><td><input type="text" name="iqeinfo[ccompanyurl]" id="iqeinfo_ccompanyurl" size="50" placeholder="Web site for company"></td></tr>
-    <tr><td><input type="text" name="iqeinfo[cproducturl]" id="iqeinfo_cproducturl" size="50" placeholder="Web site for product"></td></tr>
-  </table>
+    <table id="imageInfo">
+      <tr><td>X Coord: <input type="text" name="iqeinfo[cx]" id="iqeinfo_cx" placeholder="0"></td></tr>
+      <tr><td>Y Coord: <input type="text" name="iqeinfo[cy]" id="iqeinfo_cy" placeholder="0"></td></tr>
+      <tr><td><input type="text" name="iqeinfo[cdescription]" id="iqeinfo_cdescription" size="50" placeholder="Describe the Image"></td></tr>
+      <tr><td><input type="text" name="iqeinfo[ccompanyurl]" id="iqeinfo_ccompanyurl" size="50" placeholder="Web site for company"></td></tr>
+      <tr><td><input type="text" name="iqeinfo[cproducturl]" id="iqeinfo_cproducturl" size="50" placeholder="Web site for product"></td></tr>
+    </table>
   </div>
-    <input type="hidden" name="iqeinfo[cradius]" id="iqeinfo_cradius" />
+  <input type="hidden" name="iqeinfo[cradius" id="iqeinfo_cradius" />
   <div class="actions">
-    <input id="betterpic_submit" name="commit" type="submit" value="Update pic!" />
+    <%= image.submit "Update pic!" %>
   </div>
-</form>
+<% end %>
 
-<script>
-  Event.observe(window, 'load', function() {
-    Event.observe('circleToolBox1','click', function () {
-      clearSelectionBoxes();
-      selectedTool = 1;
-      $('iqeinfo_cradius').value = 10 + (15*selectedTool);
-      $('circleToolBox1').style.border = "solid #000 4px";
-    });
-
-    Event.observe('circleToolBox2','click',function () {
-      clearSelectionBoxes();
-      selectedTool = 2;
-      $('iqeinfo_cradius').value = 10 + (15*selectedTool);
-      $('circleToolBox2').style.border = "solid #000 4px";
-    });
-
-    Event.observe('circleToolBox3','click',function () {
-      clearSelectionBoxes();
-      selectedTool = 3;
-      $('iqeinfo_cradius').value = 10 + (15*selectedTool);
-      $('circleToolBox3').style.border = "solid #000 4px";
-    });
-  });
-
-  function clearSelectionBoxes()
-  {
-    $('circleToolBox1').style.border = "solid #000 1px";
-    $('circleToolBox2').style.border = "solid #000 1px";
-    $('circleToolBox3').style.border = "solid #000 1px";
-  }
-
-</script>
+<%= javascript_include_tag "betterpic" %>
 <%= render "shared/footer" %>
-

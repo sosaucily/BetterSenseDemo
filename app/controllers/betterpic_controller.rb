@@ -4,7 +4,7 @@ class BetterpicController < ApplicationController
     @completed_crowd_images = Iqeinfo.find_all_by_send_to_crowd_and_complete(false, false, :order=>:video_id)
     @incomplete_crowd_images = Iqeinfo.find_all_by_send_to_crowd_and_complete(false, false, :order=>:video_id)
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # list.html.erb
       format.xml  { render :xml => Iqeinfo.find_all_by_send_to_crowd(true, :order=>:video_id) }
     end
   end
@@ -32,7 +32,16 @@ class BetterpicController < ApplicationController
       logger.info 'Successfully updated pic with id ' + params[:iqeinfo_id].to_s
       @currIQE.complete = true
       @currIQE.save
-      redirect_to("/betterpic")
+      flash[:notice] = "Thanks for updating the pic!"
+      @image_for_crowd = Iqeinfo.find(:all, :limit => 1, :order => :created_at, :conditions => ["send_to_crowd = ? AND processing < ? AND complete = ?",false, Time.now - 5.minutes, false])[0]
+      if (!@image_for_crowd.nil?) then
+        @image_for_crowd.processing = Time.now
+        @image_for_crowd.save
+      end
+      respond_to do |format|
+        format.html { redirect_to("/betterpic", :notice => 'Thanks for updating the pic!') }
+        format.js { render :content_type => 'text/javascript' }
+      end
     else
       redirect_to("/",:notice => 'There was an error updating the pic')
     end
