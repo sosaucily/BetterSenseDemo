@@ -11,12 +11,12 @@ module VideosHelper
     #First let's check if the exact matching word / phrase is in our wordTrie
     hitQuality = "Great"
 
-    wordResults.push ($adWordTrie.wildcard (keyword.downcase))
+    wordResults.push($adWordTrie.wildcard(keyword.downcase))
 
     if (wordResults[0].empty?) then
       wordResults = []
       logger.info "in Very Good section, trying " + keyword.downcase + " ........."
-      wordResults.push ($adWordTrie.wildcard(keyword.downcase + " .........."))
+      wordResults.push($adWordTrie.wildcard(keyword.downcase + " .........."))
       logger.info "results are " + wordResults.to_s
       hitQuality = "Very Good"
     end
@@ -24,7 +24,7 @@ module VideosHelper
     if (wordResults[0].empty?) then
       wordResults = []
       keyword.to_s.split(" ").each do |word|
-        wordResults.push ($adWordTrie.wildcard (word.downcase + " ........"))
+        wordResults.push($adWordTrie.wildcard(word.downcase + " ........"))
       end
       hitQuality = "Good"
     end
@@ -32,7 +32,7 @@ module VideosHelper
     if (wordResults[0].empty?) then
       wordResults = []
       keyword.to_s.split(" ").each do |word|
-        wordResults.push ($adWordTrie.wildcard (word.downcase + "........"))
+        wordResults.push($adWordTrie.wildcard(word.downcase + "........"))
       end
       hitQuality = "Fair"
     end
@@ -44,7 +44,7 @@ module VideosHelper
       cat.each do |word|
         logger.info "now getting categories for " + word
         cats = $adWordTrie.get(word)
-        results.push (cats.each_with_index.map {|c,i| if (i!=cats.length-1) then c.to_s + "->" else c.to_s end })
+        results.push(cats.each_with_index.map {|c,i| if (i!=cats.length-1) then c.to_s + "->" else c.to_s end })
       end
     end
     result_string = ""

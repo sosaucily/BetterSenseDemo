@@ -16,6 +16,7 @@ class VideosController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @videos }
+      format.json { render :json => @videos }
     end
   end
 
@@ -29,6 +30,7 @@ class VideosController < ApplicationController
       format.html # show.html.erb
       format.js
       format.xml  { render :xml => @video }
+      format.json { render :json => @video }
     end
   end
 
@@ -57,9 +59,11 @@ class VideosController < ApplicationController
       if @video.save
         format.html { redirect_to(@video, :notice => 'Video was successfully created.') }
         format.xml  { render :xml => @video, :status => :created, :location => @video }
+        format.json { render :json => @video, :status => :created, :location => @video }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @video.errors, :status => :unprocessable_entity }
+        format.json { render :json => @video.errors, :status => :unprocessable_entity }
       end
     end
   end

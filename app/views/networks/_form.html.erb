@@ -1,0 +1,29 @@
+<%= form_for(@network) do |f| %>
+  <% if @network.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@network.errors.count, "error") %> prohibited this network from being saved:</h2>
+
+      <ul>
+      <% @network.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :network_type_id %><br />
+    <%= select("network", "network_type_id", NetworkType.all.collect {|n| [n.name, n.id] }, {:include_blank => 'None'}) %>
+  </div>
+  <div class="field">
+    <%= f.label :account_id %><br />
+    <%= select("network", "account_id", Account.all.collect {|a| [a.company_name, a.id] }) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

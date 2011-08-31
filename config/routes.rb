@@ -1,5 +1,9 @@
 BetterSenseDemo::Application.routes.draw do
 
+  resources :networks
+
+  resources :accounts
+
   get "kalturademo/index"
   match "kalturademo", :controller => 'kalturademo', :action => 'index'
 

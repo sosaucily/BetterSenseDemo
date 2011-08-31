@@ -1,4 +1,3 @@
-<%= render "shared/header" %>
 <% 
   imagew = Video.find(@image_for_crowd.video_id).res_x
   imageh = Video.find(@image_for_crowd.video_id).res_y
@@ -42,4 +41,3 @@ Choose selector type: <table id="drawOptions" cellspacing="8">
 <% end %>
 
 <%= javascript_include_tag "betterpic" %>
-<%= render "shared/footer" %>

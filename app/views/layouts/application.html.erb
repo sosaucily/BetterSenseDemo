@@ -13,13 +13,8 @@
 <!-- <script type="text/javascript" src="http://www.bettersensekaltura.com/p/100/sp/10000/embedIframeJs/uiconf_id/4421494/partner_id/10"></script> -->
 <%= csrf_meta_tag %>
 </head>
-<body class="bp one-col">
-
-<div class="container">
-
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-
+<%= render "shared/header" %>
 <%= yield %>
+<%= render "shared/footer" %>
 </body>
 </html>

@@ -10,7 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110726003504) do
+ActiveRecord::Schema.define(:version => 20110830230201) do
+
+  create_table "accounts", :force => true do |t|
+    t.string   "fname"
+    t.string   "lname"
+    t.string   "company_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "iqeinfos", :force => true do |t|
     t.text     "results"
@@ -37,6 +45,22 @@ ActiveRecord::Schema.define(:version => 20110726003504) do
     t.string   "cdescription"
     t.string   "cproducturl"
     t.string   "ccompanyurl"
+  end
+
+  create_table "network_types", :force => true do |t|
+    t.string   "name"
+    t.string   "company_url"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "networks", :force => true do |t|
+    t.string   "name"
+    t.integer  "account_id"
+    t.integer  "network_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
@@ -68,6 +92,7 @@ ActiveRecord::Schema.define(:version => 20110726003504) do
     t.integer  "res_x",        :default => 480
     t.integer  "res_y",        :default => 360
     t.boolean  "viewable",     :default => false
+    t.integer  "account_id"
   end
 
 end
