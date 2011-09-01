@@ -10,12 +10,33 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110830230201) do
+ActiveRecord::Schema.define(:version => 20110901010042) do
 
   create_table "accounts", :force => true do |t|
     t.string   "fname"
     t.string   "lname"
     t.string   "company_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ad_sets", :force => true do |t|
+    t.string   "name"
+    t.integer  "video_id"
+    t.integer  "account_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ads", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "zone_id_id"
+    t.string   "image_url"
+    t.integer  "time_millis"
+    t.integer  "duration_millis"
+    t.integer  "ad_set_id_id"
+    t.integer  "account_id_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -63,6 +84,23 @@ ActiveRecord::Schema.define(:version => 20110830230201) do
     t.datetime "updated_at"
   end
 
+  create_table "player_types", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "player_url"
+    t.string   "version"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "players", :force => true do |t|
+    t.string   "name"
+    t.integer  "player_type_id"
+    t.integer  "account_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
     t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
@@ -93,6 +131,24 @@ ActiveRecord::Schema.define(:version => 20110830230201) do
     t.integer  "res_y",        :default => 360
     t.boolean  "viewable",     :default => false
     t.integer  "account_id"
+  end
+
+  create_table "zone_types", :force => true do |t|
+    t.string   "name"
+    t.integer  "width"
+    t.text     "description"
+    t.integer  "height"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "zones", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "zone_type_id"
+    t.integer  "account_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

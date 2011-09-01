@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @ad.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @ad.description %>
+</p>
+
+<p>
+  <b>Zone:</b>
+  <%= @ad.zone_id %>
+</p>
+
+<p>
+  <b>Image url:</b>
+  <%= @ad.image_url %>
+</p>
+
+<p>
+  <b>Time millis:</b>
+  <%= @ad.time_millis %>
+</p>
+
+<p>
+  <b>Duration millis:</b>
+  <%= @ad.duration_millis %>
+</p>
+
+<p>
+  <b>Ad set:</b>
+  <%= @ad.ad_set_id %>
+</p>
+
+<p>
+  <b>Account:</b>
+  <%= @ad.account_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_ad_path(@ad) %> |
+<%= link_to 'Back', ads_path %>

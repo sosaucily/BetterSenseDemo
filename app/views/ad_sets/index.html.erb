@@ -1,0 +1,27 @@
+<h1>Listing ad_sets</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Video</th>
+    <th>Account</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ad_sets.each do |ad_set| %>
+  <tr>
+    <td><%= ad_set.name %></td>
+    <td><%= ad_set.video_id %></td>
+    <td><%= ad_set.account_id %></td>
+    <td><%= link_to 'Show', ad_set %></td>
+    <td><%= link_to 'Edit', edit_ad_set_path(ad_set) %></td>
+    <td><%= link_to 'Destroy', ad_set, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ad set', new_ad_set_path %>

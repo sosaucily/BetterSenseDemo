@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  description: MyText
+  zone_id: 1
+  image_url: MyString
+  time_millis: 1
+  duration_millis: 1
+  ad_set_id: 1
+  account_id: 1
+
+two:
+  name: MyString
+  description: MyText
+  zone_id: 1
+  image_url: MyString
+  time_millis: 1
+  duration_millis: 1
+  ad_set_id: 1
+  account_id: 1

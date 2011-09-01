@@ -27,7 +27,7 @@
          patharray = iqe.imagepath.split("/")
          seq = patharray[patharray.length-1][6..-4]
        rescue => msg
-         logger.info ("caught exception in video.show when iterating through iqeinfo images: " + msg)
+         logger.info("caught exception in video.show when iterating through iqeinfo images: " + msg)
        end
      end
      if (seq != nil && iqe.matcheditem != nil)
@@ -106,7 +106,7 @@ Items Detected In Video <span id="infoTip1" title="bettersense uses a combinatio
          patharray = iqe.imagepath.split("/")
          seq = patharray[patharray.length-1][6..-4]
        rescue => msg
-         logger.info ("caught exception in video.show when iterating through iqeinfo images: " + msg)
+         logger.info("caught exception in video.show when iterating through iqeinfo images: " + msg)
        end
      end
      if (seq != nil && iqe.matcheditem != nil)

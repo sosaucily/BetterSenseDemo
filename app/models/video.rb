@@ -1,5 +1,6 @@
 class Video < ActiveRecord::Base
   has_many :iqeinfos
+  has_many :ad_sets
   belongs_to :account
 #  def self.save(upload)
 #    name =  upload['datafile'].original_filename

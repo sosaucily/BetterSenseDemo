@@ -1,5 +1,18 @@
 BetterSenseDemo::Application.routes.draw do
 
+
+  resources :ads
+
+  resources :ad_sets
+
+  get "tag/deliver"
+
+  get "tag/display"
+
+  resources :players
+
+  resources :zones
+
   resources :networks
 
   resources :accounts
