@@ -4,5 +4,4 @@ log/*.log
 tmp/
 *~
 doc/*
-lib/*
 public/processedVideos/*
