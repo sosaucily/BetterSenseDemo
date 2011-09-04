@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>Name:</b>
   <%= @ad.name %>
@@ -14,6 +12,10 @@
   <b>Zone:</b>
   <%= @ad.zone_id %>
 </p>
+
+<%= image_tag @ad.ad_pic.url %>
+<%= image_tag @ad.ad_pic.url(:medium) %>
+<%= image_tag @ad.ad_pic.url(:thumb) %>
 
 <p>
   <b>Image url:</b>

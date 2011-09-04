@@ -41,7 +41,7 @@ class AdsController < ApplicationController
   # POST /ads.xml
   def create
     @ad = Ad.new(params[:ad])
-
+  #  @ad = Ad.create( params[:ad] )
     respond_to do |format|
       if @ad.save
         format.html { redirect_to(@ad, :notice => 'Ad was successfully created.') }

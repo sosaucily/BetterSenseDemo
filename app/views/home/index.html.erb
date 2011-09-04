@@ -6,3 +6,9 @@
                 <p>For further details please see our <%= link_to "Contact page", "contact" %></p>
                 <p>Please take a moment to view our <%= link_to "Demo", videos_path %></p>
                 <!-- end #content -->
+<script type="text/javascript">
+  url = "http://www.bettersense.com:3000/tag/deliver.json";
+  jQuery.getJSON(url+"&callback=?", function(data) {
+    data();
+  });
+</script>

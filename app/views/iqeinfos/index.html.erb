@@ -1,7 +1,8 @@
+<%= javascript_include_tag "jquery.sausage.js" %>
 <h1>Listing IQEInfos for video <%= @video.name %></h1>
 
-<table>
 <!--
+<table>
   <tr>
     <th>imagepath</th>
     <th>image</th>
@@ -12,18 +13,55 @@
     <th></th>
     <th></th>
   </tr>
--->
-<% @iqeinfos.each do |iqeinfo| %>
+<%# @iqeinfos.each do |iqeinfo| %>
   <tr>
-    <td><%= iqeinfo.id %></td>
- <!--   <td><%#iqeinfo.imagepath %></td> -->
-    <td><img src="<%= iqeinfo.imagepath %>" /></td>
-    <td><%= iqeinfo.matcheditem %></td>
-    <td><%= iqeinfo.videotimemillis %></td>
-    <td><%= iqeinfo.results %></td>
+    <td><%# iqeinfo.id %></td>
+    <td><%#iqeinfo.imagepath %></td>
+    <td><img src="<%# iqeinfo.imagepath %>" /></td>
+    <td><%# iqeinfo.matcheditem %></td>
+    <td><%# iqeinfo.videotimemillis %></td>
+    <td><%# iqeinfo.results %></td>
   </tr>
-<% end %>
+<%# end %>
 </table>
+-->
 
-<br />
+<div id="piclist">
+  <%= render 'picdivinfo', :iqeinfos => @iqeinfos %>
+</div>
+
+<script type="text/javascript">
+(function() {
+  var page = 1,
+      loading = false;
+
+  function nearBottomOfPage() {
+    return $(window).scrollTop() > $(document).height() - $(window).height() - 200;
+  }
+
+  $(window).scroll(function(){
+    if (loading) {
+      return;
+    }
+
+    if(nearBottomOfPage()) {
+      loading=true;
+      page++;
+      $.ajax({
+        url: "<%= request.request_uri %>" + "?page=" + page,
+        type: 'get',
+        dataType: 'script',
+        success: function() {
+          $(window).sausage('draw');
+          loading=false;
+        }
+      });
+    }
+  });
+
+  $(window).sausage();
+}());
+</script>
+
+<%# will_paginate @iqeinfos %>
 

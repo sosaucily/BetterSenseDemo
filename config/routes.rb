@@ -1,6 +1,8 @@
 BetterSenseDemo::Application.routes.draw do
 
 
+  resources :advertisers
+
   resources :ads
 
   resources :ad_sets

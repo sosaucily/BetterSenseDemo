@@ -10,6 +10,7 @@
     <th>Duration millis</th>
     <th>Ad set</th>
     <th>Account</th>
+    <th>Image</th>
     <th></th>
     <th></th>
     <th></th>
@@ -25,6 +26,7 @@
     <td><%= ad.duration_millis %></td>
     <td><%= ad.ad_set_id %></td>
     <td><%= ad.account_id %></td>
+    <td><img src="<%= ad.ad_pic.url(:thumb) %>" /></td>
     <td><%= link_to 'Show', ad %></td>
     <td><%= link_to 'Edit', edit_ad_path(ad) %></td>
     <td><%= link_to 'Destroy', ad, :confirm => 'Are you sure?', :method => :delete %></td>

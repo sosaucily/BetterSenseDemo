@@ -17,11 +17,11 @@
   </div>
   <div class="field">
     <%= f.label :player_type_id %><br />
-    <%= f.text_field :player_type_id %>
+    <%= select("player", "player_type_id", PlayerType.all.collect {|p| [p.name, p.id] }) %>
   </div>
   <div class="field">
     <%= f.label :account_id %><br />
-    <%= f.text_field :account_id %>
+    <%= select("player", "account_id", Account.all.collect {|a| [a.company_name, a.id] }) %>
   </div>
   <div class="actions">
     <%= f.submit %>

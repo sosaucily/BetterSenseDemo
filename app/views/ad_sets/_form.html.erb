@@ -17,11 +17,11 @@
   </div>
   <div class="field">
     <%= f.label :video_id %><br />
-    <%= f.text_field :video_id %>
+    <%= select("ad_set","video_id",Video.all.collect{|v| [v.name,v.id]}) %>
   </div>
   <div class="field">
     <%= f.label :account_id %><br />
-    <%= f.text_field :account_id %>
+    <%= select("ad_set","account_id",Account.all.collect{|a| [a.company_name,a.id]}) %>
   </div>
   <div class="actions">
     <%= f.submit %>

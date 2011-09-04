@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>Name:</b>
   <%= @ad_set.name %>
@@ -15,6 +13,29 @@
   <%= @ad_set.account_id %>
 </p>
 
-
 <%= link_to 'Edit', edit_ad_set_path(@ad_set) %> |
 <%= link_to 'Back', ad_sets_path %>
+
+<h1>Listing IQEInfos for video <%= @video.name %></h1>
+
+<table>
+  <tr>
+    <th>image</th>
+    <th>matcheditem</th>
+    <th>videotimemillis</th>
+    <th>results</th>
+  </tr>
+
+<% @iqeinfos.each do |iqeinfo| %>
+  <tr>
+    <td><img src="<%= iqeinfo.imagepath %>" /></td>
+    <td><%= iqeinfo.matcheditem %></td>
+    <td><%= iqeinfo.videotimemillis %></td>
+    <td><%= iqeinfo.results %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+

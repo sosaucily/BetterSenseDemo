@@ -14,6 +14,8 @@ class AdSetsController < ApplicationController
   # GET /ad_sets/1.xml
   def show
     @ad_set = AdSet.find(params[:id])
+    @video = Video.find_by_id(@ad_set[:video_id])
+    @iqeinfos = Iqeinfo.find_all_by_video_id(@ad_set[:video_id])
 
     respond_to do |format|
       format.html # show.html.erb

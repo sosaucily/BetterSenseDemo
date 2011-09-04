@@ -1,4 +1,5 @@
 @import "tables";
+@import "fields";
 
 $logo-height: 104px;
 
@@ -67,3 +68,6 @@ $logo-height: 104px;
 }
 
 @include video-table; 
+
+@include bettersense-fields;
+

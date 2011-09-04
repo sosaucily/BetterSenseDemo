@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110901010042) do
+ActiveRecord::Schema.define(:version => 20110903052608) do
 
   create_table "accounts", :force => true do |t|
     t.string   "fname"
@@ -31,12 +31,25 @@ ActiveRecord::Schema.define(:version => 20110901010042) do
   create_table "ads", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "zone_id_id"
+    t.integer  "zone_id"
     t.string   "image_url"
     t.integer  "time_millis"
     t.integer  "duration_millis"
-    t.integer  "ad_set_id_id"
-    t.integer  "account_id_id"
+    t.integer  "ad_set_id"
+    t.integer  "account_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "ad_pic_file_name"
+    t.string   "ad_pic_content_type"
+    t.integer  "ad_pic_file_size"
+    t.datetime "ad_pic_updated_at"
+    t.string   "ad_pic_fingerprint"
+  end
+
+  create_table "advertisers", :force => true do |t|
+    t.string   "fname"
+    t.string   "lname"
+    t.string   "company_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -127,10 +140,14 @@ ActiveRecord::Schema.define(:version => 20110901010042) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "filepath"
-    t.integer  "res_x",        :default => 480
-    t.integer  "res_y",        :default => 360
-    t.boolean  "viewable",     :default => false
+    t.integer  "res_x",                 :default => 480
+    t.integer  "res_y",                 :default => 360
+    t.boolean  "viewable",              :default => false
     t.integer  "account_id"
+    t.string   "vid_file_file_name"
+    t.string   "vid_file_content_type"
+    t.integer  "vid_file_file_size"
+    t.datetime "vid_file_updated_at"
   end
 
   create_table "zone_types", :force => true do |t|
@@ -149,6 +166,8 @@ ActiveRecord::Schema.define(:version => 20110901010042) do
     t.integer  "account_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "width"
+    t.integer  "height"
   end
 
 end

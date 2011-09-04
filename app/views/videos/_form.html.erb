@@ -1,4 +1,4 @@
-<%= form_for(@video) do |f| %>
+<%= form_for(@video, :html => { :multipart => true }) do |f| %>
   <% if @video.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@video.errors.count, "error") %> prohibited this video from being saved:</h2>
@@ -15,7 +15,10 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
-
+  <div class="field">
+    <%= f.label :account_id %><br />
+    <%= select("video", "account_id", Account.all.collect {|a| [a.company_name, a.id] }) %>
+  </div>
   <div class="field">
     <%= f.label :lengthmillis %><br />
     <%= f.text_field :lengthmillis %>
@@ -23,6 +26,9 @@
   <div class="field">
     <%= f.label :description %><br />
     <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.file_field :vid_file %>
   </div>
   <div class="field">
     <%= f.label :hashstring %><br />

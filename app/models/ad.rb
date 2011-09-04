@@ -2,11 +2,10 @@ class Ad < ActiveRecord::Base
   belongs_to :zone
   belongs_to :account
   belongs_to :ad_set
+  belongs_to :advertiser
 
-  validate :ensure_account_exists
+  has_attached_file :ad_pic, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 
-  def ensure_account_exists
-    errors.add('account') unless Account.find_by_id(self.account_id)
-  end
+  validates :account, :account_exists => true
 
 end
