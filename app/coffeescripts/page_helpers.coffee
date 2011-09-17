@@ -3,7 +3,7 @@ $ ->
 	j_zone_id = $('#ad_zone_id')
 	$('#ad_zone_id').change () ->
 	  if $("#ad_zone_id option[value='" + j_zone_id + "']").text() is "Video Overlay (Text or Image)"
-		$(this).show()
+	    $('videoAd_fields').show()
 	  else
-	    $(this).hide()
+	    $('videoAd_fields').hide()
 	  return

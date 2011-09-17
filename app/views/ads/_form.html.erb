@@ -1,3 +1,4 @@
+<%= javascript_include_tag "page_helpers" %>
 <%= form_for(@ad, :html => { :class => "form_clean_fields", :multipart => true }) do |f| %>
   <% if @ad.errors.any? %>
     <div id="error_explanation">
@@ -25,7 +26,7 @@
 	  <div class="field">
 	    <%= f.label :zone_id %><%= select("ad", "zone_id", Zone.all.collect {|a| [a.name, a.id] }) %>
 	  </div>
-	  <div id="videoAd_fields">
+	  <div id="videoAd_fields" style="display:none">
 	    <div class="field">
 	      <%= f.label :time_millis %><%= f.text_field :time_millis %>
 	    </div>
