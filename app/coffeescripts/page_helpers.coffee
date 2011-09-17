@@ -7,3 +7,4 @@ $ ->
 	  else
 	    $('videoAd_fields').hide()
 	  return
+	return
