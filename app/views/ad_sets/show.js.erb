@@ -1,0 +1,6 @@
+<% if (@iqeinfos.nil? or @iqeinfos.empty?) then %>
+  window.cancel_scroll = true;
+  console.log ("Finished retrieving items");
+<% else %>
+  $("#piclist").append("<%= escape_javascript(render('shared/picdiv', :iqeinfos => @iqeinfos)) %>");
+<% end %>

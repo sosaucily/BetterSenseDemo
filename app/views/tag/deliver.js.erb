@@ -1,0 +1,9 @@
+<% logger.info("In the deliver function") %>
+
+<% @ka = KalturaAd.new
+  logger.info(@ads.inspect)
+  the_ads = @ka.buildAds(@ads)
+%>
+<%# "console.log ('hi')" %>
+
+<%= @callback.to_s + ".(" + the_ads.to_json +");" %>

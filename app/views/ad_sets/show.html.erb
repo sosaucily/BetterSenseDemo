@@ -1,3 +1,6 @@
+<%= javascript_include_tag "jquery.sausage" %>
+<%= javascript_include_tag "betteradModule" %>
+<%= javascript_include_tag "swfobject", "jquery.uploadify.v2.1.4.js" %>
 <p>
   <b>Name:</b>
   <%= @ad_set.name %>
@@ -15,27 +18,16 @@
 
 <%= link_to 'Edit', edit_ad_set_path(@ad_set) %> |
 <%= link_to 'Back', ad_sets_path %>
-
-<h1>Listing IQEInfos for video <%= @video.name %></h1>
-
-<table>
-  <tr>
-    <th>image</th>
-    <th>matcheditem</th>
-    <th>videotimemillis</th>
-    <th>results</th>
-  </tr>
-
-<% @iqeinfos.each do |iqeinfo| %>
-  <tr>
-    <td><img src="<%= iqeinfo.imagepath %>" /></td>
-    <td><%= iqeinfo.matcheditem %></td>
-    <td><%= iqeinfo.videotimemillis %></td>
-    <td><%= iqeinfo.results %></td>
-  </tr>
-<% end %>
-</table>
-
 <br />
+<div id="piclist">
+  <%= render 'shared/picdiv' %>
+</div>
+<script type="text/javascript">
+  window.cancel_scroll = false;
+  var url = "<%= request.fullpath %>" + "?page=";
+</script>
+<%= javascript_include_tag "bettersense_inf_scroll" %>
+<%= render 'shared/loading' %>
 
-
+<div class="fadepic span-16">
+</div>

@@ -1,6 +1,7 @@
 class Iqeinfo < ActiveRecord::Base
   belongs_to :video
+  belongs_to :ads
 
-  named_scope :ordered, lambda {|*args| {:order => (args.first || 'created_at DESC')} }
+  scope :ordered, lambda {|*args| {:order => (args.first || 'created_at DESC')} }
 
 end

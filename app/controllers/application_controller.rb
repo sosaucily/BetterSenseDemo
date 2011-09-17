@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   def populateAdWordTrie()
     if (defined?($adWordTrie)) then return end
     $adWordTrie = Containers::Trie.new
-    @dir = "data/GoogleKeywordData07192011"
+    @dir = "/home/ubuntu/www/BetterSenseDemoDev/data/GoogleKeywordData07192011"
     files = Dir.entries(@dir)
     logger.info "Building ad word trie " + $adWordTrie.to_s
 

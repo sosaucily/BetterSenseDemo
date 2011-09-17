@@ -15,10 +15,11 @@ class AdSetsController < ApplicationController
   def show
     @ad_set = AdSet.find(params[:id])
     @video = Video.find_by_id(@ad_set[:video_id])
-    @iqeinfos = Iqeinfo.find_all_by_video_id(@ad_set[:video_id])
-
+    @iqeinfos = Iqeinfo.where(:video_id => @ad_set[:video_id]).paginate(:page => params[:page], :per_page => 20).order('created_at DESC')
+    @ad = Ad.new
     respond_to do |format|
       format.html # show.html.erb
+      format.js
       format.xml  { render :xml => @ad_set }
     end
   end
@@ -52,6 +53,47 @@ class AdSetsController < ApplicationController
         format.html { render :action => "new" }
         format.xml  { render :xml => @ad_set.errors, :status => :unprocessable_entity }
       end
+    end
+  end
+
+  # POST /ad_sets/ad_set_id/create_ad
+  # POST /ad_sets/ad_set_id/create_ad.js
+  def createAd
+    @nfo = params[:ad][:nfo]
+    params[:ad].delete :nfo
+    @ad = Ad.new(params[:ad])
+    respond_to do |format| #if the javascript response is empty, this may never run
+      if @ad.save
+        format.js
+      end
+    end
+  end
+
+  def updateAd
+    @ad = Ad.find(params["id"])
+    @this_ad = @ad
+
+    if (defined? params[:Filedata] and !params[:Filedata].nil?) then
+      @ad.ad_pic = params[:Filedata]
+      logger.info("Results from saving the ad is " + @ad.save.to_s)
+    end
+
+    if (defined? params["name"] and !params["name"].nil?) then
+      @ad.name = params["name"]
+      @ad.save
+    end
+
+    respond_to do |format|
+      format.js { head :ok, :notice => 'Ad was successfully updated.' }
+    end
+  end
+
+  def getNewImage
+    logger.info params.inspect
+    @ad = Ad.find(params[:id])
+
+    respond_to do |format|
+      format.js
     end
   end
 

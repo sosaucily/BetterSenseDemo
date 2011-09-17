@@ -1,0 +1,2 @@
+<% logger.info "getting pic data for ad with id " + @ad.id.to_s + " and the image source is " + @ad.ad_pic.url(:thumb) %>
+<%= escape_javascript(@ad.ad_pic.url(:medium)) %>

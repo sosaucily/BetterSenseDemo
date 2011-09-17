@@ -1,5 +1,7 @@
-<h1>Editing video</h1>
- 
+<h1>Editing Image Details</h1>
+<h4>Please modify the following information</h4>
+<div class="span-16 last redhr"></div>
+
 <form accept-charset="UTF-8" action="<%=videos_path + "/" + @iqeinfo.video_id.to_s + '/iqeinfos/' + @iqeinfo.id.to_s %>" class="edit_iqeinfo" id="<%= "edit_iqeinfo_" + @iqeinfo.id.to_s %>" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="_method" type="hidden" value="put" /><input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" /></div>
   <div class="field">
     <label for="iqeinfo_imagepath">imagepath</label>

@@ -1,11 +1,19 @@
 BetterSenseDemo::Application.routes.draw do
 
 
+  resources :campaigns
+
   resources :advertisers
 
   resources :ads
 
+  match "regclick" => 'ads#regclick'
+
   resources :ad_sets
+
+  match "ad_sets/:ad_set_id/createAd" => 'ad_sets#createAd'
+  match "ad_sets/:ad_set_id/updateAd" => 'ad_sets#updateAd'
+  match "ad_sets/:ad_set_id/getNewImage/:id" => 'ad_sets#getNewImage'
 
   get "tag/deliver"
 
@@ -21,6 +29,7 @@ BetterSenseDemo::Application.routes.draw do
 
   get "kalturademo/index"
   match "kalturademo", :controller => 'kalturademo', :action => 'index'
+  match "kalturademo/:vid_name" => 'kalturademo', :action => 'servePage'
 
   get "betterpic/list"
 

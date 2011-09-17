@@ -1,4 +1,4 @@
-<%= form_for(@advertiser) do |f| %>
+<%= form_for(@advertiser, :html => {:class => "form_clean_fields"}) do |f| %>
   <% if @advertiser.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@advertiser.errors.count, "error") %> prohibited this advertiser from being saved:</h2>
@@ -10,20 +10,40 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :fname %><br />
-    <%= f.text_field :fname %>
+<div class="span-16 last">
+  <b><u>Account Manager Info:</u></b><br />
+  <div class="span-6">
+	<div class="span-6 greyBox">
+	  <div class="span-3">
+	    <%= f.label :fname, "First Name:" %>
+	  </div>
+	  <div class="span-3 last">
+	    <%= f.label :lname, "Last Name:" %>
+	  </div>
+	  <br />
+	  <div class="span-3">
+	    <%= f.text_field :fname, :size => 10 %>
+	  </div>
+	  <div class="span-3 last">
+	    <%= f.text_field :lname, :size => 10 %>
+	  </div>
+    </div>
+	<br /><br />
+	<!--<div class="span-6 last">
+	  <%# f.label :account_email, "Admin Email:" %><br />
+	  <%# f.text_field :account_email %>
+	</div>-->
+    <br /><b><u>Company Info:</u></b><br />
+	<div class="span-6 greyBox">
+		<div class="span-6 last">
+		  <%= f.label :company_name, "Company Name:" %><br />
+		  <%= f.text_field :company_name %>
+		</div>
+	</div><br /><br />
+	<div class="actions">
+      <%= f.submit %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :lname %><br />
-    <%= f.text_field :lname %>
-  </div>
-  <div class="field">
-    <%= f.label :company_name %><br />
-    <%= f.text_field :company_name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <div class="prepend-4 span-6 last"></div>
+</div>
 <% end %>

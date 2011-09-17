@@ -2,11 +2,7 @@ class VideosController < ApplicationController
 
   #Process Video function is used to send the video data for this video to the various third parties for processing
 
-#  def processvideo
-    #@video = Video.find(params[:id])
-#    logger.info "testtest "  
-#    redirect_to videos_url+'/'
-#  end
+#  caches_action :show
 
   # GET /videos
   # GET /videos.xml
@@ -25,7 +21,7 @@ class VideosController < ApplicationController
   def show
     @video = Video.find(params[:id])
     populateAdWordTrie()
-
+    logger.info("suuuuuup")
     respond_to do |format|
       format.html # show.html.erb
       format.js

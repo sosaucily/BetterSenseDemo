@@ -1,0 +1,26 @@
+            <%= link_to 'Edit Ad ' + this_ad.id.to_s, edit_ad_path(this_ad) %>
+            <% url = if (!request.fullpath.include? "updateAd") then request.fullpath + "/updateAd" else request.fullpath end %>
+            <%= form_for(this_ad, :url => url, :html => { :multipart => true }, :remote => true, :accept => "text/javascript" ) do |f| %>
+             <!-- Name:&nbsp; --><%# f.text_field :name %>
+              <%= if(!this_ad.ad_pic_file_name.nil?) then image_tag this_ad.ad_pic.url(:medium) end %>
+              <%= f.file_field :ad_pic, :id => 'ad_ad_pic' + this_ad.iqeinfo_id.to_s %>
+              <%= f.text_field :id, :hidden => true, :value => this_ad.id %>
+              <%= f.text_field 'nfo[iqe_id]', :value => this_ad.iqeinfo_id, :hidden => true %>
+              <div class="actions">
+                <%= f.submit :class => 'adModuleButton', :hidden => true, :id => 'ad_submit' + this_ad.iqeinfo_id.to_s %>
+              </div>
+            <% end %>
+            <script type="text/javascript">
+            <% if (!this_ad.nil?) %> uploadifyAdItems(<%=this_ad.iqeinfo_id%>,<%=this_ad.id%>,<%=this_ad.ad_set_id%>, "Pick Overlay Img"); <% end %>
+            </script>
+            <br />
+            <%= form_for(this_ad, :remote => true ) do |f| %>
+              <%= f.text_area :html_src, :cols => 35, :rows => 5, :id => "ad_html_src" + this_ad.iqeinfo_id.to_s %><br />
+              Start time: <%= f.text_field :time_millis %><br />
+              Overlay Duration: <%= f.text_field :duration_millis %>
+              <%= f.text_field 'nfo[iqe_id]', :value => this_ad.iqeinfo_id, :hidden => true %>
+              <div class="actions">
+                <%= f.submit %>
+              </div>
+            <% end %>
+            <div id="editAdModNotice<%= this_ad.iqeinfo_id%>" style="display:none;color:red"></div>

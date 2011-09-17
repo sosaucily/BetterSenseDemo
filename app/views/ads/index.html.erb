@@ -26,7 +26,11 @@
     <td><%= ad.duration_millis %></td>
     <td><%= ad.ad_set_id %></td>
     <td><%= ad.account_id %></td>
-    <td><img src="<%= ad.ad_pic.url(:thumb) %>" /></td>
+    <% if !ad.ad_pic_file_name.nil? then %>
+      <td><img src="<%= ad.ad_pic.url(:thumb) %>" /></td>
+    <% else %>
+      <td></td>
+    <% end %>
     <td><%= link_to 'Show', ad %></td>
     <td><%= link_to 'Edit', edit_ad_path(ad) %></td>
     <td><%= link_to 'Destroy', ad, :confirm => 'Are you sure?', :method => :delete %></td>

@@ -1,4 +1,16 @@
 class AdsController < ApplicationController
+
+  def regclick
+    @ad = Ad.find(params[:id])
+    curr_count = @ad.click_count
+    if (curr_count.nil?)
+	curr_count = 0
+    end
+    @ad.click_count = curr_count + 1
+    @ad.save
+    redirect_to params[:url]
+  end    
+
   # GET /ads
   # GET /ads.xml
   def index
@@ -41,7 +53,6 @@ class AdsController < ApplicationController
   # POST /ads.xml
   def create
     @ad = Ad.new(params[:ad])
-  #  @ad = Ad.create( params[:ad] )
     respond_to do |format|
       if @ad.save
         format.html { redirect_to(@ad, :notice => 'Ad was successfully created.') }
@@ -57,11 +68,13 @@ class AdsController < ApplicationController
   # PUT /ads/1.xml
   def update
     @ad = Ad.find(params[:id])
-
+    @nfo = params[:ad][:nfo]
+    params[:ad].delete :nfo
     respond_to do |format|
       if @ad.update_attributes(params[:ad])
         format.html { redirect_to(@ad, :notice => 'Ad was successfully updated.') }
         format.xml  { head :ok }
+        format.js   
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @ad.errors, :status => :unprocessable_entity }

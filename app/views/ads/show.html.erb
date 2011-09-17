@@ -13,10 +13,19 @@
   <%= @ad.zone_id %>
 </p>
 
+<% if !@ad.ad_pic_file_name.nil? then %>
 <%= image_tag @ad.ad_pic.url %>
 <%= image_tag @ad.ad_pic.url(:medium) %>
 <%= image_tag @ad.ad_pic.url(:thumb) %>
-
+<% end %>
+<div class="field">
+  Preview of Ad HTML
+  <% if !@ad.html_src.nil? and (@ad.html_src != "") then %>
+  <div class="AdHTMLPreview">
+    <%= markdown(@ad.html_src) %>
+  </div>
+  <% end %>
+</div>
 <p>
   <b>Image url:</b>
   <%= @ad.image_url %>

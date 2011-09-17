@@ -1,5 +1,58 @@
+<% @ads_in_set = Ad.find_all_by_ad_set_id(@ad_set.id) %>
 <% @iqeinfos.each do |iqe| %>
-<div id="image">
-  <img src="<%= iqe.imagepath %>" /><br />
-</div>
+  <div id="image">
+    <img src="<%= iqe.imagepath %>" /><br />
+  </div>
+  <div>
+    IQEINFO ID <%= iqe.id %> AND VIDEO ID <%= @video.id %> and adset id <%= @ad_set.id %> and account id is <%= @ad_set.account_id %><br />
+  </div>
+  <div class="span-16 last adModuleContainer" id="adModuleContainer<%=iqe.id%>">
+    <div class="span-8" id="newOverlayModule<%=iqe.id%>">
+      <button id="newOverlayButton<%=iqe.id%>">Video Overlay</button>
+      <div class="newOverlayFieldsContainer" id="newOverlayFieldsContainer<%=iqe.id%>">
+        <%
+          this_ad = nil
+          @ads_in_set.each { |a| if (a.iqeinfo_id == iqe.id and a.zone.zone_type.name == "Video Overlay") then this_ad = a end }
+          if (!this_ad.nil?) 
+        %>
+          <div id="existingAdMod<%=iqe.id%>">
+            <%= render 'shared/editAdMod', :this_ad => this_ad, :iqe => iqe %>
+          </div>
+        <% 
+          else
+        %>
+          <div id="newAdMod<%=iqe.id%>">
+            <%= render 'shared/addAdMod', :this_ad => this_ad, :iqe => iqe %>
+          </div>
+        <%
+          end
+        %>
+      </div>
+    </div>
+    <div class="span-8 last" id="newCompanionModule<%=iqe.id%>">
+      <button id="newCompanionButton<%=iqe.id%>">Companion Ad</button>
+      <div class="newCompanionFieldsContainer" id="newCompanionFieldsContainer<%=iqe.id%>">
+        <%
+          this_comp_ad = nil
+          @ads_in_set.each { |a| if (a.iqeinfo_id == iqe.id and a.zone.zone_type.name == "Standard Video Companion") then this_comp_ad = a end }
+          if (!this_comp_ad.nil?)                                     
+        %>
+        <div id="existingCompanionAdMod<%=iqe.id%>">
+         <%= render 'shared/editCompAdMod', :this_ad => this_comp_ad, :iqe => iqe %>
+        </div>
+        <%
+          else 
+        %>
+          <div id="newCompanionAdMod<%=iqe.id%>">
+            <%= render 'shared/addCompAdMod', :this_ad => this_comp_ad, :iqe => iqe %>
+          </div>
+        <%
+          end
+        %>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    registerNewButtons(<%=iqe.id%>);
+  </script>
 <% end %>
