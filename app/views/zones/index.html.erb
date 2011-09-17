@@ -5,7 +5,6 @@
     <th>Name</th>
     <th>Description</th>
     <th>Zone type</th>
-    <th>Account</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,8 +14,7 @@
   <tr>
     <td><%= zone.name %></td>
     <td><%= zone.description %></td>
-    <td><%= zone.zone_type_id %></td>
-    <td><%= zone.account_id %></td>
+    <td><%= zone.zone_type.name %></td>
     <td><%= link_to 'Show', zone %></td>
     <td><%= link_to 'Edit', edit_zone_path(zone) %></td>
     <td><%= link_to 'Destroy', zone, :confirm => 'Are you sure?', :method => :delete %></td>

@@ -20,16 +20,18 @@
       </div>
 	  <div class="field">
 	    <%= f.label :description %><br />
-	    <%= f.text_area :description, :cols => 60, :rows => 5 %>
+	    <%= f.text_area :description, :cols => 40, :rows => 3 %>
 	  </div>
 	  <div class="field">
 	    <%= f.label :zone_id %><%= select("ad", "zone_id", Zone.all.collect {|a| [a.name, a.id] }) %>
 	  </div>
-	  <div class="field">
-	    <%= f.label :time_millis %><%= f.text_field :time_millis %>
-	  </div>
-	  <div class="field">
-	    <%= f.label :duration_millis %><%= f.text_field :duration_millis %>
+	  <div id="videoAd_fields">
+	    <div class="field">
+	      <%= f.label :time_millis %><%= f.text_field :time_millis %>
+	    </div>
+	    <div class="field">
+	      <%= f.label :duration_millis %><%= f.text_field :duration_millis %>
+	    </div>
 	  </div>
 	</div>
     <b><u>Ad Content:</u></b><br />
