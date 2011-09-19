@@ -5,7 +5,7 @@
             <%= f.text_field :time_millis, :hidden => true, :value => iqe.videotimemillis %>
             <%= f.text_field :account_id, :hidden => true, :value => @ad_set.account_id %>
             <%= f.text_field :iqeinfo_id, :hidden => true, :value => iqe.id %>
-            <%= f.text_field :zone_id, :hidden => true, :value => Zone.find_by_name('Standard Video Overlay').id %>
+            <%= f.text_field :zone_id, :hidden => true, :value => Zone.find_by_name('Video Overlay (Text or Image)').id %>
             <%= f.text_field :ad_set_id, :hidden => true, :value => @ad_set.id %>
             <%= f.text_field 'nfo[iqe_id]', :value => iqe.id, :hidden => true %>
             <div class="actions">

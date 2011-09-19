@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110916210739) do
+ActiveRecord::Schema.define(:version => 20110919142219) do
 
   create_table "accounts", :force => true do |t|
     t.string   "fname"
@@ -47,6 +47,9 @@ ActiveRecord::Schema.define(:version => 20110916210739) do
     t.integer  "iqeinfo_id"
     t.integer  "click_count"
     t.text     "html_src"
+    t.string   "overlay_content_type"
+    t.integer  "campaign_id"
+    t.integer  "impress_count"
   end
 
   create_table "advertisers", :force => true do |t|
@@ -62,9 +65,9 @@ ActiveRecord::Schema.define(:version => 20110916210739) do
     t.date     "start_date"
     t.date     "end_date"
     t.decimal  "budget"
-    t.integer  "ad_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "assigned_cpm"
   end
 
   create_table "iqeinfos", :force => true do |t|

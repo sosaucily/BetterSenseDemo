@@ -1,6 +1,6 @@
 module ApplicationHelper
   def markdown(text)
-    options = [:hard_wrap, :autolink, :no_intraemphasis]
+    options = [:autolink, :no_intraemphasis]
     #$ad_markdown ||= Markdown.new(*options)
     #$ad_markdown.render(text)
     #For some minor safety, I will pull the word "script" out of this content

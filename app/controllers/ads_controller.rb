@@ -2,14 +2,19 @@ class AdsController < ApplicationController
 
   def regclick
     @ad = Ad.find(params[:id])
-    curr_count = @ad.click_count
-    if (curr_count.nil?)
-	curr_count = 0
-    end
+    curr_count = @ad.click_count || 0
     @ad.click_count = curr_count + 1
     @ad.save
     redirect_to params[:url]
   end    
+
+  def regimpress
+    @ad = Ad.find(params[:id])
+    curr_count = @ad.impress_count || 0
+    @ad.impress_count = curr_count + 1
+    @ad.save
+    head :ok
+  end
 
   # GET /ads
   # GET /ads.xml

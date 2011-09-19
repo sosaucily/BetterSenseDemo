@@ -67,6 +67,9 @@ $logo-height: 77px;
   a {
         text-decoration: none;
         color: #82050B; }
+  a:hover {
+    background-color: transparent;
+    }
   .loading {
     display:none; }
   .fadepic {
@@ -102,10 +105,17 @@ $logo-height: 77px;
     margin-left: .5em;
     margin-right: .5em;
     margin-bottom: .5em; }
-  .greyBox {
+  .grayBox {
     padding: .5em;
     margin: .5em;
-    background-color: #F2F2F2;
+    background-color: #F2F2F2;}
+  .blueBoxWithBorder {
+    padding: .5em;
+    margin: .5em;
+    border: 1px;
+    border-style: solid;
+    border-color: #656AB0;
+    background-color: #CDD0FF;
   }
 }
 

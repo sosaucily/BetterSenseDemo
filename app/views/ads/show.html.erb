@@ -32,6 +32,11 @@
 </p>
 
 <p>
+  <b>Content Type:</b>
+  <%= @ad.overlay_content_type %>
+</p>
+
+<p>
   <b>Time millis:</b>
   <%= @ad.time_millis %>
 </p>
@@ -40,17 +45,6 @@
   <b>Duration millis:</b>
   <%= @ad.duration_millis %>
 </p>
-
-<p>
-  <b>Ad set:</b>
-  <%= @ad.ad_set_id %>
-</p>
-
-<p>
-  <b>Account:</b>
-  <%= @ad.account_id %>
-</p>
-
 
 <%= link_to 'Edit', edit_ad_path(@ad) %> |
 <%= link_to 'Back', ads_path %>

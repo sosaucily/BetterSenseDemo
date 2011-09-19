@@ -3,7 +3,8 @@ class CampaignsController < ApplicationController
   # GET /campaigns.xml
   def index
     @campaigns = Campaign.all
-
+    #Generate Performance for campaigns in the set.  This should be for a single user's account.
+    @campaignPerformance = Campaign.generatePerformance(@campaigns)
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @campaigns }
@@ -14,7 +15,8 @@ class CampaignsController < ApplicationController
   # GET /campaigns/1.xml
   def show
     @campaign = Campaign.find(params[:id])
-
+    @ads = Ad.find_all_by_campaign_id(params[:id])
+    @campaignPerformance = Campaign.generatePerformance([] << @campaign)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @campaign }

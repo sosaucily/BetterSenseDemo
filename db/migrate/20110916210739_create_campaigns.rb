@@ -5,7 +5,6 @@ class CreateCampaigns < ActiveRecord::Migration
       t.date :start_date
       t.date :end_date
       t.decimal :budget, :scale => 2
-      t.references :ad
 
       t.timestamps
     end

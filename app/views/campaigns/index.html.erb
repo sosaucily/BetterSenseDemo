@@ -1,31 +1,66 @@
-<h1>Listing campaigns</h1>
+<h1>Campaigns</h1>
+<h4>View and Manage your Campaigns</h4>
+<div class="span-16 last redhr"></div>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Start date</th>
-    <th>End date</th>
-    <th>Budget</th>
-    <th>Ad</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @campaigns.each do |campaign| %>
-  <tr>
-    <td><%= campaign.name %></td>
-    <td><%= campaign.start_date %></td>
-    <td><%= campaign.end_date %></td>
-    <td><%= campaign.budget %></td>
-    <td><%= campaign.ad_id %></td>
-    <td><%= link_to 'Show', campaign %></td>
-    <td><%= link_to 'Edit', edit_campaign_path(campaign) %></td>
-    <td><%= link_to 'Destroy', campaign, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+<div class="span-16 last">
+  <% @campaigns.each do |campaign| %>
+    <%= link_to(campaign) do %>
+      <span style="font-size:16px;font-weight:bold"><u><%= campaign.name %></u></span>
+    <% end %><br />
+    <b><u>General Info:</u></b><br />
+    <div class="span-16 last grayBox">
+	    <div class="span-16 last">
+	      <div class="span-8">
+	        <%= campaign.name %><br /><%= link_to 'edit', edit_campaign_path(campaign) %> - <%= link_to 'delete', campaign, :confirm => 'Are you sure?', :method => :delete %>
+	      </div>
+	      <div class="span-8 last">
+	        Campaign Budget: $<%= sprintf("%.2f",campaign.budget) %><br />
+                Max CPM bid: $<%= sprintf("%.2f",campaign.assigned_cpm) %>
+	      </div>
+	    </div>
+	    <br /><hr>
+	    <div class="span-16 last">
+	      <div class="span-8">
+	        Start Date: <%= campaign.start_date %><br />
+	      </div>
+	      <div class="span-8 last">
+	        Start Date: <%= campaign.start_date %><br />
+	      </div>
+	    </div>
+	</div>
+    <b><u>Performance Info:</u></b><br />
+    <% perform = @campaignPerformance.select {|p| p[:id] == campaign.id }[0] %>
+    <div class="span-16 last grayBox">
+      <div class="span-4">
+        Clicks: <%= perform[:total_clicks] %><br/>
+        <div class="blueBoxWithBorder" style="text-align:center">
+          <%= image_tag("chart.jpg", :alt => "Chart") %>
+        </div>
+      </div>
+      <div class="span-4">
+        Impressions: <%= perform[:total_impressions] %><br />
+        <div class="blueBoxWithBorder" style="text-align:center">
+          <%= image_tag("chart.jpg", :alt => "Chart") %>
+        </div>
+      </div>
+      <div class="span-4">
+        CTR: <%= sprintf("%.2f",perform[:total_clicks] / perform[:total_impressions].to_f) %>%</br>
+        <div class="blueBoxWithBorder" style="text-align:center">
+          <%= image_tag("chart.jpg", :alt => "Chart") %>
+        </div>
+      </div>
+      <div class="span-4 last">
+        Avg. CPC: $<%= sprintf("%.2f",((campaign.budget - (((perform[:total_impressions] || 0)/1000.0) * (campaign.assigned_cpm || 0)))/perform[:total_clicks])) %></br>
+        <div class="blueBoxWithBorder" style="text-align:center">
+          <%= image_tag("chart.jpg", :alt => "Chart") %>
+        </div>
+      </div>
+      <%= link_to 'Performance Details', campaign %>
+    </div>
+  <% end %>
+</div>
 
 <br />
 
 <%= link_to 'New Campaign', new_campaign_path %>
+

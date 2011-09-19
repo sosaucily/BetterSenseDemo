@@ -15,7 +15,7 @@
 <div class="span-16 last">
   <b><u>General Info:</u></b><br />
   <div class="span-12">
-	<div class="span-12 greyBox">
+	<div class="span-12 grayBox">
       <div class="field">
         <%= f.label :name %><%= f.text_field :name %>
       </div>
@@ -36,7 +36,7 @@
 	  </div>
 	</div>
     <b><u>Ad Content:</u></b><br />
-	<div class="span-12 greyBox">	
+	<div class="span-12 grayBox">	
 	  <div class="field">
 	    <%= f.label :ad_pic, "Choose an Image for the Ad" %><br />
 	    <%= f.file_field :ad_pic %>
@@ -48,7 +48,7 @@
 	    <% end %>
 	  </div>
 	  <div class="field">
-	    <%= f.label :image_url, "Target URL for Image" %><br />
+	    <%= f.label :image_url, "Target URL for Ad" %><br />
 	    <%= f.text_field :image_url %>
 	  </div>
 	  <div class="field">
@@ -57,9 +57,12 @@
 	  </div>
 	  <div class="field">
 	    Preview of Ad HTML
-	    <div class="AdHTMLPreview">
-	      <%= markdown(@ad.html_src) %>
-	    </div>
+	    <div class="AdHTMLPreview"><%= markdown(@ad.html_src) %></div>
+	  </div>
+	  <div class="field">
+	    Choose content type<br />
+	    HTML <%= radio_button("ad", "overlay_content_type", "html") %>
+	    Image <%= radio_button("ad", "overlay_content_type", "image") %>
 	  </div>
 	</div>
 	<!--
@@ -76,6 +79,6 @@
 	  <%= f.submit %>
 	</div>
   </div>
-  <div class="prepend-4 span-6 last"></div>
+  <div class="span-4 last"></div>
 </div>
 <% end %>

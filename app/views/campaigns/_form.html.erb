@@ -1,3 +1,4 @@
+<%# javascript_include_tag 'jquery-ui.min.js' %>
 <%= form_for(@campaign) do |f| %>
   <% if @campaign.errors.any? %>
     <div id="error_explanation">
@@ -11,27 +12,28 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :start_date %><br />
-    <%= f.date_select :start_date %>
-  </div>
-  <div class="field">
-    <%= f.label :end_date %><br />
-    <%= f.date_select :end_date %>
-  </div>
-  <div class="field">
-    <%= f.label :budget %><br />
-    <%= f.text_field :budget %>
-  </div>
-  <div class="field">
-    <%= f.label :ad_id %><br />
-    <%= f.text_field :ad_id %>
+<div class="span-16 last">
+  <div class="span-16 last grayBox">
+    <div class="span-8">
+      <%= f.label :name %><%= f.text_field :name, :size => 32, :maxlength => 64 %>
+    </div>
+    <div class="span-4">
+      <%= f.label :budget %> $<%= f.text_field :budget, :size => 5, :maxlength => 8 %>
+    </div>
+    <div class="span-4 last">
+      Max CPM Bid: $<%= f.text_field :assigned_cpm, :size => 5, :maxlength => 5 %>
+    </div>
+    <br /><hr>
+    <div class="span-8">
+      Start Date: <%= @campaign.start_date %><br />
+    </div>
+    <div class="span-8 last">
+      Start Date: <%= @campaign.start_date %><br />
+    </div>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
+</div>
 <% end %>
+

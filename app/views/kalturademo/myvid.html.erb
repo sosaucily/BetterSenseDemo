@@ -1,117 +1,13 @@
-<h1>Below is a demo of the bettersense technology within the Kaltura CE4 player</h1>
-<h3>Showing <%= @vid_name %></h3>
+<h1><i><%= @vid_name %></i></h1>
+<h4>Below is a demo of the bettersense technology used within the Kaltura video solution</h4>
+<div class="span-16 last redhr"></div>
+
 <br />
-<!--
- <script type="text/javascript" src="http://www.bettersensekaltura.com/p/100/sp/10000/embedIframeJs/uiconf_id/4421530/partner_id/100"></script>
--->
+
 <script type="text/javascript" src="http://html5.kaltura.org/js"></script>
-<script type="text/javascript">
-	if( document.URL.indexOf('forceMobileHTML5') != -1 ){
-		mw.setConfig( 'forceMobileHTML5' , true );
-	}
-	mw.setConfig( 'EmbedPlayer.OverlayControls', false );
-	mw.setConfig('Kaltura.ServiceUrl' , 'http://medianac.nacamar.de');
-	mw.setConfig('Kaltura.CdnUrl' , 'http://mn.mdn.nacamar.de');
-	mw.setConfig('KalturaServiceBase', 'http://medianac.nacamar.de/api_v3/index.php?service=');
+<script type="text/javascript" src="http://www.bettersense.com:3000/javascripts/better_kaltura_ads_nacamar.js"></script>
 
- mw.setConfig('KalturaServiceBase', 'http://medianac.nacamar.de/api_v3/index.php?service=');
-
-	$( mw ).bind( 'Kaltura.SendAnalyticEvent', function( monitorEvent ){
-		$('#analyticsLog').append( monitorEvent + "\n");
-	});
-
-</script>
-
-Nacamar Bettersense Flash Player
 <object id="kaltura_player" name="kaltura_player" type="application/x-shockwave-flash" allowFullScreen="true" allowNetworking="all" allowScriptAccess="always" height="330" width="400" xmlns:dc="http://purl.org/dc/terms/" xmlns:media="http://search.yahoo.com/searchmonkey/media/" rel="media:video" resource="http://medianac.nacamar.de/index.php/kwidget/cache_st/1313882952/wid/_461/uiconf_id/1002731/entry_id/0_3byvgkh0" data="http://medianac.nacamar.de/index.php/kwidget/cache_st/1313882952/wid/_461/uiconf_id/1002731/entry_id/0_3byvgkh0"><param name="allowFullScreen" value="true" /><param name="allowNetworking" value="all" /><param name="allowScriptAccess" value="always" /><param name="bgcolor" value="#000000" /><param name="flashVars" value="&" /><param name="movie" value="http://medianac.nacamar.de/index.php/kwidget/cache_st/1313882952/wid/_461/uiconf_id/1002731/entry_id/0_3byvgkh0" /><a href="http://corp.kaltura.com">video platform</a> <a href="http://corp.kaltura.com/video_platform/video_management">video management</a> <a href="http://corp.kaltura.com/solutions/video_solution">video solutions</a> <a href="http://corp.kaltura.com/video_platform/video_publishing">video player</a> <a rel="media:thumbnail" href="http://mn.mdn.nacamar.de/p/461/sp/46100/thumbnail/entry_id/0_3byvgkh0/width/120/height/90/bgcolor/000000/type/2" /> <span property="dc:description" content="" /><span property="media:title" content="Casino Royale Product Placement.mp4" /> <span property="media:width" content="400" /><span property="media:height" content="330" /> <span property="media:type" content="application/x-shockwave-flash" /> </object>
 <br />
-<div id="companion"> some content </div>
 
-
-<script type="text/javascript">
-
-  var url = "http://www.bettersense.com:3000/tag/deliver?ad_set_id=" + <%= @ad_set_id %>;
-
-  var ad_data;
-  var myEmbedPlayer;
-  var result;
-  var adCount = 0;
-  var interval_handle;
-
-  $.getJSON(url+"&callback=?", function(data) {
-    console.log(data);
-    ad_data = data;
-  });
-
-  function setup_stuff() {
-    myEmbedPlayer = $('.mv-player #kaltura_player');
-    loadAds(ad_data[adCount]);
-    adCount++;
-  }
-
-  $( function () {
-    $('.play-btn').click( function() {
-    });
-  });
-
-  $( function () {
-    $('.play-btn-large').click( function() {
-    });      
-  });
-
-  var monitorTimer = function () {
-    //console.log("timer check");
-    if (myEmbedPlayer==undefined || ad_data==undefined)
-    {
-      //console.log("Ad data not ready, returning from timer check");
-      return;
-    }
-
-    var currTime = myEmbedPlayer[0].currentTime;
-    var currAdStart = ad_data[adCount-1].start;
-    var currAdTimeout = ad_data[adCount-1].timeout;
-
-    if ((adCount >= ad_data.length) && ((currTime+1) > currAdStart + currAdTimeout))
-    {
-      console.log ("no more ads, clearing interval timer");
-      overlayAd =  myEmbedPlayer[0].AdTimeline.timelineTargets.overlay;
-      overlayAd.splice(0,1);
-      window.clearInterval(interval_handle);
-    }
-
-    //console.log("currTime: " + currTime + " - currAdStart: " + currAdStart + " - currAdTimeout: " + currAdTimeout);
-    if (currTime > currAdStart + currAdTimeout)
-    {
-      console.log("Moving to the next adItem")
-      updateOverlay(ad_data[adCount-1],ad_data[adCount]);
-      adCount++;
-    }
-    //console.log("exiting timer check");
-  }
-
-  function loadAds(data)
-  {
-    console.log("Adding first ad");
-    myEmbedPlayer[0].AdTimeline = new mw.AdTimeline(myEmbedPlayer[0]);
-    myEmbedPlayer[0].AdTimeline.adOverlaysEnabled = true;
-    mw.addAdToPlayerTimeline( myEmbedPlayer[0], 'overlay', data);
-    console.log("done");
-  }
-
-  function updateOverlay(old_ad,new_ad)
-  {
-    console.log("Adding next ad (" + adCount + ")");
-    overlayAd =  myEmbedPlayer[0].AdTimeline.timelineTargets.overlay[0];
-    overlayAd.frequency = (new_ad.start - old_ad.timeout) - old_ad.start;
-    overlayAd.timeout = new_ad.timeout;
-    nonLinAd = overlayAd.ads[0].nonLinear[0];
-    nonLinAd.html = new_ad.ads[0].nonLinear[0].html;
-    console.log("Current Ad Values -- new start: " + new_ad.start + " - old start: " + old_ad.start + " - old duration: " + old_ad.timeout + " - new frequency: " + overlayAd.frequency + " - new timeout " + overlayAd.timeout);
-    console.log("done");
-  }
-
-  setTimeout('setup_stuff()',3000);
-  interval_handle = window.setInterval("monitorTimer()", 500);
-
-</script>
-
+<script type="text/javascript" src="http://www.bettersense.com:3000/javascripts/better_kaltura_ads.js"></script>

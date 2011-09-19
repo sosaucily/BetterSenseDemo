@@ -8,6 +8,7 @@ BetterSenseDemo::Application.routes.draw do
   resources :ads
 
   match "regclick" => 'ads#regclick'
+  match "regimpress" => 'ads#regimpress'
 
   resources :ad_sets
 

@@ -1209,22 +1209,26 @@ body.one-col a {
   color: #82050B;
 }
 /* line 70, ../../app/stylesheets/partials/_bettersense.scss */
+body.one-col a:hover {
+  background-color: transparent;
+}
+/* line 73, ../../app/stylesheets/partials/_bettersense.scss */
 body.one-col .loading {
   display: none;
 }
-/* line 72, ../../app/stylesheets/partials/_bettersense.scss */
+/* line 75, ../../app/stylesheets/partials/_bettersense.scss */
 body.one-col .fadepic {
   background: url(../images/640-fade.png);
   height: 50px;
   width: 100%;
 }
-/* line 76, ../../app/stylesheets/partials/_bettersense.scss */
+/* line 79, ../../app/stylesheets/partials/_bettersense.scss */
 body.one-col .adModuleContainer {
   border: 2px;
   border-color: #DDDDDD;
   border-style: solid;
 }
-/* line 81, ../../app/stylesheets/partials/_bettersense.scss */
+/* line 84, ../../app/stylesheets/partials/_bettersense.scss */
 body.one-col .newOverlayFieldsContainer {
   background-color: #DDDDFF;
   padding: 0em;
@@ -1232,7 +1236,7 @@ body.one-col .newOverlayFieldsContainer {
   margin-right: .5em;
   margin-bottom: .5em;
 }
-/* line 87, ../../app/stylesheets/partials/_bettersense.scss */
+/* line 90, ../../app/stylesheets/partials/_bettersense.scss */
 body.one-col .newCompanionFieldsContainer {
   padding: 0em;
   margin-bottom: .5em;
@@ -1240,11 +1244,11 @@ body.one-col .newCompanionFieldsContainer {
   margin-left: .5em;
   background-color: #DDDDFF;
 }
-/* line 93, ../../app/stylesheets/partials/_bettersense.scss */
+/* line 96, ../../app/stylesheets/partials/_bettersense.scss */
 body.one-col div.adModuleContainer input {
   font-size: 5px;
 }
-/* line 96, ../../app/stylesheets/partials/_bettersense.scss */
+/* line 99, ../../app/stylesheets/partials/_bettersense.scss */
 body.one-col .AdHTMLPreview {
   background-color: #FFFFFF;
   border: 2px;
@@ -1255,9 +1259,18 @@ body.one-col .AdHTMLPreview {
   margin-right: .5em;
   margin-bottom: .5em;
 }
-/* line 105, ../../app/stylesheets/partials/_bettersense.scss */
-body.one-col .greyBox {
+/* line 108, ../../app/stylesheets/partials/_bettersense.scss */
+body.one-col .grayBox {
   padding: .5em;
   margin: .5em;
   background-color: #F2F2F2;
+}
+/* line 112, ../../app/stylesheets/partials/_bettersense.scss */
+body.one-col .blueBoxWithBorder {
+  padding: .5em;
+  margin: .5em;
+  border: 1px;
+  border-style: solid;
+  border-color: #656AB0;
+  background-color: #CDD0FF;
 }
