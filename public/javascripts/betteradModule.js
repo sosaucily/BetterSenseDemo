@@ -1,4 +1,4 @@
-/* DO NOT MODIFY. This file was compiled Mon, 12 Sep 2011 20:26:34 GMT from
+/* DO NOT MODIFY. This file was compiled Wed, 28 Sep 2011 02:01:01 GMT from
  * /home/ubuntu/www/BetterSenseDemoDev/app/coffeescripts/betteradModule.coffee
  */
 
@@ -48,7 +48,7 @@
   root.updateImage = function(iqeid, adid, adsetid) {
     var imgsrc;
     imgsrc = $.ajax({
-      url: "http://www.bettersense.com:3000/ad_sets/" + adsetid + "/getNewImage/" + adid + ".js",
+      url: "http://" + window.location.href.split('/')[2] + "/ad_sets/" + adsetid + "/getNewImage/" + adid + ".js",
       dataType: "text",
       async: true,
       success: function() {

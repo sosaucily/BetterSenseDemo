@@ -45,5 +45,9 @@ module BetterSenseDemo
     config.after_initialize do
       BetterSenseDemo::Keyword.populateAdWordTrie()
     end
+
+    config.before_eager_load do
+      BetterSenseDemo::APP_CONFIG = YAML.load_file("#{Rails.root.to_s}/config/bettersense_config.yml")[Rails.env]
+    end
   end
 end

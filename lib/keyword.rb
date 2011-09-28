@@ -3,7 +3,7 @@ class Keyword
   def self.populateAdWordTrie()
     if (defined?($adWordTrie)) then return end
     $adWordTrie = Containers::Trie.new
-    @dir = "/home/ubuntu/www/BetterSenseDemoDev/data/GoogleKeywordData07192011"
+    @dir = Rails.root.to_s + BetterSenseDemo::APP_CONFIG["keyword_data_dir"]
     files = Dir.entries(@dir)
     Rails.logger.info "Building ad word trie " + $adWordTrie.to_s
 

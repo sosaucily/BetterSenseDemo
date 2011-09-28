@@ -1,12 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  VIDEODIR = APP_CONFIG["videos_dir"]
+  VIDEODIR = BetterSenseDemo::APP_CONFIG["videos_dir"]
   IMAGESUBDIR = "images"
 
   IQE_KEY = '2fd276e7f0ac4a5f948f244fa127cd22'
   IQE_SECRET = '5de565aa46c6464a81fe92c3389a7a0b'
-  HOOKBASEURL = "#{APP_CONFIG["base_url"]}"
+  HOOKBASEURL = BetterSenseDemo::APP_CONFIG["base_url"]
 
   #rediretion after login for Devise
   def after_sign_in_path_for(resource)
@@ -59,7 +59,7 @@ class ApplicationController < ActionController::Base
 
   def do_image_import (video)
     video_hash = video[:hashstring]
-    image_dir = Rails.root + APP_CONFIG["processed_videos_dir"] + "/" + video_hash + "/" + IMAGESUBDIR + "/*"
+    image_dir = Rails.root + BetterSenseDemo::APP_CONFIG["processed_videos_dir"] + "/" + video_hash + "/" + IMAGESUBDIR + "/*"
     @files = Dir.glob(image_dir)
     @files.sort!
     logger.debug 'checking directory - ' + image_dir

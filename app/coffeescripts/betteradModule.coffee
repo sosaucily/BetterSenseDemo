@@ -32,7 +32,7 @@ root.uploadifyAdItems = (iqeid, adid, adsetid, buttonText = 'Select Image') ->
   return
 
 root.updateImage = (iqeid, adid, adsetid) ->
-  imgsrc = $.ajax({url:"http://www.bettersense.com:3000" + "/ad_sets/" + adsetid + "/getNewImage/" + adid + ".js", dataType: "text", async: true, success: () ->
+  imgsrc = $.ajax({url:"http://" + window.location.href.split('/')[2] + "/ad_sets/" + adsetid + "/getNewImage/" + adid + ".js", dataType: "text", async: true, success: () ->
     root.fixImage(iqeid, adid, imgsrc)
   })
   return
