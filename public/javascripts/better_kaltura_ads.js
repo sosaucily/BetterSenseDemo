@@ -10,8 +10,9 @@ var urlParams = {};
      urlParams[d(e[1])] = d(e[2]);
 })();
 
-var tag_url = "http://www.bettersense.com:3000/tag/deliver?ad_set_id=" + urlParams["ad_set_id"];
-var impress_url = "http://www.bettersense.com:3000/regimpress?id=";
+var base_url = "http://" + window.location.href.split('/')[2]
+var tag_url = base_url + "/tag/deliver?ad_set_id=" + urlParams["ad_set_id"];
+var impress_url = base_url + "/regimpress?id=";
 var ad_data;
 var myEmbedPlayer;
 var result;
