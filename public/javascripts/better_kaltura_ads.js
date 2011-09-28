@@ -105,5 +105,5 @@ function updateOverlay(old_ad,new_ad)
 }
 
 setTimeout('setup_stuff()',3000);
-interval_handle = window.setInterval("monitorTimer()", 200);
+interval_handle = window.setInterval("monitorTimer()", 600);
 

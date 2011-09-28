@@ -5,7 +5,7 @@ BetterSenseDemo::Application.configure do
   # every request.  This slows down response time but is perfect for development
   # since you don't have to restart the webserver when you make code changes.
 #JS-Changed this to true from false for cache and memory testing
-  config.cache_classes = false
+  config.cache_classes = true
 
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
@@ -13,8 +13,9 @@ BetterSenseDemo::Application.configure do
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
   config.action_view.debug_rjs             = true
+
 #JS-Changed this to true from false for cache and memory testing
-  config.action_controller.perform_caching = false
+  config.action_controller.perform_caching = true
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
@@ -31,5 +32,5 @@ BetterSenseDemo::Application.configure do
   config.action_view.javascript_expansions[:defaults] = %w(jquery.min)
 
   Paperclip.options[:command_path] = "/usr/bin/"
-end
 
+end

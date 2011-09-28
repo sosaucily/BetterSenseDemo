@@ -40,5 +40,10 @@ module BetterSenseDemo
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    #After everything is booted up, run the system to build up the keyword data.  Perhaps this should be a separate process, or a memory-mapped file.
+    config.after_initialize do
+      BetterSenseDemo::Keyword.populateAdWordTrie()
+    end
   end
 end

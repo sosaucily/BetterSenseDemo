@@ -28,7 +28,7 @@ Nacamar Bettersense Flash Player
 
 <script type="text/javascript">
 
-  var url = "http://www.bettersense.com:3000/tag/deliver?ad_set_id=" + <%= @ad_set.id %>;
+  var url = <%= APP_CONFIG["base_url"] %> + "/tag/deliver?ad_set_id=" + <%= @ad_set.id %>;
 
   var ad_data;
   var myEmbedPlayer;

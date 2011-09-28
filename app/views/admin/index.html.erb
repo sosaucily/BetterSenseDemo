@@ -1,0 +1,32 @@
+<h1>better<b>sense</b> Admin Page</h1>
+<h4>Choose from the following administrative functions</h4>
+<div class="span-16 last redhr"></div>
+<div class="span-16 last">
+  <span style="font-size:16px;font-weight:bold"><u>Common Pages</u></span>
+
+  <div class="span-16 last grayBox">
+    <div class="span-8">
+      <%= link_to 'View Campaigns', '/campaigns' %>
+    </div>
+    <div class="span-8 last">
+      <%= link_to 'View Ads', '/ads' %>
+    </div>
+  </div>
+  <div class="span-16 last grayBox">
+    Nacamar / Kaltura Demos (*Chrome Browser)<br />
+    <div class="span-8">
+      <% star_wars_ad_set_id = Rails.env.development? ? 3 : 1 %>
+      <%= link_to 'Star Wars', "/kalturademo/starwars?ad_set_id=#{star_wars_ad_set_id}&forceMobileHTML5=true" %><br />
+    </div>
+  </div>
+  <div class="span-16 last grayBox">
+    <div class="span-8">
+      <%= link_to 'View Ad Sets', '/ad_sets' %>
+    </div>
+    <div class="span-8 last">
+      <%= link_to 'Advertisers', '/advertisers' %>
+    </div>
+  </div>
+
+</div>
+<br />

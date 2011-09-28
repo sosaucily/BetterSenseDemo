@@ -20,8 +20,6 @@ class VideosController < ApplicationController
   # GET /videos/1.xml
   def show
     @video = Video.find(params[:id])
-    populateAdWordTrie()
-    logger.info("suuuuuup")
     respond_to do |format|
       format.html # show.html.erb
       format.js

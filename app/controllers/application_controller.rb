@@ -1,37 +1,18 @@
-#require 'iqengines'
-
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  PROCESSEDVIDEOPATH = "processedVideos"
-  VIDEODIR = "public/videos"
+  VIDEODIR = APP_CONFIG["videos_dir"]
   IMAGESUBDIR = "images"
 
   IQE_KEY = '2fd276e7f0ac4a5f948f244fa127cd22'
   IQE_SECRET = '5de565aa46c6464a81fe92c3389a7a0b'
-  HOOKBASEURL = 'http://184.72.217.146:3000/'
- 
-  def populateAdWordTrie()
-    if (defined?($adWordTrie)) then return end
-    $adWordTrie = Containers::Trie.new
-    @dir = "/home/ubuntu/www/BetterSenseDemoDev/data/GoogleKeywordData07192011"
-    files = Dir.entries(@dir)
-    logger.info "Building ad word trie " + $adWordTrie.to_s
+  HOOKBASEURL = "#{APP_CONFIG["base_url"]}"
 
-    files.each do |file|
-      if (file.index(".csv") != nil) then
-        categories = file.split("_")
-        categories.map!{|item| if (item.index(".csv") != nil) then item[0..-5] else item end}
-        FasterCSV.foreach(@dir + "/" + file,  :col_sep =>',', :row_sep =>:auto) do |row|
-          $adWordTrie.push(row[0],categories)
-          logger.info "pushing value " + row[0].to_s
-        end
-        logger.info "completed with file --" + file + "-- and categories " + categories.count.to_s
-      end
-    end
+  #rediretion after login for Devise
+  def after_sign_in_path_for(resource)
+    stored_location_for(resource) || '/admin'
   end
-
-
+ 
   def process_video (video)
     logger.info 'processing video at path ' + video[:name]
     video_actions = params[:videoAction]
@@ -78,15 +59,16 @@ class ApplicationController < ActionController::Base
 
   def do_image_import (video)
     video_hash = video[:hashstring]
-    image_dir = "public/processedVideos/" + video_hash + "/" + IMAGESUBDIR + "/*"
+    image_dir = Rails.root + APP_CONFIG["processed_videos_dir"] + "/" + video_hash + "/" + IMAGESUBDIR + "/*"
     @files = Dir.glob(image_dir)
     @files.sort!
-    #logger.info 'checking directory - ' + image_dir
+    logger.debug 'checking directory - ' + image_dir
     for file in @files
-      #logger.info 'file name is: ' + file
-      #logger.info 'creating an iqeinfo object for this video'
-      iqeinfo = video.iqeinfos.build(:results => "test iqeinfo", :imagepath =>  "/" + file[7,file.size-7])
-      #logger.info 'done'
+      logger.debug 'file name is: ' + file
+      logger.debug 'creating an iqeinfo object for this video'
+      start_char = file.index("processedVideos")
+      iqeinfo = video.iqeinfos.build(:results => "test iqeinfo", :imagepath =>  "/" + file[start_char,file.size])
+      logger.debug 'done'
       iqeinfo.save
     end
   end

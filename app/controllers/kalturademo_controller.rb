@@ -5,6 +5,6 @@ class KalturademoController < ApplicationController
   def servePage
     @vid_name = params[:vid_name]
     @ad_set_id = params[:ad_set_id]
-    render "/home/ubuntu/www/BetterSenseDemoDev/app/views/kalturademo/" + @vid_name.to_s
+    render Rails.root + APP_CONFIG["kaltura_demo_path"] + "/" + @vid_name.to_s
   end
 end

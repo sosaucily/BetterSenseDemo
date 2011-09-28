@@ -7,6 +7,11 @@ BetterSenseDemo::Application.routes.draw do
 
   resources :ads
 
+  match "admin" => 'admin#index'
+
+  match "demo" => 'demo#index'
+  match "demo/:demo_name" => 'demo#servePage'
+
   match "regclick" => 'ads#regclick'
   match "regimpress" => 'ads#regimpress'
 
