@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20110919142219) do
     t.integer  "account_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "advertiser_id"
     t.string   "ad_pic_file_name"
     t.string   "ad_pic_content_type"
     t.integer  "ad_pic_file_size"
@@ -90,7 +91,7 @@ ActiveRecord::Schema.define(:version => 20110919142219) do
     t.integer  "xheight"
     t.integer  "cradius"
     t.boolean  "send_to_crowd",   :default => false
-    t.datetime "processing",      :default => '2011-07-27 16:47:33'
+    t.datetime "processing",      :default => '2011-09-29 22:57:12'
     t.boolean  "complete",        :default => false
     t.string   "cdescription"
     t.string   "cproducturl"

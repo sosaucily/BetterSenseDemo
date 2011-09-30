@@ -9,7 +9,7 @@ gem 'sqlite3'
 group :production do
   gem 'pg'
 end
-gem 'rake', '~> 0.8.7'
+gem 'rake'#, '~> 0.8.7'
 
 gem 'ruby-hmac', '~> 0.4.0'
 

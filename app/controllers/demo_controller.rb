@@ -6,7 +6,7 @@ class DemoController < ApplicationController
 
   def servePage
     @demo_name = params[:demo_name]
-    render "/home/ubuntu/www/BetterSenseDemoDev/app/views/demo/" + @demo_name.to_s
+    render Rails.root.to_s + "/app/views/demo/" + @demo_name.to_s
   end
 
 end

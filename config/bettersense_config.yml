@@ -17,7 +17,7 @@ test:
     keyword_data_dir: "/data/GoogleKeywordData07192011"
 
 production:
-    base_url: "http://www.bettersense.com:3000"
+    base_url: "http://www.bettersense.com"
     processed_videos_dir: "/public/processedVideos"
     videos_dir: "/public/videos"
     kaltura_demo_path: "/app/views/kalturademo"

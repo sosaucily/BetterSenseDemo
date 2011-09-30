@@ -1,0 +1,1 @@
+v_process.py pulls videos out of the "videos" folder, breaks them into pics using ffmpeg, converts the file to flv, and puts all that into a folder in "processedVideos" folder named with the md5sum hash of the original video.

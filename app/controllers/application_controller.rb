@@ -1,3 +1,5 @@
+require 'iqengines'
+
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
@@ -38,28 +40,45 @@ class ApplicationController < ActionController::Base
 
   def do_iqe_process (video)
     video.iqeinfos.each do |iqe|
-      hookurl = HOOKBASEURL + 'videos/' + video[:id].to_s + '/iqeinfos/' + iqe.id.to_s + '/processme'
-      api = IQEngines.Api(IQE_KEY,IQE_SECRET)
-      qid, response = api.send_query("./public" + iqe.imagepath, extra=nil, webhook=hookurl, device_id='test123', multiple_results=true, modules=nil, json=true)
-      logger.info "api.send_query(./public#{iqe.imagepath}, extra=nil, webhook=#{hookurl}, device_id='test123', multiple_results=true, modules=nil, json=true)"
-      sleep 5
+      if (Rails.env.development?) then
+        api = IQEngines.Api(IQE_KEY,IQE_SECRET)
+        qid, response = api.send_query("./public" + iqe.imagepath) #, multiple_results=true, json=true
+        logger.debug("Waiting for response from IQE")
+        response = api.wait_results()
+        logger.info(response)
+        logger.debug("done")
+      else
+        hookurl = HOOKBASEURL + 'videos/' + video[:id].to_s + '/iqeinfos/' + iqe.id.to_s + '/processme'
+        api = IQEngines.Api(IQE_KEY,IQE_SECRET)
+        qid, response = api.send_query("./public" + iqe.imagepath, extra=nil, webhook=hookurl, device_id='test123', multiple_results=true, modules=nil, json=true)
+        logger.info "api.send_query(./public#{iqe.imagepath}, extra=nil, webhook=#{hookurl}, device_id='test123', multiple_results=true, modules=nil, json=true)"
+        sleep 3
+      end
+      return
     end
   end
 
   def do_iqe_process_missing (video)
     video.iqeinfos.each do |iqe|
       if iqe.matcheditem == nil
-        hookurl = HOOKBASEURL + 'videos/' + video[:id].to_s + '/iqeinfos/' + iqe.id.to_s + '/processme'
-        api = IQEngines.Api(IQE_KEY,IQE_SECRET)
-        qid, response = api.send_query("./public" + iqe.imagepath, extra=nil, webhook=hookurl, device_id='test123', multiple_results=true, modules=nil, json=true)
-        logger.info "api.send_query(./public#{iqe.imagepath}, extra=nil, webhook=#{hookurl}, device_id='test123', multiple_results=true, modules=nil, json=true)"
+        if (Rails.env.development?) then
+          api = IQEngines.Api(IQE_KEY,IQE_SECRET)
+          qid, response = api.send_query("./public" + iqe.imagepath, extra=nil, webhook=nil, device_id='test123', multiple_results=true, modules=nil, json=true)
+          response = api.wait_results()
+          logger.info(response)
+        else
+          hookurl = HOOKBASEURL + 'videos/' + video[:id].to_s + '/iqeinfos/' + iqe.id.to_s + '/processme'
+          api = IQEngines.Api(IQE_KEY,IQE_SECRET)
+          qid, response = api.send_query("./public" + iqe.imagepath, extra=nil, webhook=hookurl, device_id='test123', multiple_results=true, modules=nil, json=true)
+          logger.info "api.send_query(./public#{iqe.imagepath}, extra=nil, webhook=#{hookurl}, device_id='test123', multiple_results=true, modules=nil, json=true)"
+        end
       end
     end
   end
 
   def do_image_import (video)
     video_hash = video[:hashstring]
-    image_dir = Rails.root + BetterSenseDemo::APP_CONFIG["processed_videos_dir"] + "/" + video_hash + "/" + IMAGESUBDIR + "/*"
+    image_dir = Rails.root.to_s + BetterSenseDemo::APP_CONFIG["processed_videos_dir"] + "/" + video_hash + "/" + IMAGESUBDIR + "/*"
     @files = Dir.glob(image_dir)
     @files.sort!
     logger.debug 'checking directory - ' + image_dir
