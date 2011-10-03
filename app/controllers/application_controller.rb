@@ -47,6 +47,7 @@ class ApplicationController < ActionController::Base
         response = api.wait_results()
         logger.info(response)
         logger.debug("done")
+        add_data_to_image(iqe, JSON.parse(response)["data"]["results"])
       else
         hookurl = HOOKBASEURL + 'videos/' + video[:id].to_s + '/iqeinfos/' + iqe.id.to_s + '/processme'
         api = IQEngines.Api(IQE_KEY,IQE_SECRET)
@@ -54,7 +55,6 @@ class ApplicationController < ActionController::Base
         logger.info "api.send_query(./public#{iqe.imagepath}, extra=nil, webhook=#{hookurl}, device_id='test123', multiple_results=true, modules=nil, json=true)"
         sleep 3
       end
-      return
     end
   end
 
@@ -66,6 +66,7 @@ class ApplicationController < ActionController::Base
           qid, response = api.send_query("./public" + iqe.imagepath, extra=nil, webhook=nil, device_id='test123', multiple_results=true, modules=nil, json=true)
           response = api.wait_results()
           logger.info(response)
+          add_data_to_image(iqe, JSON.parse(response)["data"]["results"])
         else
           hookurl = HOOKBASEURL + 'videos/' + video[:id].to_s + '/iqeinfos/' + iqe.id.to_s + '/processme'
           api = IQEngines.Api(IQE_KEY,IQE_SECRET)
@@ -101,6 +102,18 @@ class ApplicationController < ActionController::Base
   def process_video_path_custom (video)
     doing_process = 1
     "videos/" + video[:id]
+  end
+  
+  def add_data_to_image (iqe, qid_data) # This needs to be a DelayedJob...
+    logger.debug qid_data
+    labels = ""
+    qid_data.each do |qid|
+      labels += qid["qid_data"]["labels"] + " | "
+    end
+    color = qid_data[0][:color]
+    iqe.matcheditem = labels
+    iqe.colors = color
+    iqe.save
   end
 
 end

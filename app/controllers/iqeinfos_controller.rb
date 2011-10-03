@@ -2,10 +2,12 @@ class IqeinfosController < ApplicationController
 
   def processme
     @video = Video.find(params[:video_id])
-    logger.info "Process ME called!"
-    qid_data = params[:qid_data]
-    logger.info qid_data
+    logger.debug "Process ME called!"
     @iqeinfo = @video.iqeinfos.find(params[:id])
+    #add_data_to_image(@iqeinfo, params[:qid_data])
+    #when ready to test, replace everything below, except for the redirect, with the above line.  Or maybe not, because of data format issues. CHeck application_controller method.
+    qid_data = params[:qid_data]
+    logger.debug qid_data
     labels = ""
     qid_data.each do |qid|
       labels += qid[:labels] + " | "
