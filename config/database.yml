@@ -12,7 +12,7 @@ development:
 test:
   adapter: postgresql
   database: bettertest
-  usernane: bettersense
+  username: bettersense
   password: bettersense
   pool: 25
   timeout: 5000
