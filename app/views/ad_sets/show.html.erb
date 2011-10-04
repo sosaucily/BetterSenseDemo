@@ -1,6 +1,5 @@
-<%= javascript_include_tag "jquery.sausage" %>
-<%= javascript_include_tag "betteradModule" %>
-<%= javascript_include_tag "swfobject", "jquery.uploadify.v2.1.4.js" %>
+<%= javascript_include_tag %w(jquery-ui jquery.sausage betteradModule swfobject jquery.uploadify.v2.1.4) %>
+
 <p>
   <b>Name:</b>
   <%= @ad_set.name %>
