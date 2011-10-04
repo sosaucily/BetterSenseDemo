@@ -6,9 +6,10 @@ gem 'rails', '3.0.7'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
-group :production do
+group :production, :test do
   gem 'pg'
 end
+
 gem 'rake'#, '~> 0.8.7'
 
 gem 'ruby-hmac', '~> 0.4.0'
