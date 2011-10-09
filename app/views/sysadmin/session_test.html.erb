@@ -1,0 +1,17 @@
+<h1><b>Better</b>sense Session Tester Page</h1>
+
+<b>Rail Session Data</b><br/>
+<%=
+session.to_yaml
+%>
+<br/>
+
+<b>Is User?</b> <%= user_signed_in?.to_s %><br/>
+<b>Is Admin?</b> <%= admin_signed_in?.to_s %><br/>
+<b>User Session</b> <%= user_session.to_yaml%><br/>
+<b>Admin Session</b> <%= admin_session.to_yaml%><br/>
+<b>Current User</b> <%= current_user.to_yaml%><br/>
+<b>Current Admin</b> <%= current_admin.to_yaml%><br/>
+<br />
+<b>Request Details</b> <%= request.inspect%><br />
+<b>Response Details</b> <%= response.inspect%><br />

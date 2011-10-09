@@ -1,0 +1,29 @@
+<b><u>Performance Info:</u></b><br />
+<% perform = @campaignPerformance.select {|p| p[:id] == campaign.id }[0] %>
+<div class="span-16 last grayBox">
+  <div class="span-4">
+    Clicks: <%= perform[:total_clicks] %><br/>
+    <div class="blueBoxWithBorder" style="text-align:center">
+      <%= image_tag("chart.jpg", :alt => "Chart") %>
+    </div>
+  </div>
+  <div class="span-4">
+    Impressions: <%= perform[:total_impressions] %><br />
+    <div class="blueBoxWithBorder" style="text-align:center">
+      <%= image_tag("chart.jpg", :alt => "Chart") %>
+    </div>
+  </div>
+  <div class="span-4">
+    CTR: <%= sprintf("%.2f",perform[:total_clicks] / perform[:total_impressions].to_f) %>%</br>
+    <div class="blueBoxWithBorder" style="text-align:center">
+      <%= image_tag("chart.jpg", :alt => "Chart") %>
+    </div>
+  </div>
+  <div class="span-4 last">
+    Avg. CPC: $<%= sprintf("%.2f",((((perform[:total_impressions] || 0)/1000.0) * (campaign.assigned_cpm || 0))/perform[:total_clicks])) %></br>
+    <div class="blueBoxWithBorder" style="text-align:center">
+      <%= image_tag("chart.jpg", :alt => "Chart") %>
+    </div>
+  </div>
+  <%= link_to 'Performance Details', campaign %>
+</div>

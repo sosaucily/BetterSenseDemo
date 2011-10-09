@@ -4,59 +4,8 @@
 
 <div class="span-16 last">
   <% @campaigns.each do |campaign| %>
-    <%= link_to(campaign) do %>
-      <span style="font-size:16px;font-weight:bold"><u><%= campaign.name %></u></span>
-    <% end %><br />
-    <b><u>General Info:</u></b><br />
-    <div class="span-16 last grayBox">
-	    <div class="span-16 last">
-	      <div class="span-8">
-	        <%= campaign.name %><br /><%= link_to 'edit', edit_campaign_path(campaign) %> - <%= link_to 'delete', campaign, :confirm => 'Are you sure?', :method => :delete %>
-	      </div>
-	      <div class="span-8 last">
-	        Campaign Budget: $<%= sprintf("%.2f",campaign.budget) %><br />
-                Max CPM bid: $<%= sprintf("%.2f",campaign.assigned_cpm) %>
-	      </div>
-	    </div>
-	    <br /><hr>
-	    <div class="span-16 last">
-	      <div class="span-8">
-	        Start Date: <%= campaign.start_date %><br />
-	      </div>
-	      <div class="span-8 last">
-	        Start Date: <%= campaign.start_date %><br />
-	      </div>
-	    </div>
-	</div>
-    <b><u>Performance Info:</u></b><br />
-    <% perform = @campaignPerformance.select {|p| p[:id] == campaign.id }[0] %>
-    <div class="span-16 last grayBox">
-      <div class="span-4">
-        Clicks: <%= perform[:total_clicks] %><br/>
-        <div class="blueBoxWithBorder" style="text-align:center">
-          <%= image_tag("chart.jpg", :alt => "Chart") %>
-        </div>
-      </div>
-      <div class="span-4">
-        Impressions: <%= perform[:total_impressions] %><br />
-        <div class="blueBoxWithBorder" style="text-align:center">
-          <%= image_tag("chart.jpg", :alt => "Chart") %>
-        </div>
-      </div>
-      <div class="span-4">
-        CTR: <%= sprintf("%.2f",perform[:total_clicks] / perform[:total_impressions].to_f) %>%</br>
-        <div class="blueBoxWithBorder" style="text-align:center">
-          <%= image_tag("chart.jpg", :alt => "Chart") %>
-        </div>
-      </div>
-      <div class="span-4 last">
-        Avg. CPC: $<%= sprintf("%.2f",((((perform[:total_impressions] || 0)/1000.0) * (campaign.assigned_cpm || 0))/perform[:total_clicks])) %></br>
-        <div class="blueBoxWithBorder" style="text-align:center">
-          <%= image_tag("chart.jpg", :alt => "Chart") %>
-        </div>
-      </div>
-      <%= link_to 'Performance Details', campaign %>
-    </div>
+    <%= render :partial => "shared/show_campaign", :object => campaign %>
+    <%= render :partial => "shared/campaign_performance", :locals => {:campaign => campaign, :campaignPerformance => @campaignPerformance} %>
   <% end %>
 </div>
 

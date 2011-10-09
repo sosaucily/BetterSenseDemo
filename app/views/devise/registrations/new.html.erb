@@ -1,6 +1,6 @@
 <h2>Sign up</h2>
 
-<% if (user_signed_in?) %>
+<% if (admin_signed_in?) %>
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
 

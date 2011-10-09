@@ -5,6 +5,8 @@
     <p>Copyright (c) 2011 bettersense.com. All rights reserved. - <a href="/contact/index">Contact</a> -
     <% if (user_signed_in?) %>
       <br />Signed in as <%= current_user.email %>.  <%= link_to "Sign out", destroy_user_session_path %>
+    <% elsif (admin_signed_in?) %>
+      <br />Signed in as <%= current_admin.email %>.  <%= link_to "Sign out", destroy_admin_session_path %>
     <% else %>
       <%= link_to "Sign in", new_user_session_path %>
     <% end %>

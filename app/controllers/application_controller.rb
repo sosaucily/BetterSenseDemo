@@ -10,11 +10,47 @@ class ApplicationController < ActionController::Base
   IQE_SECRET = '5de565aa46c6464a81fe92c3389a7a0b'
   HOOKBASEURL = BetterSenseDemo::APP_CONFIG["base_url"]
 
-  #rediretion after login for Devise
-  def after_sign_in_path_for(resource)
-    stored_location_for(resource) || '/admin'
+  def validate_account_id(account_id)
+    if (!session.include? "account_id" or (account_id.to_i != session[:account_id].to_i))
+      return lambda {
+        flash[:alert] = "This campaign is not valid for this user"
+        redirect_to '/account'
+        return true
+      }
+    else
+      return lambda {return nil}
+    end
   end
- 
+
+  #rediretion after login for Devise  
+  def after_sign_in_path_for(resource)
+    #This method needs the overwritten 'stored_location_for' method below otherwise this method won't run when a user is redirected to the login page from a protected page.
+    if (resource.is_a? User)
+      logger.info "Login recorded from User with id:" + resource.id.to_s
+      #clear_session_data
+      session[:account_id] = resource.account_id
+      session[:user_id] = resource.id
+      session[:user_type] = "User"
+      if (session.include? :user_return_to) then
+        session.delete :user_return_to #This also returns the value of this session variable, used for redirect
+      else
+        '/account'
+      end
+    elsif (resource.is_a? Admin)
+      logger.info "Login recorded from Admin with id:" + resource.id.to_s
+      session[:user_type] = "Admin"
+      '/sysadmin'
+    end
+  end
+  
+  def stored_location_for(resource)
+    #if (current_user) then
+    #elsif (current_admin)
+    #end
+    return nil
+    #super(resource)
+  end
+  
   def process_video (video)
     logger.info 'processing video at path ' + video[:name]
     video_actions = params[:videoAction]

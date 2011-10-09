@@ -27,8 +27,12 @@ $.getJSON(tag_url+"&callback=?", function(data) {
 
 function setup_stuff() {
   myEmbedPlayer = $('.mv-player #kaltura_player');
-  loadAds(ad_data[adCount]);
-  adCount++;
+  mw.load( "mw.AdTimeline", function()
+	{
+		if (ad_data.length > 0)
+			loadAds(ad_data[adCount]);
+		adCount++;
+	});
 }
 
 $( function () {
@@ -43,11 +47,17 @@ $( function () {
 
 var monitorTimer = function () {
   //console.log("timer check");
-  if (myEmbedPlayer==undefined || ad_data==undefined)
+  if (myEmbedPlayer==undefined || ad_data==undefined || adCount < 1)
   {
     //console.log("Ad data not ready, returning from timer check");
     return;
   }
+
+  if (ad_data.length == 0) //No ads came from Bettersense.
+  {
+    window.clearInterval(interval_handle);
+    return;
+  }  
 
   var currTime = myEmbedPlayer[0].currentTime;
   var currAdStart = ad_data[adCount-1].start;
@@ -105,6 +115,8 @@ function updateOverlay(old_ad,new_ad)
   console.log("done");
 }
 
-setTimeout('setup_stuff()',3000);
+//setTimeout('',3000);
+mw.ready(function() {setup_stuff();});
+//mw.ready( function() {setTimeout('setup_stuff()',3000); });
 interval_handle = window.setInterval("monitorTimer()", 600);
 

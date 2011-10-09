@@ -1,19 +1,29 @@
 class AccountsController < ApplicationController
+  
+  before_filter :authenticate_user!, :except => ['new','create']
   # GET /accounts
   # GET /accounts.xml
   def index
-    @accounts = Account.all
+    if (admin_signed_in?) #For now, just admin protect some functions
+      @accounts = Account.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @accounts }
+      respond_to do |format|
+        format.html # index.html.erb
+        format.xml  { render :xml => @accounts }
+      end
+    else
+      flash[:notice] = 'This function if for administrators only.'
+      redirect_to "/admins/sign_in"
     end
   end
 
   # GET /accounts/1
   # GET /accounts/1.xml
+  # GET /account
   def show
-    @account = Account.find(params[:id])
+    id = session[:account_id]
+    @account = Account.find(id)
+    @campaigns = Campaign.find(:all, :limit => 3, :order => "updated_at desc", :conditions => "account_id = #{id}") #Show three most recently modified Campaigns in the quick view
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,60 +34,76 @@ class AccountsController < ApplicationController
   # GET /accounts/new
   # GET /accounts/new.xml
   def new
-    @account = Account.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @account }
+    if (admin_signed_in?) #For now, just admin protect some functions
+      @account = Account.new
+      respond_to do |format|
+        format.html # new.html.erb
+        format.xml  { render :xml => @account }
+      end
+    else
+      flash[:notice] = 'This function if for administrators only.'
+      redirect_to "/admins/sign_in"
     end
   end
 
   # GET /accounts/1/edit
+  # GET /account/edit
   def edit
-    @account = Account.find(params[:id])
+    id = session[:account_id]
+    @account = Account.find(id)
   end
 
   # POST /accounts
   # POST /accounts.xml
   def create
-    @account = Account.new(params[:account])
-
-    respond_to do |format|
-      if @account.save
-        format.html { redirect_to(@account, :notice => 'Account was successfully created.') }
-        format.xml  { render :xml => @account, :status => :created, :location => @account }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @account.errors, :status => :unprocessable_entity }
+    if (admin_signed_in?) #For now, just admin protect some functions
+      @account = Account.new(params[:id])
+      respond_to do |format|
+        if @account.save
+          format.html { redirect_to(@account, :notice => 'Account was successfully created.') }
+          format.xml  { render :xml => @account, :status => :created, :location => @account }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @account.errors, :status => :unprocessable_entity }
+        end
       end
+    else
+      flash[:notice] = 'This function if for administrators only.'
+      redirect_to "/admins/sign_in"
     end
   end
 
   # PUT /accounts/1
   # PUT /accounts/1.xml
   def update
-    @account = Account.find(params[:id])
+      id = session[:account_id]
+      @account = Account.find(id)
 
-    respond_to do |format|
-      if @account.update_attributes(params[:account])
-        format.html { redirect_to(@account, :notice => 'Account was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @account.errors, :status => :unprocessable_entity }
+      respond_to do |format|
+        if @account.update_attributes(params[:account])
+          format.html { redirect_to('/account', :notice => 'Account was successfully updated.') }
+          format.xml  { head :ok }
+        else
+          format.html { render :action => "edit" }
+          format.xml  { render :xml => @account.errors, :status => :unprocessable_entity }
+        end
       end
-    end
   end
 
   # DELETE /accounts/1
   # DELETE /accounts/1.xml
   def destroy
-    @account = Account.find(params[:id])
-    @account.destroy
+    if (admin_signed_in?) #For now, just admin protect some functions
+      @account = Account.find(params[:id])
+      @account.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(accounts_url) }
-      format.xml  { head :ok }
+      respond_to do |format|
+        format.html { redirect_to(accounts_url) }
+        format.xml  { head :ok }
+      end
+    else
+      flash[:notice] = 'This function if for administrators only.'
+      redirect_to "/admins/sign_in"
     end
   end
 end

@@ -49,4 +49,8 @@ BetterSenseDemo::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+  
+  #Set paperclip command_path to the directory of the ImageMagick `convert` utility
+  Paperclip.options[:command_path] = "/usr/bin/"
+  
 end

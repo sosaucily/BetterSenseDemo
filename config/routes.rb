@@ -1,5 +1,9 @@
 BetterSenseDemo::Application.routes.draw do
 
+  devise_for :users
+  devise_for :admins
+  
+  match '/admin' => "sysadmin#index", :as => :admin_root
 
   resources :campaigns
 
@@ -7,7 +11,8 @@ BetterSenseDemo::Application.routes.draw do
 
   resources :ads
 
-  match "admin" => 'admin#index'
+  match "sysadmin" => 'sysadmin#index'
+  match "sysadmin/session_test" => 'sysadmin#session_test'
 
   match "demo" => 'demo#index'
   match "demo/:demo_name" => 'demo#servePage'
@@ -32,6 +37,9 @@ BetterSenseDemo::Application.routes.draw do
   resources :networks
 
   resources :accounts
+  
+  match "account" => 'accounts#show'
+  match "account/edit" => 'accounts#edit'
 
   get "kalturademo/index"
   match "kalturademo", :controller => 'kalturademo', :action => 'index'
@@ -43,8 +51,6 @@ BetterSenseDemo::Application.routes.draw do
 
   match "betterpic", :controller => 'betterpic', :action => 'index'
   match "betterpic/:iqeinfo_id", :controller => 'betterpic', :action => 'update'
-
-  devise_for :users
 
   get "contact/index"
 

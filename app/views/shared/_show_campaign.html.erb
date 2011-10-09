@@ -1,0 +1,27 @@
+<%# Used as partial collection, so must keep object name matching partial name %>
+<%= link_to(show_campaign) do %>
+  <span style="font-size:16px;font-weight:bold"><u><%= show_campaign.name %></u></span>
+<% end %><br />
+<b><u>General Info:</u></b><br />
+<div class="span-16 last grayBox">
+  <div class="span-16 last">
+    <div class="span-16 last">
+      <div class="span-8">
+        <%= show_campaign.name %><br /><%= link_to 'edit', edit_campaign_path(show_campaign) %> - <%= link_to 'delete', show_campaign, :confirm => 'Are you sure?', :method => :delete %>
+      </div>
+      <div class="span-8 last">
+        Campaign Budget: $<%= sprintf("%.2f",show_campaign.budget) %><br />
+        Max CPM bid: $<%= sprintf("%.2f",show_campaign.assigned_cpm) %>
+      </div>
+    </div>
+    <br /><hr>
+    <div class="span-16 last">
+      <div class="span-8">
+        Start Date: <%= show_campaign.start_date %><br />
+      </div>
+      <div class="span-8 last">
+        End Date: <%= show_campaign.end_date %><br />
+      </div>
+    </div>
+  </div>
+</div>

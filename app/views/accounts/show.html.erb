@@ -1,18 +1,15 @@
-<p>
-  <b>Fname:</b>
-  <%= @account.fname %>
-</p>
-
-<p>
-  <b>Lname:</b>
-  <%= @account.lname %>
-</p>
-
-<p>
-  <b>Company name:</b>
-  <%= @account.company_name %>
-</p>
-
-
-<%= link_to 'Edit', edit_account_path(@account) %> |
-<%= link_to 'Back', accounts_path %>
+<% page_title "Account Management"%>
+<h1>Account Home</h1>
+<h4><%= @account.company_name %></h4>
+<div class="span-16 last redhr"></div>
+<div class="span-16 last">
+	<b><u>Primary Account Admin:</u></b><br />
+	<div class="span-16 last grayBox">
+		<%= @account.fname %> <%= @account.lname %>
+	</div>
+    <div class="span-16 last redhr"></div>
+	<b><u>Recent Campaigns</u> - <%= link_to 'Manage Campaigns', '/campaigns' %></b><br /><br />
+	<%= render :partial => "shared/show_campaign", :collection => @campaigns %>
+</div>	
+<%= link_to 'Edit Account Details', '/account/edit' %>
+<%= if admin_signed_in? then link_to(' | Back', accounts_path) end %>

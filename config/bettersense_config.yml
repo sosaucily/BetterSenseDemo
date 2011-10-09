@@ -8,12 +8,12 @@ development:
     keyword_data_dir: "/data/GoogleKeywordData07192011"
 
 test:
-    base_url: "http://www.bettertest.com"
+    base_url: "http://107.20.141.244"
     processed_videos_dir: "/public/processedVideos"
     videos_dir: "/public/videos"
     kaltura_demo_path: "/app/views/kalturademo"
-    kaltura_ads_js: "http://www.bettertest.com/javascripts/better_kaltura_ads.js"
-    nacamar_js: "http://www.bettertest.com/javascripts/better_kaltura_ads_nacamar.js"
+    kaltura_ads_js: "http://107.20.141.244/javascripts/better_kaltura_ads.js"
+    nacamar_js: "http://107.20.141.244/javascripts/better_kaltura_ads_nacamar.js"
     keyword_data_dir: "/data/GoogleKeywordData07192011"
 
 production:

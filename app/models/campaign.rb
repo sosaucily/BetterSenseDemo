@@ -1,6 +1,7 @@
 class Campaign < ActiveRecord::Base
 
   has_many :ads, :dependent => :destroy
+  belongs_to :account
 
   def self.generatePerformance(campaigns)
     results = []
