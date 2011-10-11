@@ -1,5 +1,9 @@
 class AdsController < ApplicationController
 
+  before_filter :authenticate_user!
+  before_filter :check_session
+  
+  #Need to encode these register systems in such a way that they can't be spoofed, Not that anyone should want to...
   def regclick
     @ad = Ad.find(params[:id])
     curr_count = @ad.click_count || 0
@@ -19,7 +23,7 @@ class AdsController < ApplicationController
   # GET /ads
   # GET /ads.xml
   def index
-    @ads = Ad.all
+    @ads = Ad.find_all_by_account_id(session[:account_id])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -31,6 +35,8 @@ class AdsController < ApplicationController
   # GET /ads/1.xml
   def show
     @ad = Ad.find(params[:id])
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@ad.account_id).call().nil? then return end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -42,7 +48,6 @@ class AdsController < ApplicationController
   # GET /ads/new.xml
   def new
     @ad = Ad.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @ad }
@@ -52,12 +57,16 @@ class AdsController < ApplicationController
   # GET /ads/1/edit
   def edit
     @ad = Ad.find(params[:id])
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@ad.account_id).call().nil? then return end
+    @ad
   end
 
   # POST /ads
   # POST /ads.xml
   def create
     @ad = Ad.new(params[:ad])
+    @ad.account_id = session[:account_id]
     respond_to do |format|
       if @ad.save
         format.html { redirect_to(@ad, :notice => 'Ad was successfully created.') }
@@ -75,6 +84,8 @@ class AdsController < ApplicationController
     @ad = Ad.find(params[:id])
     @nfo = params[:ad][:nfo]
     params[:ad].delete :nfo
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@ad.account_id).call().nil? then return end
     respond_to do |format|
       if @ad.update_attributes(params[:ad])
         format.html { redirect_to(@ad, :notice => 'Ad was successfully updated.') }
@@ -91,8 +102,9 @@ class AdsController < ApplicationController
   # DELETE /ads/1.xml
   def destroy
     @ad = Ad.find(params[:id])
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@ad_set.account_id).call().nil? then return end
     @ad.destroy
-
     respond_to do |format|
       format.html { redirect_to(ads_url) }
       format.xml  { head :ok }

@@ -1,8 +1,12 @@
 class ZonesController < ApplicationController
   # GET /zones
   # GET /zones.xml
+  
+  before_filter :authenticate_user!
+  before_filter :check_session
+  
   def index
-    @zones = Zone.all
+    @zones = Zone.find_all_by_account_id(session[:account_id])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +18,8 @@ class ZonesController < ApplicationController
   # GET /zones/1.xml
   def show
     @zone = Zone.find(params[:id])
-
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@zone.account_id).call().nil? then return end
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @zone }
@@ -35,13 +40,16 @@ class ZonesController < ApplicationController
   # GET /zones/1/edit
   def edit
     @zone = Zone.find(params[:id])
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@zone.account_id).call().nil? then return end
+    @zone
   end
 
   # POST /zones
   # POST /zones.xml
   def create
     @zone = Zone.new(params[:zone])
-
+    @zone.account_id = session[:account_id]
     respond_to do |format|
       if @zone.save
         format.html { redirect_to(@zone, :notice => 'Zone was successfully created.') }
@@ -57,7 +65,8 @@ class ZonesController < ApplicationController
   # PUT /zones/1.xml
   def update
     @zone = Zone.find(params[:id])
-
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@zone.account_id).call().nil? then return end
     respond_to do |format|
       if @zone.update_attributes(params[:zone])
         format.html { redirect_to(@zone, :notice => 'Zone was successfully updated.') }
@@ -73,6 +82,8 @@ class ZonesController < ApplicationController
   # DELETE /zones/1.xml
   def destroy
     @zone = Zone.find(params[:id])
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@zone.account_id).call().nil? then return end
     @zone.destroy
 
     respond_to do |format|

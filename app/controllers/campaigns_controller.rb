@@ -1,6 +1,7 @@
 class CampaignsController < ApplicationController
 
   before_filter :authenticate_user!
+  before_filter :check_session
   # GET /campaigns
   # GET /campaigns.xml
   def index
@@ -18,9 +19,8 @@ class CampaignsController < ApplicationController
 
   def show
     @campaign = Campaign.find(params[:id])
-    #These next two lines are a security to validate that the object is shown is owned by the current session holder.
-    act = validate_account_id(@campaign.account_id).call
-    return if !act.nil?
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@campaign.account_id).call().nil? then return end
     @ads = Ad.find_all_by_campaign_id(params[:id])
     @campaignPerformance = Campaign.generatePerformance([] << @campaign)
     respond_to do |format|
@@ -42,6 +42,9 @@ class CampaignsController < ApplicationController
   # GET /campaigns/1/edit
   def edit
     @campaign = Campaign.find(params[:id])
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@campaign.account_id).call().nil? then return end
+    @campaign
   end
 
   # POST /campaigns
@@ -49,8 +52,6 @@ class CampaignsController < ApplicationController
   def create
     @campaign = Campaign.new(params[:campaign])
     @campaign.account_id = session[:account_id]
-    act = validate_account_id(@campaign.account_id).call
-    return if !act.nil?
     respond_to do |format|
       if @campaign.save
         format.html { redirect_to(@campaign, :notice => 'Campaign was successfully created.') }
@@ -66,8 +67,8 @@ class CampaignsController < ApplicationController
   # PUT /campaigns/1.xml
   def update
     @campaign = Campaign.find(params[:id])
-    act = validate_account_id(@campaign.account_id).call
-    return if !act.nil?
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@campaign.account_id).call().nil? then return end
     respond_to do |format|
       if @campaign.update_attributes(params[:campaign])
         format.html { redirect_to(@campaign, :notice => 'Campaign was successfully updated.') }
@@ -83,8 +84,8 @@ class CampaignsController < ApplicationController
   # DELETE /campaigns/1.xml
   def destroy
     @campaign = Campaign.find(params[:id])
-    act = validate_account_id(@campaign.account_id).call
-    return if !act.nil?
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@campaign.account_id).call().nil? then return end
     @campaign.destroy
     respond_to do |format|
       format.html { redirect_to(campaigns_url) }

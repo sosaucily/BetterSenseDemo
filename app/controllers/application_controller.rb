@@ -28,9 +28,7 @@ class ApplicationController < ActionController::Base
     if (resource.is_a? User)
       logger.info "Login recorded from User with id:" + resource.id.to_s
       #clear_session_data
-      session[:account_id] = resource.account_id
-      session[:user_id] = resource.id
-      session[:user_type] = "User"
+      setup_session_from_User(resource)
       if (session.include? :user_return_to) then
         session.delete :user_return_to #This also returns the value of this session variable, used for redirect
       else
@@ -38,7 +36,6 @@ class ApplicationController < ActionController::Base
       end
     elsif (resource.is_a? Admin)
       logger.info "Login recorded from Admin with id:" + resource.id.to_s
-      session[:user_type] = "Admin"
       '/sysadmin'
     end
   end
@@ -150,6 +147,25 @@ class ApplicationController < ActionController::Base
     iqe.matcheditem = labels
     iqe.colors = color
     iqe.save
+  end
+  
+private
+
+  def check_session
+    logger.debug "Checking session"
+    if (session[:account_id].nil? or session[:account_id] <= 0)
+      if (user_signed_in?)
+        setup_session_from_User(current_user)
+      else
+        flash[:alert] = "Error with user session, please try to log in again."
+        redirect_to '/'
+      end
+    end
+  end
+  
+  def setup_session_from_User(resource)
+    session[:account_id] = resource.account_id
+    logger.debug "Setting account id to " + resource.account_id.to_s
   end
 
 end

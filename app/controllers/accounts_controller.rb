@@ -1,12 +1,11 @@
 class AccountsController < ApplicationController
   
-  before_filter :authenticate_user!, :except => ['new','create']
+  before_filter :authenticate_user!, :except => ['new','create','index']
   # GET /accounts
   # GET /accounts.xml
   def index
     if (admin_signed_in?) #For now, just admin protect some functions
       @accounts = Account.all
-
       respond_to do |format|
         format.html # index.html.erb
         format.xml  { render :xml => @accounts }

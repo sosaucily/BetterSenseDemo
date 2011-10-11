@@ -2,7 +2,7 @@ class PlayersController < ApplicationController
   # GET /players
   # GET /players.xml
   def index
-    @players = Player.all
+    @players = Player.find_all_by_account_id(session[:account_id])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +14,8 @@ class PlayersController < ApplicationController
   # GET /players/1.xml
   def show
     @player = Player.find(params[:id])
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@player.account_id).call().nil? then return end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -35,13 +37,16 @@ class PlayersController < ApplicationController
   # GET /players/1/edit
   def edit
     @player = Player.find(params[:id])
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@player.account_id).call().nil? then return end
+    @player
   end
 
   # POST /players
   # POST /players.xml
   def create
     @player = Player.new(params[:player])
-
+    @player.account_id = session[:account_id]
     respond_to do |format|
       if @player.save
         format.html { redirect_to(@player, :notice => 'Player was successfully created.') }
@@ -57,7 +62,8 @@ class PlayersController < ApplicationController
   # PUT /players/1.xml
   def update
     @player = Player.find(params[:id])
-
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@player.account_id).call().nil? then return end
     respond_to do |format|
       if @player.update_attributes(params[:player])
         format.html { redirect_to(@player, :notice => 'Player was successfully updated.') }
@@ -73,6 +79,8 @@ class PlayersController < ApplicationController
   # DELETE /players/1.xml
   def destroy
     @player = Player.find(params[:id])
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@player.account_id).call().nil? then return end
     @player.destroy
 
     respond_to do |format|

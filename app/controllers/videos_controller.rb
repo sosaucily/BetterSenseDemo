@@ -1,13 +1,12 @@
 class VideosController < ApplicationController
 
-  #Process Video function is used to send the video data for this video to the various third parties for processing
-
-#  caches_action :show
+  before_filter :authenticate_user!
+  before_filter :check_session
 
   # GET /videos
   # GET /videos.xml
   def index
-    @videos = Video.all
+    @videos = Video.find_all_by_account_id(session[:account_id])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -20,6 +19,8 @@ class VideosController < ApplicationController
   # GET /videos/1.xml
   def show
     @video = Video.find(params[:id])
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@video.account_id).call().nil? then return end
     respond_to do |format|
       format.html # show.html.erb
       format.js
@@ -42,12 +43,16 @@ class VideosController < ApplicationController
   # GET /videos/1/edit
   def edit
     @video = Video.find(params[:id])
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@video.account_id).call().nil? then return end
+    @video
   end
 
   # POST /videos
   # POST /videos.xml
   def create
     @video = Video.new(params[:video])
+    @video.account_id = session[:account_id]
 
     respond_to do |format|
       if @video.save
@@ -66,7 +71,8 @@ class VideosController < ApplicationController
   # PUT /videos/1.xml
   def update
     @video = Video.find(params[:id])
-
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@video.account_id).call().nil? then return end
     respond_to do |format|
       if @video.update_attributes(params[:video])
         logger.info 'Updating Video with id ' + params[:id].to_s
@@ -83,6 +89,8 @@ class VideosController < ApplicationController
   # DELETE /videos/1.xml
   def destroy
     @video = Video.find(params[:id])
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@video.account_id).call().nil? then return end
     @video.destroy
 
     respond_to do |format|

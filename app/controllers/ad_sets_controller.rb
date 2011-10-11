@@ -1,9 +1,12 @@
 class AdSetsController < ApplicationController
+
+  before_filter :authenticate_user!
+  before_filter :check_session
+  
   # GET /ad_sets
   # GET /ad_sets.xml
   def index
-    @ad_sets = AdSet.all
-
+    @ad_sets = AdSet.find_all_by_account_id(session[:account_id])
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @ad_sets }
@@ -14,6 +17,8 @@ class AdSetsController < ApplicationController
   # GET /ad_sets/1.xml
   def show
     @ad_set = AdSet.find(params[:id])
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@ad_set.account_id).call().nil? then return end
     @video = Video.find_by_id(@ad_set[:video_id])
     @iqeinfos = Iqeinfo.where(:video_id => @ad_set[:video_id]).paginate(:page => params[:page], :per_page => 20).order('created_at DESC')
     @ad = Ad.new
@@ -38,6 +43,9 @@ class AdSetsController < ApplicationController
   # GET /ad_sets/1/edit
   def edit
     @ad_set = AdSet.find(params[:id])
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@ad_set.account_id).call().nil? then return end
+    @ad_set
   end
 
   # POST /ad_sets
@@ -62,6 +70,7 @@ class AdSetsController < ApplicationController
     @nfo = params[:ad][:nfo]
     params[:ad].delete :nfo
     @ad = Ad.new(params[:ad])
+    @ad.account_id = session[:account_id]
     respond_to do |format| #if the javascript response is empty, this may never run
       if @ad.save
         format.js
@@ -72,17 +81,16 @@ class AdSetsController < ApplicationController
   def updateAd
     @ad = Ad.find(params["id"])
     @this_ad = @ad
-
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@this_ad.account_id).call().nil? then return end
     if (defined? params[:Filedata] and !params[:Filedata].nil?) then
       @ad.ad_pic = params[:Filedata]
       logger.info("Results from saving the ad is " + @ad.save.to_s)
     end
-
     if (defined? params["name"] and !params["name"].nil?) then
       @ad.name = params["name"]
       @ad.save
     end
-
     respond_to do |format|
       format.js { head :ok, :notice => 'Ad was successfully updated.' }
     end
@@ -91,7 +99,8 @@ class AdSetsController < ApplicationController
   def getNewImage
     logger.info params.inspect
     @ad = Ad.find(params[:id])
-
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@ad.account_id).call().nil? then return end
     respond_to do |format|
       format.js
     end
@@ -101,7 +110,8 @@ class AdSetsController < ApplicationController
   # PUT /ad_sets/1.xml
   def update
     @ad_set = AdSet.find(params[:id])
-
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@ad_set.account_id).call().nil? then return end
     respond_to do |format|
       if @ad_set.update_attributes(params[:ad_set])
         format.html { redirect_to(@ad_set, :notice => 'Ad set was successfully updated.') }
@@ -117,6 +127,8 @@ class AdSetsController < ApplicationController
   # DELETE /ad_sets/1.xml
   def destroy
     @ad_set = AdSet.find(params[:id])
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@ad_set.account_id).call().nil? then return end
     @ad_set.destroy
 
     respond_to do |format|
