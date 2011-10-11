@@ -1,13 +1,13 @@
 class VideosController < ApplicationController
 
-  before_filter :authenticate_user!
-  before_filter :check_session
+  before_filter :authenticate_user!, :except => ['show','index']
+  before_filter :check_session, :except => ['show','index']
 
   # GET /videos
   # GET /videos.xml
   def index
-    @videos = Video.find_all_by_account_id(session[:account_id])
-
+    #@videos = Video.find_all_by_account_id(session[:account_id])
+    @videos = Video.all
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @videos }
@@ -20,7 +20,7 @@ class VideosController < ApplicationController
   def show
     @video = Video.find(params[:id])
     #The next line are a security to validate that the object being shown is owned by the current session holder.
-    if !validate_account_id(@video.account_id).call().nil? then return end
+    #if !validate_account_id(@video.account_id).call().nil? then return end
     respond_to do |format|
       format.html # show.html.erb
       format.js
