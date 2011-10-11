@@ -20,7 +20,7 @@ class AdSetsController < ApplicationController
     #The next line are a security to validate that the object being shown is owned by the current session holder.
     if !validate_account_id(@ad_set.account_id).call().nil? then return end
     @video = Video.find_by_id(@ad_set[:video_id])
-    @iqeinfos = Iqeinfo.where(:video_id => @ad_set[:video_id]).paginate(:page => params[:page], :per_page => 20).order('created_at DESC')
+    @iqeinfos = Iqeinfo.where(:video_id => @ad_set[:video_id]).paginate(:page => params[:page], :per_page => 20).order('id')
     @ad = Ad.new
     respond_to do |format|
       format.html # show.html.erb

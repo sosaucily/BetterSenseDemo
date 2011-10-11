@@ -7,7 +7,7 @@
       <th scope="col">Name</th>
       <th scope="col">Description</th>
       <th scope="col"></th>
-      <% if (user_signed_in?) %>
+      <% if (admin_signed_in?) %>
         <th scope="col"></th>
       <% end %>
     </tr>
@@ -17,7 +17,7 @@
       <th scope="col">Name</th>
       <th scope="col">Description</th>
       <th scope="col"></th>
-      <% if (user_signed_in?) %>
+      <% if (admin_signed_in?) %>
         <th scope="col"></th>
       <% end %>
     </tr>
@@ -25,12 +25,12 @@
   <tbody>
   
 <% @videos.each do |video| %>
-  <% if (video.viewable? or user_signed_in?) %>
+  <% if (video.viewable? or admin_signed_in?) %>
     <tr class="<%= cycle('vodd', 'veven') %>">
       <td><%= video.name %></td>
       <td><%= video.description %></td>
       <td><%= link_to 'View', video %></td>
-      <% if (user_signed_in?) %>
+      <% if (admin_signed_in?) %>
         <td><%= link_to 'Edit', edit_video_path(video) %></td>
       <% end %>
     </tr>
@@ -42,4 +42,4 @@
 <br />
 
 
-<%= if (user_signed_in?) then link_to 'New Video', new_video_path end %>
+<%= if (admin_signed_in?) then link_to 'New Video', new_video_path end %>

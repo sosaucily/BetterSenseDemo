@@ -13,7 +13,7 @@ class Keyword
         categories.map!{|item| if (item.index(".csv") != nil) then item[0..-5] else item end}
         FasterCSV.foreach(@dir + "/" + file,  :col_sep =>',', :row_sep =>:auto) do |row|
           $adWordTrie.push(row[0],categories)
-          Rails.logger.debug "pushing value " + row[0].to_s
+          #Rails.logger.debug "pushing value " + row[0].to_s
         end
         Rails.logger.info "completed with file --" + file + "-- and categories " + categories.count.to_s
       end

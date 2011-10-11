@@ -32,7 +32,7 @@
      if (seq != nil && iqe.matcheditem != nil)
      %>
        imageData[<%= (seq.to_i * 2) - 5  %>] = "<%= iqe.matcheditem[0..-4] %>";
-       keywordCat[<%= (seq.to_i * 2) - 5  %>] = "<%= getAdCategories(iqe.matcheditem[0..-4]) %>";
+       //keywordCat[<%= (seq.to_i * 2) - 5  %>] = "<%= getAdCategories(iqe.matcheditem[0..-4]) %>";
      <%
      end
    end %>
@@ -92,7 +92,7 @@ Items Detected In Video <span id="infoTip1" title="bettersense uses a combinatio
 <tr style="height: 40px;"><td style="padding-left:5px; color:#000000; font-size:14pt; font-weight:bold; border-color:#868686; border:1px solid #868686;" >
 <span style="font-weight:normal;">Matched Items(s):&nbsp;</span><span id="detectedData">&nbsp;</span>
 </td></tr>
-<tr><td>Advertising Categories: <br/><span id="categories"></span></td></tr>
+<!-- <tr><td>Advertising Categories: <br/><span id="categories"></span></td></tr> -->
 </table>
 <script type="text/javascript">
 //Tool Tip for image recognition
@@ -125,7 +125,7 @@ Items Detected In Video <span id="infoTip1" title="bettersense uses a combinatio
 -->
 
 </div>
-<% if (user_signed_in?) %>
+<% if (admin_signed_in?) %>
   <h2>Video Commands</h2><br />
   <%= form_for([@video, @video.iqeinfos.build]) do |f| %>
     <div class="actions">

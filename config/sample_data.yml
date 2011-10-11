@@ -1,0 +1,55 @@
+development:
+    PlayerType:
+        one:
+            name: "Kaltura Hosted Video Player"
+            description: "The Kaltura hosted video solution"
+            player_url: "www.kaltura.org"
+            version: "4.0"
+    ZoneType:
+        one:
+            name: "Leaderboard"
+            description: "IAB Leaderboard"
+            width: 728
+            height: 90
+        two:
+            name: "Medium Rectangle"
+            description: "Medium Rectangle"
+            width: 300
+            height: 250
+        three:
+            name: "Rectangle"
+            description: "Rectangle"
+            width: 180
+            height: 150
+        four:
+            name: "Wide Skyscraper"
+            description: "Wide Skyscraper"
+            width: 160
+            height: 600
+        five:
+            name: "Half Page Ad"
+            description: "Half Page Ad"
+            width: 300
+            height: 600
+        six:
+            name: "Button 2"
+            description: "Button 2"
+            width: 120
+            height: 60
+        seven:
+            name: "Micro Bar"
+            description: "Micro Bar"
+            width: 88
+            height: 31
+        eight:
+            name: "Video Overlay"
+            description: "Standard Video Overlay"
+            width: 350
+            height: 40
+    Zone:
+        one:
+            name: "Video Overlay (Text or Image)"
+            description: "Standard Video Overlay - This can be either an uploaded image, or text based from HTML"
+        two:
+            name: "Video Companion Skyscraper"
+            description: "Tall banner for video companion"
