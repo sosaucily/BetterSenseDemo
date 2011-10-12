@@ -23,7 +23,8 @@ class AccountsController < ApplicationController
     id = session[:account_id]
     @account = Account.find(id)
     @campaigns = Campaign.find(:all, :limit => 3, :order => "updated_at desc", :conditions => "account_id = #{id}") #Show three most recently modified Campaigns in the quick view
-
+    @ads = Ad.find(:all, :limit => 3, :order => "updated_at desc", :conditions => "account_id = #{id}") #Show three most recently modified Ads in the quick view
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @account }

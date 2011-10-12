@@ -14,16 +14,18 @@
     </div>
   </div>
   <div class="span-4">
-    CTR: <%= sprintf("%.2f",perform[:total_clicks] / perform[:total_impressions].to_f) %>%</br>
+    CTR: <%= perform[:total_impressions] == 0 ? "0.00" : sprintf("%.2f",perform[:total_clicks] / perform[:total_impressions].to_f) %>%</br>
     <div class="blueBoxWithBorder" style="text-align:center">
       <%= image_tag("chart.jpg", :alt => "Chart") %>
     </div>
   </div>
   <div class="span-4 last">
-    Avg. CPC: $<%= sprintf("%.2f",((((perform[:total_impressions] || 0)/1000.0) * (campaign.assigned_cpm || 0))/perform[:total_clicks])) %></br>
+    Avg. CPC: $<%= perform[:total_clicks] == 0 ? "0.00" : sprintf("%.2f",((((perform[:total_impressions] || 0)/1000.0) * (campaign.assigned_cpm || 0))/perform[:total_clicks])) %></br>
     <div class="blueBoxWithBorder" style="text-align:center">
       <%= image_tag("chart.jpg", :alt => "Chart") %>
     </div>
   </div>
-  <%= link_to 'Performance Details', campaign %>
+  <%= if request.filtered_parameters["action"] != "show" then
+	link_to 'Performance Details', campaign 
+	end %>
 </div>

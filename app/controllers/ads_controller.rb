@@ -37,6 +37,8 @@ class AdsController < ApplicationController
     @ad = Ad.find(params[:id])
     #The next line are a security to validate that the object being shown is owned by the current session holder.
     if !validate_account_id(@ad.account_id).call().nil? then return end
+    @campaign_name = Campaign.find(@ad.campaign_id).name
+    @zone_name = Zone.find(@ad.zone_id).name
 
     respond_to do |format|
       format.html # show.html.erb
@@ -48,6 +50,8 @@ class AdsController < ApplicationController
   # GET /ads/new.xml
   def new
     @ad = Ad.new
+    @account_campaigns = Campaign.find_all_by_account_id(session[:account_id])
+    @account_zones = Zone.find_all_by_account_id(session[:account_id])
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @ad }
@@ -57,6 +61,9 @@ class AdsController < ApplicationController
   # GET /ads/1/edit
   def edit
     @ad = Ad.find(params[:id])
+    if !validate_account_id(@ad.account_id).call().nil? then return end
+    @account_campaigns = Campaign.find_all_by_account_id(session[:account_id])
+    @account_zones = Zone.find_all_by_account_id(session[:account_id])
     #The next line are a security to validate that the object being shown is owned by the current session holder.
     if !validate_account_id(@ad.account_id).call().nil? then return end
     @ad

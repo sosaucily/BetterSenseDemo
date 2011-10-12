@@ -1,0 +1,24 @@
+<span style="font-size:16px;font-weight:bold"><u><%= show_ad.name %></u></span>
+<div class="span-16 last grayBox">
+	<div class="span-4">
+		<%= show_ad.name %><br /><%= link_to 'edit', edit_ad_path(show_ad) %> - <%= link_to 'delete', show_ad, :confirm => 'Are you sure?', :method => :delete %>
+	</div>
+	<div class="span-12 last">
+		<%= show_ad.description %>
+	</div><br />
+</div>
+<br />
+<div class="span-16 last">
+	<div class="span-4">
+		<% if !show_ad.ad_pic_file_name.nil? then %>
+			<img src="<%= show_ad.ad_pic.url(:thumb) %>" />
+		<% end %>
+	</div>
+	<div class="span-12 last">
+		<div class="AdHTMLPreview">
+			<%= markdown(show_ad.html_src) %>
+		</div>
+	</div>
+</div>
+<br /><hr><br />
+<!--		<div class="span-16 last redhr"></div> -->

@@ -3,30 +3,7 @@
 <div class="span-16 last redhr"></div>
 <div class="span-16 last">
 	<% @ads.each do |ad| %>
-                <span style="font-size:16px;font-weight:bold"><u><%= ad.name %></u></span>
-		<div class="span-16 last grayBox">
-			<div class="span-4">
-				<%= ad.name %><br /><%= link_to 'edit', edit_ad_path(ad) %> - <%= link_to 'delete', ad, :confirm => 'Are you sure?', :method => :delete %>
-			</div>
-			<div class="span-12 last">
-				<%= ad.description %>
-			</div>
-		</div>
-		<br />
-		<div class="span-16 last">
-			<div class="span-4">
-				<% if !ad.ad_pic_file_name.nil? then %>
-					<img src="<%= ad.ad_pic.url(:thumb) %>" />
-				<% end %>
-			</div>
-			<div class="span-12 last">
-				<div class="AdHTMLPreview">
-					<%= markdown(ad.html_src) %>
-				</div>
-			</div>
-		</div>
-		<br /><hr><br />
-<!--		<div class="span-16 last redhr"></div> -->
+    	<%= render :partial => "shared/show_ad", :object => ad %>
 	<% end %>
 </div>
 <br />
