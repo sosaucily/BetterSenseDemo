@@ -1,7 +1,8 @@
 class VideosController < ApplicationController
 
-  before_filter :authenticate_user!, :except => ['show','index']
-  before_filter :check_session, :except => ['show','index']
+  before_filter :authenticate_user!, :except => ['show','index','new']
+  before_filter :authenticate_admin!, :only => ['new','create','edit','update']
+  before_filter :check_session, :except => ['show','index','new']
 
   # GET /videos
   # GET /videos.xml
