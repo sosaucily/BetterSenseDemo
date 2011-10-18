@@ -82,7 +82,7 @@ class ApplicationController < ActionController::Base
         logger.debug("done")
         add_data_to_image(iqe, JSON.parse(response)["data"]["results"])
       else
-        hookurl = HOOKBASEURL + 'videos/' + video[:id].to_s + '/iqeinfos/' + iqe.id.to_s + '/processme'
+        hookurl = HOOKBASEURL + '/videos/' + video[:id].to_s + '/iqeinfos/' + iqe.id.to_s + '/processme'
         api = IQEngines.Api(IQE_KEY,IQE_SECRET)
         qid, response = api.send_query("./public" + iqe.imagepath, extra=nil, webhook=hookurl, device_id='test123', multiple_results=true, modules=nil, json=true)
         logger.info "api.send_query(./public#{iqe.imagepath}, extra=nil, webhook=#{hookurl}, device_id='test123', multiple_results=true, modules=nil, json=true)"
@@ -101,7 +101,7 @@ class ApplicationController < ActionController::Base
           logger.info(response)
           add_data_to_image(iqe, JSON.parse(response)["data"]["results"])
         else
-          hookurl = HOOKBASEURL + 'videos/' + video[:id].to_s + '/iqeinfos/' + iqe.id.to_s + '/processme'
+          hookurl = HOOKBASEURL + '/videos/' + video[:id].to_s + '/iqeinfos/' + iqe.id.to_s + '/processme'
           api = IQEngines.Api(IQE_KEY,IQE_SECRET)
           qid, response = api.send_query("./public" + iqe.imagepath, extra=nil, webhook=hookurl, device_id='test123', multiple_results=true, modules=nil, json=true)
           logger.info "api.send_query(./public#{iqe.imagepath}, extra=nil, webhook=#{hookurl}, device_id='test123', multiple_results=true, modules=nil, json=true)"
