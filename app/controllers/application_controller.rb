@@ -72,7 +72,7 @@ class ApplicationController < ActionController::Base
   end
 
   def do_iqe_process (video)
-    video.iqeinfos[1...5].each do |iqe|
+    video.iqeinfos.each do |iqe|
       if (Rails.env.development?) then
         api = IQEngines.Api(IQE_KEY,IQE_SECRET)
         qid, response = api.send_query("./public" + iqe.imagepath) #, multiple_results=true, json=true
@@ -92,7 +92,7 @@ class ApplicationController < ActionController::Base
   end
 
   def do_iqe_process_missing (video)
-    video.iqeinfos[1...5].each do |iqe|
+    video.iqeinfos.each do |iqe|
       if iqe.matcheditem == nil
         if (Rails.env.development?) then
           api = IQEngines.Api(IQE_KEY,IQE_SECRET)
