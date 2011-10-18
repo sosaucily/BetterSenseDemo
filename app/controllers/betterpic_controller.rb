@@ -1,17 +1,17 @@
 class BetterpicController < ApplicationController
 
   def list
-    @completed_crowd_images = Iqeinfo.find_all_by_send_to_crowd_and_complete(false, true, :order=>:video_id)
-    @incomplete_crowd_images = Iqeinfo.find_all_by_send_to_crowd_and_complete(false, false, :order=>:video_id)
+    @completed_crowd_images = Iqeinfo.find_all_by_send_to_crowd_and_complete(true, true, :order=>:video_id)
+    @incomplete_crowd_images = Iqeinfo.find_all_by_send_to_crowd_and_complete(true, false, :order=>:video_id)
     respond_to do |format|
       format.html # list.html.erb
-      format.xml  { render :xml => Iqeinfo.find_all_by_send_to_crowd(true, :order=>:video_id) }
-      format.json { render :json => Iqeinfo.find_all_by_send_to_crowd_and_complete(false, false, :order=>:video_id) }
+      format.xml  { render :xml => Iqeinfo.find_all_by_send_to_crowd_and_complete(true, false, :order=>:video_id) }
+      format.json { render :json => Iqeinfo.find_all_by_send_to_crowd_and_complete(true, false, :order=>:video_id) }
     end
   end
   
   def crowdProcess
-    @ready_crowd_images = Iqeinfo.find_all_by_send_to_crowd_and_complete(false, false, :order=>:video_id)
+    @ready_crowd_images = Iqeinfo.find_all_by_send_to_crowd_and_complete(true, false, :order=>:video_id)
     
     respond_to do |format|
       format.json { render :json => Iqeinfo.getJSONForCrowd(@ready_crowd_images) }

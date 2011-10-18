@@ -11,6 +11,12 @@ def main():
 	videoSubDir = "video"
 	imagesSubDir = "images"
 	videoInputPath = "videos"
+	
+	running_os = ""
+	if (sys.platform.find("linux") >= 0):
+		running_os = "linux"
+	else:
+		running_os = "osx"
 
 	completedVideos = []
 	
@@ -18,6 +24,8 @@ def main():
 
 	for i in range(len(dirList)):
 		videoName = dirList[i]
+		if (videoName.find("README") > -1):
+			continue
 #		f = open((str(infoFilePath) + "" + str(dirList[i]))[:-3] + "txt" , 'w')
 
 		print ("scanning video " + videoInputPath +"/" + videoName)
@@ -27,14 +35,32 @@ def main():
 		clean_video_name = re.sub("_[_]*","_",clean_video_name2) + videoName[-4:]
 		video_format = videoName[-3:]
 
-		md5_shell_command = "md5sum \"%s\"" % (videoInputPath +"/" + videoName)
+		if (running_os == "linux"):
+			md5_shell_command = "md5sum \"%s\"" % (videoInputPath +"/" + videoName)
+		elif (running_os == "osx"):
+			md5_shell_command = "md5 \"%s\"" % (videoInputPath +"/" + videoName)
+		else:
+			md5_shell_command = "md5sum \"%s\"" % (videoInputPath +"/" + videoName)
+		
 		md5_args = shlex.split(md5_shell_command)
 		print ("Running md5sum command: " + md5_shell_command )
 		video_md5sum_b = subprocess.check_output(md5_args)
 		video_md5sum_long = video_md5sum_b.decode("utf-8")
 		
-		intBreak = video_md5sum_long.find(" ")
-		video_md5sum = video_md5sum_long[0:intBreak]
+		video_md5sum = ""
+				
+		#On OS X with the md5 command, we want the last
+		if (running_os == "osx"):
+			intBreak = video_md5sum_long.rfind(" ")
+			video_md5sum = video_md5sum_long[intBreak+1:intBreak+33]
+		#On linux with the md5sum command, we want the first segment
+		elif (running_os == "linux"):
+			intBreak = video_md5sum_long.find(" ")
+			video_md5sum = video_md5sum_long[0:intBreak]
+		else:
+			intBreak = video_md5sum_long.find(" ")
+			video_md5sum = video_md5sum_long[0:intBreak]
+		
 		
 		print ("Got video md5sum of " + video_md5sum)
 		

@@ -8,3 +8,4 @@ public/processedVideos/*
 public/system/*
 BetterSenseDemoDev.tmproj
 .DS_Store
+*.swp
