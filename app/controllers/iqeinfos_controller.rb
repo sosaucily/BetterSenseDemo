@@ -31,7 +31,7 @@ class IqeinfosController < ApplicationController
 
   def index
     @video = Video.find(params[:video_id])
-    @iqeinfos = @video.iqeinfos.ordered.paginate :page => params[:page], :per_page => 20 
+    @iqeinfos = @video.iqeinfos.order.paginate :page => params[:page], :per_page => 20 
 
     respond_to do |format|
       format.html # index.html.erb
