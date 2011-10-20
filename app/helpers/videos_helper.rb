@@ -1,7 +1,7 @@
 module VideosHelper
 
   def getAdCategories(keyword)
-    logger.info "Looking for categories for keyword " + keyword
+    Rails.logger.info "Looking for categories for keyword " + keyword
 
     if (keyword == "No Match") then return end
 
@@ -15,9 +15,9 @@ module VideosHelper
 
     if (wordResults[0].empty?) then
       wordResults = []
-      logger.info "in Very Good section, trying " + keyword.downcase + " ........."
+      Rails.logger.info "in Very Good section, trying " + keyword.downcase + " ........."
       wordResults.push($adWordTrie.wildcard(keyword.downcase + " .........."))
-      logger.info "results are " + wordResults.to_s
+      Rails.logger.info "results are " + wordResults.to_s
       hitQuality = "Very Good"
     end
 
@@ -42,7 +42,7 @@ module VideosHelper
     #wordResults.flatten!
     wordResults.each do |cat|
       cat.each do |word|
-        logger.info "now getting categories for " + word
+        Rails.logger.info "now getting categories for " + word
         cats = $adWordTrie.get(word)
         results.push(cats.each_with_index.map {|c,i| if (i!=cats.length-1) then c.to_s + "->" else c.to_s end })
       end
@@ -53,7 +53,7 @@ module VideosHelper
     end
     result_string = result_string[0..-3]
     result_string += " -- Accuracy: " + hitQuality
-    logger.info "Result = " + result_string
+    Rails.logger.info "Result = " + result_string
     return result_string
   end
 

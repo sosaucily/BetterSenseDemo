@@ -1,0 +1,12 @@
+cluster_address: 0.0.0.0
+cluster_port: 3000
+map:
+  - incoming:
+      - www.bsdev.com
+      - bsdev.com
+    outgoing: 127.0.0.1:5555
+    default: true
+  - incoming: ads.bsdev.com
+    outgoing: 127.0.0.1:5556
+  - incoming: keywords.bsdev.com
+    outgoing: 127.0.0.1:5557

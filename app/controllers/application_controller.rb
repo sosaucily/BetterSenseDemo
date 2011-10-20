@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   def validate_account_id(account_id)
     if (!session.include? "account_id" or (account_id.to_i != session[:account_id].to_i))
       return lambda {
-        flash[:alert] = "This campaign is not valid for this user"
+        flash[:alert] = "Sorry, you don't have access to that page."
         redirect_to '/account'
         return true
       }
