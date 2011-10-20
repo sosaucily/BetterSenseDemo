@@ -29,7 +29,9 @@ class ApplicationController < ActionController::Base
       logger.info "Login recorded from User with id:" + resource.id.to_s
       #clear_session_data
       setup_session_from_User(resource)
-      if (session.include? :user_return_to) then
+      if (resource.account.company_name == "TVNEXT")
+        '/videos/29'
+      elsif (session.include? :user_return_to)
         session.delete :user_return_to #This also returns the value of this session variable, used for redirect
       else
         '/account'
