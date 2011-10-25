@@ -22,8 +22,8 @@ class VideosController < ApplicationController
     @video = Video.find(params[:id])
     #The next line are a security to validate that the object being shown is owned by the current session holder.
     #if !validate_account_id(@video.account_id).call().nil? then return end
-    if (!@video.viewable)
-      if (!validate_account_id(@video.account_id).call().nil? and !admin_signed_in?) then return end
+    if (!@video.viewable and !admin_signed_in?)
+      if (!validate_account_id(@video.account_id).call().nil?) then return end
     end
         
     respond_to do |format|

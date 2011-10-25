@@ -32,7 +32,7 @@
      if (seq != nil && iqe.matcheditem != nil)
      %>
        imageData[<%= (seq.to_i * 2) - 5  %>] = "<%= iqe.matcheditem[0..-4] %>";
-       //keywordCat[<%= (seq.to_i * 2) - 5  %>] = "<%= getAdCategories(iqe.matcheditem[0..-4]) %>";
+       //keywordCat[<%= (seq.to_i * 2) - 5  %>] = "<%# getAdCategories(iqe.matcheditem[0..-4]) %>";
      <%
      end
    end %>

@@ -42,11 +42,6 @@ module BetterSenseDemo
     config.filter_parameters += [:password]
 
     config.action_view.javascript_expansions[:defaults] = %w(jquery.min jquery_ujs jquery.qtip.min)
-      
-    #After everything is booted up, run the system to build up the keyword data.  Perhaps this should be a separate process, or a memory-mapped file.
-    config.after_initialize do
-      BetterSenseDemo::Keyword.populateAdWordTrie()
-    end
 
     config.before_initialize do
       BetterSenseDemo::APP_CONFIG = YAML.load_file("#{Rails.root.to_s}/config/bettersense_config.yml")[Rails.env]
