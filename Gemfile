@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.7'
+gem 'rails', '3.0.9'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -22,7 +22,7 @@ gem 'devise'
 
 gem 'algorithms'
 
-gem 'fastercsv'
+#gem 'fastercsv'
 
 gem 'compass', '~> 0.11.5'
 
@@ -40,7 +40,7 @@ gem "paperclip", "~> 2.3"
 
 gem 'will_paginate', '~> 3.0'
 
-gem 'ruby-debug'
+#gem 'ruby-debug'
 
 gem 'oink'
 
