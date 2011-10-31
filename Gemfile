@@ -46,9 +46,10 @@ gem 'oink'
 
 gem 'redcarpet'
 
-gem 'mongoid'
+#gem 'mongoid'
 
-gem 'bson_ext'
+#gem 'bson_ext'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
