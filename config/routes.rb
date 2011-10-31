@@ -65,6 +65,8 @@ BetterSenseDemo::Application.routes.draw do
   end
 
   get "home/index"
+  match "about", :controller => 'home', :action => 'about'
+  get "team", :controller => 'home', :action => 'team'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

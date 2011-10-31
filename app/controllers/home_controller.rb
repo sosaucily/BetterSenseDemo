@@ -4,5 +4,11 @@ class HomeController < ApplicationController
 
   def index
   end
+  
+  def team
+  end
+  
+  def about
+  end
 
 end
