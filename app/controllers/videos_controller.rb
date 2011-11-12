@@ -57,6 +57,7 @@ class VideosController < ApplicationController
   # POST /videos.xml
   def create
     @video = Video.new(params[:video])
+    #If Admin is creating the video (which is how this is done now) the account for the video should be the one selected on the page, not the one from the current session.
     @video.account_id = session[:account_id]
 
     respond_to do |format|

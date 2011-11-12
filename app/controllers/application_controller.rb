@@ -1,3 +1,8 @@
+# This is part of the BetterSense Web system
+#
+# Author::    Jesse Smith  (mailto:js@bettersense.com)
+# Copyright:: Copyright (c) 2011 BetterSense
+
 require 'iqengines'
 
 class ApplicationController < ActionController::Base
@@ -6,10 +11,16 @@ class ApplicationController < ActionController::Base
   VIDEODIR = BetterSenseDemo::APP_CONFIG["videos_dir"]
   IMAGESUBDIR = "images"
 
-  IQE_KEY = '2fd276e7f0ac4a5f948f244fa127cd22'
-  IQE_SECRET = '5de565aa46c6464a81fe92c3389a7a0b'
+  IQE_KEY = BetterSenseDemo::IQENGINES_CONFIG["IQE_KEY"]
+  IQE_SECRET = BetterSenseDemo::IQENGINES_CONFIG["IQE_SECRET"]
   HOOKBASEURL = BetterSenseDemo::APP_CONFIG["base_url"]
 
+  # Function to validate that the account_id matches the account id of the session holder
+  # This function will either return nil, or a redirect call.
+  # Because any page that calls this should have authentication requirements, we can assume the user is authenticated in some way.
+  # Params:
+  # +account_id+:: Account ID in question
+  # Return: Lambda function of either nil, or a redirect to the user's /account default page.
   def validate_account_id(account_id)
     if (!session.include? "account_id" or (account_id.to_i != session[:account_id].to_i))
       return lambda {
@@ -22,7 +33,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  #rediretion after login for Devise  
+  # Redirect after login using Devise
+  # Params:
+  # +resource+:: The object being managed by Devise (User or Admin)
+  # Return: URL for redirection after login.  If the user (or admin) had a target destination before being redirected to the auth page, grab that value and return it.
   def after_sign_in_path_for(resource)
     #This method needs the overwritten 'stored_location_for' method below otherwise this method won't run when a user is redirected to the login page from a protected page.
     if (resource.is_a? User)
@@ -42,14 +56,18 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  # Overwrite this Devise method to redirect properly
+  # Params:
+  # +resource+:: The object being managed by Devise (User or Admin)
+  # Return: nil
   def stored_location_for(resource)
-    #if (current_user) then
-    #elsif (current_admin)
-    #end
     return nil
-    #super(resource)
   end
   
+  # Accept a command to trigger various functions on a video
+  # Params:
+  # +video+:: Video object
+  # Return: Message stating completion
   def process_video (video)
     logger.info 'processing video at path ' + video[:name]
     video_actions = params[:videoAction]
@@ -73,6 +91,7 @@ class ApplicationController < ActionController::Base
     'Completed processing video ' + video[:id].to_s
   end
 
+  # Grab the images for this video (based on folder structure) and create iqeinfo objects on the video for each image.
   def do_iqe_process (video)
     video.iqeinfos.each do |iqe|
       if (Rails.env.development?) then
@@ -93,6 +112,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # Send images for this video to iqengines that do not yet have data from iqengines
   def do_iqe_process_missing (video)
     video.iqeinfos.each do |iqe|
       if iqe.matcheditem == nil
@@ -112,6 +132,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # Send all images for this video to iqengines
   def do_image_import (video)
     video_hash = video[:hashstring]
     image_dir = Rails.root.to_s + BetterSenseDemo::APP_CONFIG["processed_videos_dir"] + "/" + video_hash + "/" + IMAGESUBDIR + "/*"
@@ -128,18 +149,22 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # Delete all iqeinfo image objects associated to this video
   def do_image_clear (video)
     video.iqeinfos.each do |i|
       i.delete
     end
   end
 
+  # OBSOLETE
   def process_video_path_custom (video)
     doing_process = 1
     "videos/" + video[:id]
   end
   
-  def add_data_to_image (iqe, qid_data) # This needs to be a DelayedJob...
+  #Append data back from IQEngines to the iqeinfo object.
+  #Not currently being used.
+  def add_data_to_image (iqe, qid_data) # This should be a DelayedJob...
     logger.debug qid_data
     labels = ""
     qid_data.each do |qid|
@@ -153,6 +178,9 @@ class ApplicationController < ActionController::Base
   
 private
 
+  #Validate the current session.
+  #If Devise says the user is signed in, but they don't have a valid account_id in the session object, add it.
+  #I believe this can happen if the rails session timing is different from that of Devise.
   def check_session
     logger.debug "Checking session"
     if (session[:account_id].nil? or session[:account_id] <= 0)
@@ -165,6 +193,7 @@ private
     end
   end
   
+  #Basic values to set up and commands to run upon user login
   def setup_session_from_User(resource)
     session[:account_id] = resource.account_id
     logger.debug "Setting account id to " + resource.account_id.to_s

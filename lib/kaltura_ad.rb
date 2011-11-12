@@ -1,6 +1,16 @@
+# This is part of the BetterSense ad design system
+#
+# Author::    Jesse Smith  (mailto:js@bettersense.com)
+# Copyright:: Copyright (c) 2011 BetterSense
+
+# KalturaAd
+# This class is used to build ads in the correct format for the Kaltura HTML5 Player
+
 class KalturaAd
+  #Included to provide access to gain access to the code markdown system.
   include ApplicationHelper
 
+  # Initialize default ad parameters 
   def initialize
     @ad_params =
     {
@@ -23,9 +33,13 @@ class KalturaAd
     }
   end
 
+  # Get top keywords for this object 
+  # Params:
+  # +ad_list+:: The set of all ads for this video.  
+  # Return: An array of hash values representing the HTML5 ads for the Kaltura player.
   def buildAds ad_list
     count = 0
-    output = [] #This is a hash of hashes that are used as Kaltura HTML5 player ad sets
+    output = [] #This is an array of hashes that are used as Kaltura HTML5 player ad sets
     ad_list = ad_list.select {|a| a.zone.zone_type.name == "Video Overlay"}.sort_by{|a| a.time_millis}
     ad_list.each { |a|
       if (a.zone.zone_type.name == "Video Overlay") then
@@ -51,6 +65,10 @@ class KalturaAd
 
   private
 
+  # Build various components for an html5 overlay ad for Kaltura html5 player
+  # Params:
+  # +ad+:: The current ad
+  # Return: The hash representing the various components for this html5 overlay ad for the Kaltura html5 player.
   def buildOverlayAd ad
 
     overlay_content = ""
@@ -90,10 +108,15 @@ class KalturaAd
     end
 
     Rails.logger.info("Overlay content = " + overlay_content)
-    output = {'ad_id' => ad.id, 'iqeinfo' => ad.iqeinfo_id, 'ads' => [ {'nonLinear'=> [ { 'width' => @ad_params[:width], 'height' => @ad_params[:height] + 5, 'html' => '<div style=”position:relative;background-color:' + @ad_params[:background_color] + ';font-size:' + @ad_params[:font_size] + ';opacity:' + @ad_params[:opacity].to_s + ';filter:alpha(opacity=' + @ad_params[:alpha].to_s + ');padding-left:' + @ad_params[:padding_left] + ';padding-right:' + @ad_params[:padding_right] + ';padding-top:' + @ad_params[:padding_top] + ';padding-bottom:' + @ad_params[:padding_bottom] + ';height:' + @ad_params[:height].to_s + 'px;width:' + @ad_params[:width].to_s + 'px"><a href="' + BetterSenseDemo::APP_CONFIG["base_url"] + '/regclick?id=' + ad_id.to_s + '&url=' + ad_target + '" target="_blank" style="color:' + @ad_params[:a_color] + ';hover:' + @ad_params[:a_hover_color] + ':visited:' + @ad_params[:a_visited_color] + '"><span style="position:absolute;width:100%;height:100%;top:0;left:0"></span>' + overlay_content + '</a></div>'  } ] } ], 'start' => @ad_params[:start], 'timeout' => @ad_params[:timeout] }
+    output = {'ad_id' => ad.id, 'iqeinfo' => ad.iqeinfo_id, 'ads' => [ {'nonLinear'=> [ { 'width' => @ad_params[:width], 'height' => @ad_params[:height] + 5, 'html' => '<div style="position:relative;background-color:' + @ad_params[:background_color] + ';font-size:' + @ad_params[:font_size] + ';opacity:' + @ad_params[:opacity].to_s + ';filter:alpha(opacity=' + @ad_params[:alpha].to_s + ');padding-left:' + @ad_params[:padding_left] + ';padding-right:' + @ad_params[:padding_right] + ';padding-top:' + @ad_params[:padding_top] + ';padding-bottom:' + @ad_params[:padding_bottom] + ';height:' + @ad_params[:height].to_s + 'px;width:' + @ad_params[:width].to_s + 'px"><a href="' + BetterSenseDemo::APP_CONFIG["base_url"] + '/regclick?id=' + ad_id.to_s + '&url=' + ad_target + '" target="_blank" style="color:' + @ad_params[:a_color] + ';hover:' + @ad_params[:a_hover_color] + ':visited:' + @ad_params[:a_visited_color] + '"><span style="position:absolute;width:100%;height:100%;top:0;left:0"></span>' + overlay_content + '</a></div>'  } ] } ], 'start' => @ad_params[:start], 'timeout' => @ad_params[:timeout] }
     output
   end
 
+  # INCOMPLETE
+  # Build various components a companion ad
+  # Params:
+  # +ad+:: The current ad
+  # Return: The hash representing the various components for this ad for the Kaltura player.
   def buildCompanionAd ad
     output = {'iqeinfo' => ad.iqeinfo_id, 'ads'=> [{ 'companions'=> [ { 'id' => 1, 'html' => '<div style="background-color:#F99">' + 'overlayText' +'</div>' } ] }], 'start' => start, 'timeout' => timeout, 'companionTargets'=> [ { 'elementid'=>'companionTarget' } ] }
     output

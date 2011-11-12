@@ -45,6 +45,7 @@ module BetterSenseDemo
 
     config.before_initialize do
       BetterSenseDemo::APP_CONFIG = YAML.load_file("#{Rails.root.to_s}/config/bettersense_config.yml")[Rails.env]
+      BetterSenseDemo::IQENGINES_CONFIG = YAML.load_file("#{Rails.root.to_s}/config/iqengines.yml")[Rails.env]
     end
   end
 end

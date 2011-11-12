@@ -10,3 +10,4 @@ BetterSenseDemoDev.tmproj
 .DS_Store
 *.swp
 config/kaltura.yml
+config/iqengines.yml

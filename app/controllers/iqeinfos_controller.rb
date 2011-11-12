@@ -5,7 +5,7 @@ class IqeinfosController < ApplicationController
     logger.debug "Process ME called!"
     @iqeinfo = @video.iqeinfos.find(params[:id])
     #add_data_to_image(@iqeinfo, params[:qid_data])
-    #when ready to test, replace everything below, except for the redirect, with the above line.  Or maybe not, because of data format issues. CHeck application_controller method.
+    #when ready to test, replace everything below, except for the redirect, with the above line.  Or maybe not, because of data format issues. Check application_controller method.
     qid_data = params[:qid_data]
     logger.debug qid_data
     labels = ""

@@ -1,7 +1,8 @@
-root = exports ? this
-$ ->
+root = exports ? this #This line sets up the public methods under the 'root' scope on the page's javascript
+$ -> #JQuery initializer so this code runs after the page loads, when JQuery is ready
 	toolID = 1
 
+	#Build html5 canvas
 	gCanvasElement = root.$('#layer1')
 	myCanvas = gCanvasElement[0].getContext '2d'
 	betterpic = new Image
@@ -9,6 +10,9 @@ $ ->
 		myCanvas.drawImage betterpic, 0, 0, root.imagew, root.imageh
 	betterpic.src = root.imagepath
 
+	#Record where the click happened, and draw the image at that spot.
+	#Params:
+	#+e+:: EventListener object 
 	halmaOnClick = (e) ->
 		if e.pageX? and e.pageY?
 			x = e.pageX
@@ -32,6 +36,7 @@ $ ->
 
 	gCanvasElement[0].addEventListener 'click', halmaOnClick, false 		
 
+	#Draw the image on the canvas
 	drawSelectionCircle = (x, y, canvasContext, id) ->
 		canvasContext.clearRect 0, 0, root.imagew, root.imageh
 		myCanvas.drawImage betterpic, 0, 0, root.imagew, root.imageh
@@ -51,15 +56,18 @@ $ ->
 	root.$('#circleToolBox3').click () ->
 		setSelectedTool 3
 
+	#Choose which draw image is selected
 	setSelectedTool = (id) ->
 		toolID = id
 		clearSelectionBoxes()
 		root.$('#iqeinfo_cradius').value = getRad id
 		root.$("#circleToolBox#{id}")[0].style.border = "solid #000 4px"
 	
+	#Deselect all tool selection boxes.
 	clearSelectionBoxes = () ->
 		elem.style.border = "solid #000 1px" for elem in root.$('.toolselector')
 
+	#Get the radius
 	getRad = (id) ->
 		10 + (15*id)
 
@@ -70,6 +78,7 @@ $ ->
 			)
 		return
 
+	#Draw the next image
 	root.clearAndNextPic = (newImagePath, newimagew, newimageh) ->
 		root.imagew = newimagew
 		root.imageh = newimageh

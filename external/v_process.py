@@ -86,8 +86,18 @@ def main():
 			video_res = ""
 		else:
 			resolution = getResolution(video_res)
+			
+		duration = ""
+		duration_string = re.search('\d\d:\d\d:\d\d\.\d\d', video_info).group(0)
+		d_elems = duration_string.split(":")
+		d_hrs = int(d_elems[0])
+		d_mins = int(d_elems[1])
+		d_elems_sec = d_elems[len(d_elems)-1].split(".")
+		d_sec = int(d_elems_sec[0])
+		d_millis = int(d_elems_sec[1]) * 10
+		duration = (d_hrs * 60 * 60 * 1000) + (d_mins * 60 * 1000) + (d_sec * 1000) + (d_millis)
 		
-		ffmpeg_shell_command = "ffmpeg -i \"%s\" -r %s -s %s \"%s/%s/%s/image_%%04d.jpg\"" % ( videoInputPath +"/" + videoName, ".5", str(resolution["width"]) + "x" + str(resolution["height"]), processedVideoPath, video_md5sum, imagesSubDir)
+		ffmpeg_shell_command = "ffmpeg -i \"%s\" -r %s -s %s \"%s/%s/%s/image_%%04d.jpg\"" % ( videoInputPath +"/" + videoName, ".25", str(resolution["width"]) + "x" + str(resolution["height"]), processedVideoPath, video_md5sum, imagesSubDir)
 		
 		print ("running ffmpeg -> " + ffmpeg_shell_command)
 		
@@ -122,7 +132,7 @@ def main():
 		#pickle.dump(results, f)
 		#f.write(results)
 		#f.close()
-		completedVideos.append ({'md5':video_md5sum,'res':str(resolution["width"]) + "x" + str(resolution["height"]), 'filename':clean_video_name[0:-4] + ".flv"})
+		completedVideos.append ({'md5':video_md5sum,'res':str(resolution["width"]) + "x" + str(resolution["height"]), 'filename':clean_video_name[0:-4] + ".flv", 'duration_millis':duration})
 		#sys.exit()
 
 	for i in completedVideos:
