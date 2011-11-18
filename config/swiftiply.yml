@@ -1,5 +1,6 @@
 cluster_address: 0.0.0.0
 cluster_port: 3000
+daeomize: true
 map:
   - incoming:
       - www.bsdev.com
