@@ -10,7 +10,7 @@ group :production, :test do
   gem 'pg'
 end
 
-gem 'rake'#, '~> 0.8.7'
+gem 'rake'
 
 gem 'ruby-hmac', '~> 0.4.0'
 
