@@ -1,5 +1,5 @@
-/* DO NOT MODIFY. This file was compiled Sun, 18 Sep 2011 12:33:00 GMT from
- * /home/ubuntu/www/BetterSenseDemoDev/app/coffeescripts/page_helpers.coffee
+/* DO NOT MODIFY. This file was compiled Fri, 18 Nov 2011 01:17:24 GMT from
+ * /Users/jessesmith/Documents/BetterSense/www/BetterSenseDemoDev/BetterSenseDemo/app/coffeescripts/page_helpers.coffee
  */
 
 (function() {
