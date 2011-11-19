@@ -13,6 +13,9 @@ BetterSenseDemo::Application.routes.draw do
 
   match "sysadmin" => 'sysadmin#index'
   match "sysadmin/session_test" => 'sysadmin#session_test'
+  
+  match "tokens" => 'tokens#index'
+  match "tokens/generate" => 'tokens#generate'
 
   match "demo" => 'demo#index'
   match "demo/:demo_name" => 'demo#servePage'
