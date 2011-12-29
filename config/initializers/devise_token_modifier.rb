@@ -5,7 +5,8 @@ module Devise
     class TokenAuthenticatable < Authenticatable
       private
       def valid_request?
-        params[:controller] == "api"
+        valid_controllers = ['api','accounts']
+        valid_controllers.include? params[:controller]
       end
     end
   end

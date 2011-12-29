@@ -7,6 +7,7 @@ development:
     nacamar_js: "http://localhost:3000/javascripts/better_kaltura_ads_nacamar.js"
     keyword_data_dir: "/data/GoogleKeywordData07192011"
     video_demo_1: "http://localhost:3000/videos/1"
+    backend_key: "HxmfdCjuqozranEkavx6"
 
 test:
     base_url: "http://107.20.141.244"
@@ -17,6 +18,7 @@ test:
     nacamar_js: "http://107.20.141.244/javascripts/better_kaltura_ads_nacamar.js"
     keyword_data_dir: "/data/GoogleKeywordData07192011"
     video_demo_1: "http://107.20.141.244/videos/1"
+    backend_key: "HxmfdCjuqozranEkavx6"
 
 production:
     base_url: "http://www.bettersense.com"
@@ -27,3 +29,4 @@ production:
     nacamar_js: "http://www.bettersense.com/javascripts/better_kaltura_ads_nacamar.js"
     keyword_data_dir: "/data/GoogleKeywordData07192011"
     video_demo_1: "http://www.bettersense.com/videos/7"
+    backend_key: "HxmfdCjuqozranEkavx6"
