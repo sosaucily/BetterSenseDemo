@@ -45,7 +45,9 @@ module BetterSenseDemo
 
     config.before_initialize do
       BetterSenseDemo::APP_CONFIG = YAML.load_file("#{Rails.root.to_s}/config/bettersense_config.yml")[Rails.env]
-      BetterSenseDemo::IQENGINES_CONFIG = YAML.load_file("#{Rails.root.to_s}/config/iqengines.yml")[Rails.env]
+      kaltura_yml = File.join(File.dirname(__FILE__),'kaltura.yml')
+      YAML.load_file(kaltura_yml)[Rails.env].each_pair{|k,v| KalturaFu.config.send("#{k}=",v)}
+      KalturaFu.generate_session_key
     end
   end
 end

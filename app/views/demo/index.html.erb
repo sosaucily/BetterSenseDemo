@@ -3,31 +3,56 @@
 <div class="span-16 last redhr"></div>
 <div class="span-16 last">
 <div class="span-16 last">
-	<%= link_to '/demo/kaltura_video' do |link| %>
+	<%= link_to '/demo/kaltura_video' do %>
 	  <span style="font-size:16px;font-weight:bold"><u>Delivering Context Targeted Ads</u></span>
 	<% end %>
 	<br />
   <div class="span-8">
     A demo video showing the <b>better</b>sense content sensitive ad delivery. Served by partner Nacamar, and leveraging the Kaltura HTML5 player.
   </div>
-  <div class="span-8 last">
-    <%= link_to '/demo/kaltura_video' do |link| %>
-      <%= image_tag "kaltura_demo_pic_150.jpg" %>
+  <div class="span-7 prepend-1 last">
+	<%
+		vid_x = 640
+		vid_y = 360
+		play_button_wh = 40
+		thumb_x = 260
+		wh_ratio = vid_x.to_f / vid_y.to_f
+		thumb_y = (thumb_x/wh_ratio).to_f
+
+		thumbnail_options = {}
+		thumbnail_options[:size] = [thumb_x,thumb_y.to_i]
+		thumbnail_options[:second] = '3'
+
+	%>
+    <%= link_to '/demo/kaltura_video' do %>
+      <%= raw getThumbnailWithPlayButton("0_32kvjv16", thumbnail_options, play_button_wh) %>
     <% end %>
   </div>
 </div>
 <br />&nbsp;<br />
 <div class="span-16 last">
-	<%= link_to BetterSenseDemo::APP_CONFIG["video_demo_1"] do |link| %>
+	<%= link_to 'demo/video_analysis' do %>
 	  <span style="font-size:16px;font-weight:bold"><u>Video Analysis</u></span>
 	<% end %>
 	<br />
   <div class="span-8">
     Demonstration of the types of items the <b>better</b>sense system can extract from a video.
   </div>
-  <div class="span-8 last">
-    <%= link_to BetterSenseDemo::APP_CONFIG["video_demo_1"] do |link| %>
-      <%= image_tag "video_demo_pic_1.jpg" %>
+  <div class="span-7 prepend-1 last">
+	<%
+		vid_x = 480
+		vid_y = 360
+		play_button_wh = 40
+		thumb_x = 260
+		wh_ratio = vid_x.to_f / vid_y.to_f
+		thumb_y = (thumb_x/wh_ratio).to_f
+
+		thumbnail_options = {}
+		thumbnail_options[:size] = [thumb_x,thumb_y.to_i]
+		thumbnail_options[:second] = '45'
+	%>
+    <%= link_to '/demo/video_analysis' do %>
+      <%= raw getThumbnailWithPlayButton("0_3byvgkh0", thumbnail_options, play_button_wh) %>
     <% end %>
   </div>
 </div>

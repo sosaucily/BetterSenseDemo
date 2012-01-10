@@ -11,3 +11,4 @@ BetterSenseDemoDev.tmproj
 *.swp
 config/kaltura.yml
 config/iqengines.yml
+devise/*

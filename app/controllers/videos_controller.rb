@@ -21,11 +21,8 @@ class VideosController < ApplicationController
   def show
     @video = Video.find(params[:id])
     #The next line are a security to validate that the object being shown is owned by the current session holder.
-    #if !validate_account_id(@video.account_id).call().nil? then return end
-    if (!@video.viewable and !admin_signed_in?)
-      if (!validate_account_id(@video.account_id).call().nil?) then return end
-    end
-        
+    if (!validate_account_id(@video.account_id).call().nil?) then return end
+    @nac_id = @video.getKalturaIDByName(@video.name).to_s
     respond_to do |format|
       format.html # show.html.erb
       format.js

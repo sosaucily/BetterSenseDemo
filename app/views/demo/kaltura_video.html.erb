@@ -1,12 +1,17 @@
 <h1>Video Ads Demo</h1>
-<h4>Demo Video of Content Sentitive Ads</h4>
+<h4>Video of Content Sensitive Ads</h4>
 <div class="span-16 last redhr"></div>
 <div class="span-16 last">
 <span style="font-size:16px;font-weight:bold"><u>Content Sensitive Video Ads</u></span> - Back to <%= link_to 'Demos', '/demo/' %>
 <div class="span-16 last">
-
-<object id="kaltura_player" name="kaltura_player" type="application/x-shockwave-flash" allowFullScreen="true" allowNetworking="all" allowScriptAccess="always" height="386" width="630" xmlns:dc="http://purl.org/dc/terms/" xmlns:media="http://search.yahoo.com/searchmonkey/media/" rel="media:video" resource="http://medianac.nacamar.de/index.php/kwidget/cache_st/1316568215/wid/_461/uiconf_id/1002379/entry_id/0_32kvjv16" data="http://medianac.nacamar.de/index.php/kwidget/cache_st/1316568215/wid/_461/uiconf_id/1002379/entry_id/0_32kvjv16"><param name="allowFullScreen" value="true" /><param name="allowNetworking" value="all" /><param name="allowScriptAccess" value="always" /><param name="bgcolor" value="#000000" /><param name="flashVars" value="&" /><param name="movie" value="http://medianac.nacamar.de/index.php/kwidget/cache_st/1316568215/wid/_461/uiconf_id/1002379/entry_id/0_32kvjv16" /> <a rel="media:thumbnail" href="http://mn.mdn.nacamar.de/p/461/sp/46100/thumbnail/entry_id/0_32kvjv16/width/120/height/90/bgcolor/000000/type/2" /> <span property="dc:description" content="" /><span property="media:title" content="GoldenGateScreenCapture2.mov" /> <span property="media:width" content="400" /><span property="media:height" content="333" /> <span property="media:type" content="application/x-shockwave-flash" /> </object>
-
+	<% 
+	  vid_x = 640
+	  vid_y = 360
+	  kaltura_options = {}
+	  video_size = [vid_x,vid_y]
+	  kaltura_options[:size] = video_size
+	%>
+	<%= raw kaltura_player_embed('0_32kvjv16', kaltura_options) %>
 </div>
 </div>
 <br />

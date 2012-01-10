@@ -50,6 +50,14 @@ gem 'redcarpet'
 
 #gem 'bson_ext'
 
+#gem 'kaltura'
+
+#gem 'kaltura_fu', :path => '/Users/jessesmith/Documents/BetterSense/www/kaltura_fu'
+
+gem 'kaltura_fu', :git => 'git@github.com:jesses16/kaltura_fu.git'
+
+#gem 'kaltura_fu'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

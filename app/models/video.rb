@@ -6,4 +6,7 @@ class Video < ActiveRecord::Base
   has_attached_file :vid_file
 
   validates :account, :account_exists => true
+  
+  include VideosHelper
+  
 end

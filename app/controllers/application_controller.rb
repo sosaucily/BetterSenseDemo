@@ -8,13 +8,6 @@ require 'iqengines'
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  VIDEODIR = BetterSenseDemo::APP_CONFIG["videos_dir"]
-  IMAGESUBDIR = "images"
-
-  IQE_KEY = BetterSenseDemo::IQENGINES_CONFIG["IQE_KEY"]
-  IQE_SECRET = BetterSenseDemo::IQENGINES_CONFIG["IQE_SECRET"]
-  HOOKBASEURL = BetterSenseDemo::APP_CONFIG["base_url"]
-
   # Function to validate that the account_id matches the account id of the session holder
   # This function will either return nil, or a redirect call.
   # Because any page that calls this should have authentication requirements, we can assume the user is authenticated in some way.
@@ -22,7 +15,7 @@ class ApplicationController < ActionController::Base
   # +account_id+:: Account ID in question
   # Return: Lambda function of either nil, or a redirect to the user's /account default page.
   def validate_account_id(account_id)
-    if (!session.include? "account_id" or (account_id.to_i != session[:account_id].to_i))
+    if ((!admin_signed_in?) and (!session.include? "account_id" or (account_id.to_i != session[:account_id].to_i))) then
       return lambda {
         flash[:alert] = "Sorry, you don't have access to that page."
         redirect_to '/account'
@@ -63,118 +56,7 @@ class ApplicationController < ActionController::Base
   def stored_location_for(resource)
     return nil
   end
-  
-  # Accept a command to trigger various functions on a video
-  # Params:
-  # +video+:: Video object
-  # Return: Message stating completion
-  def process_video (video)
-    logger.info 'processing video at path ' + video[:name]
-    video_actions = params[:videoAction]
-    video_actions.sort!
-    for v_action in video_actions do
-      case v_action
-      when "200importImages"
-        logger.info 'doing import of images on this video' 
-        do_image_import (video)
-      when "100clearImages"
-        logger.info 'doing a clear of images on this video'
-        do_image_clear (video)
-      when "300iqeprocess"
-        logger.info 'processing images with IQE'
-        do_iqe_process (video)
-      when "400iqeprocessmissing"
-        logger.info "processing missing images with IQE"
-        do_iqe_process_missing (video)
-      end
-    end
-    'Completed processing video ' + video[:id].to_s
-  end
 
-  # Grab the images for this video (based on folder structure) and create iqeinfo objects on the video for each image.
-  def do_iqe_process (video)
-    video.iqeinfos.each do |iqe|
-      if (Rails.env.development?) then
-        api = IQEngines.Api(IQE_KEY,IQE_SECRET)
-        qid, response = api.send_query("./public" + iqe.imagepath) #, multiple_results=true, json=true
-        logger.debug("Waiting for response from IQE")
-        response = api.wait_results()
-        logger.info(response)
-        logger.debug("done")
-        add_data_to_image(iqe, JSON.parse(response)["data"]["results"])
-      else
-        hookurl = HOOKBASEURL + '/videos/' + video[:id].to_s + '/iqeinfos/' + iqe.id.to_s + '/processme'
-        api = IQEngines.Api(IQE_KEY,IQE_SECRET)
-        qid, response = api.send_query("./public" + iqe.imagepath, extra=nil, webhook=hookurl, device_id='test123', multiple_results=true, modules=nil, json=true)
-        logger.info "api.send_query(./public#{iqe.imagepath}, extra=nil, webhook=#{hookurl}, device_id='test123', multiple_results=true, modules=nil, json=true)"
-        sleep 3
-      end
-    end
-  end
-
-  # Send images for this video to iqengines that do not yet have data from iqengines
-  def do_iqe_process_missing (video)
-    video.iqeinfos.each do |iqe|
-      if iqe.matcheditem == nil
-        if (Rails.env.development?) then
-          api = IQEngines.Api(IQE_KEY,IQE_SECRET)
-          qid, response = api.send_query("./public" + iqe.imagepath, extra=nil, webhook=nil, device_id='test123', multiple_results=true, modules=nil, json=true)
-          response = api.wait_results()
-          logger.info(response)
-          add_data_to_image(iqe, JSON.parse(response)["data"]["results"])
-        else
-          hookurl = HOOKBASEURL + '/videos/' + video[:id].to_s + '/iqeinfos/' + iqe.id.to_s + '/processme'
-          api = IQEngines.Api(IQE_KEY,IQE_SECRET)
-          qid, response = api.send_query("./public" + iqe.imagepath, extra=nil, webhook=hookurl, device_id='test123', multiple_results=true, modules=nil, json=true)
-          logger.info "api.send_query(./public#{iqe.imagepath}, extra=nil, webhook=#{hookurl}, device_id='test123', multiple_results=true, modules=nil, json=true)"
-        end
-      end
-    end
-  end
-
-  # Send all images for this video to iqengines
-  def do_image_import (video)
-    video_hash = video[:hashstring]
-    image_dir = Rails.root.to_s + BetterSenseDemo::APP_CONFIG["processed_videos_dir"] + "/" + video_hash + "/" + IMAGESUBDIR + "/*"
-    @files = Dir.glob(image_dir)
-    @files.sort!
-    logger.debug 'checking directory - ' + image_dir
-    for file in @files
-      logger.debug 'file name is: ' + file
-      logger.debug 'creating an iqeinfo object for this video'
-      start_char = file.index("processedVideos")
-      iqeinfo = video.iqeinfos.build(:results => "test iqeinfo", :imagepath =>  "/" + file[start_char,file.size])
-      logger.debug 'done'
-      iqeinfo.save
-    end
-  end
-
-  # Delete all iqeinfo image objects associated to this video
-  def do_image_clear (video)
-    video.iqeinfos.each do |i|
-      i.delete
-    end
-  end
-
-  # OBSOLETE
-  def process_video_path_custom (video)
-    doing_process = 1
-    "videos/" + video[:id]
-  end
-  
-  #Append data back from IQEngines to the iqeinfo object.
-  #Not currently being used.
-  def add_data_to_image (iqe, qid_data) # This should be a DelayedJob...
-    logger.debug qid_data
-    labels = ""
-    qid_data.each do |qid|
-      labels += qid["qid_data"]["labels"] + " | "
-    end
-    color = qid_data[0][:color]
-    iqe.matcheditem = labels
-    iqe.colors = color
-    iqe.save
-  end
   
 private
 

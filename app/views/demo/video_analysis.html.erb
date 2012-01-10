@@ -1,0 +1,31 @@
+<%= javascript_include_tag 'jquery.dataTables.min'%>
+<%= javascript_include_tag 'better_category_animations'%>
+<h1>Video Ads Demo</h1>
+<h4>Video Analysis</h4>
+<div class="span-20 last redhr"></div>
+<div class="span-20 last">
+<span style="font-size:16px;font-weight:bold"><u>Content Sensitive Video Ads</u></span> - Back to <%= link_to 'Demos', '/demo/' %>
+</div>
+<div class="span-20 last">
+	<% 
+	  vid_x = 480
+	  vid_y = 360
+	  kaltura_options = {}
+	  video_size = [vid_x,vid_y]
+	  kaltura_options[:size] = video_size
+	%>
+	<%= raw kaltura_player_embed('0_3byvgkh0', kaltura_options) %>
+</div>
+<div class="span-10">
+	<div id="keyword_table_div"></div>
+</div>
+<div class="span-5" id="categoryTable">
+		<div class="span-1 categoryBar categoryBarFirst" id="cBar1">
+		</div>
+		<div class="span-1 categoryBar" id="cBar2">
+		</div>
+		<div class="span-1 categoryBar" id="cBar3">
+		</div>
+</div>
+<div class="span-5 last"></div>
+<div class="span-20 last"><br /></div>
