@@ -1,10 +1,12 @@
-/* DO NOT MODIFY. This file was compiled Fri, 18 Nov 2011 01:17:24 GMT from
+/* DO NOT MODIFY. This file was compiled Fri, 13 Jan 2012 22:00:17 GMT from
  * /Users/jessesmith/Documents/BetterSense/www/BetterSenseDemoDev/BetterSenseDemo/app/coffeescripts/betteradModule.coffee
  */
 
 (function() {
   var root;
+
   root = typeof exports !== "undefined" && exports !== null ? exports : this;
+
   root.registerNewButtons = function(id) {
     var companionButton, overlayButton;
     overlayButton = $('#newOverlayButton' + id);
@@ -16,17 +18,15 @@
       return $('#newCompanionFieldsContainer' + id).toggle();
     });
   };
+
   root.uploadifyAdItems = function(iqeid, adid, adsetid, buttonText) {
-    if (buttonText == null) {
-      buttonText = 'Select Image';
-    }
+    if (buttonText == null) buttonText = 'Select Image';
     $('#ad_ad_pic' + iqeid).click(function(event) {
       return event.preventDefault();
     });
     $('#ad_ad_pic' + iqeid).uploadify({
       'uploader': '/flash/uploadify.swf',
       'script': '/ad_sets/' + adsetid + '/updateAd.js',
-      'multi': true,
       'auto': true,
       'cancelImg': '/images/cancel.png',
       'buttonText': '' + buttonText,
@@ -45,6 +45,7 @@
       return $('#ad_ad_pic' + iqeid).uploadifyUpload();
     });
   };
+
   root.updateImage = function(iqeid, adid, adsetid) {
     var imgsrc;
     imgsrc = $.ajax({
@@ -56,6 +57,7 @@
       }
     });
   };
+
   root.fixImage = function(iqeid, adid, imgsrc) {
     var newsrc;
     newsrc = imgsrc.responseText.trim();
@@ -63,4 +65,5 @@
     $('#existingAdMod' + iqeid + ' img').attr("src", newsrc);
     console.log("done");
   };
+
 }).call(this);

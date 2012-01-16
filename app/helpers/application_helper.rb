@@ -13,7 +13,9 @@ module ApplicationHelper
     #For some very basic safety, I will pull the words "script" and "table" out of this content
     clean_text = text.gsub("script","").gsub("table","")
 
-    Redcarpet.new(clean_text, *options).to_html.html_safe
+  #  Redcarpet::Markdown.new(clean_text, *options).to_html.html_safe
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML,:autolink => true, :no_inteaemphasis => true)
+    markdown.render(clean_text).html_safe
   end
   
   # Convenience method for setting a page title

@@ -1,7 +1,7 @@
 class VideosController < ApplicationController
 
-  #before_filter :authenticate_user!, :except => ['show']
-  before_filter :authenticate_admin!, :only => ['new','create','edit','update']
+  #before_filter :authenticate_user!, :only => ['create']
+  before_filter :authenticate_admin!, :only => ['new','edit','update']
   #before_filter :check_session, :except => ['show','index','new']
 
   # GET /videos
@@ -53,10 +53,25 @@ class VideosController < ApplicationController
   # POST /videos
   # POST /videos.xml
   def create
-    @video = Video.new(params[:video])
     #If Admin is creating the video (which is how this is done now) the account for the video should be the one selected on the page, not the one from the current session.
-    @video.account_id = session[:account_id]
+    
+    logger.info ("creating video and using session info of " + session.to_s)
+    if (params[:video_source] == "flash_module") then
+      update_params = { :video => { "vid_file" => params["Filedata"], "name" => params["name"], "description" => params["description"]} }
+      @video = Video.new(update_params[:video])
+      @video.account_id = params[:source_account_id].to_i
+      logger.info ("creating video with params: " + @video.inspect)
+      if @video.save
+        render :nothing => true, :status => :ok
+        return true
+      end
+    else
+      @video = Video.new(params[:video])
+      @video.account_id = session[:account_id]
+    end
 
+    logger.info('Current account_id: ' + @video.account_id.to_s)
+    
     respond_to do |format|
       if @video.save
         format.html { redirect_to(@video, :notice => 'Video was successfully created.') }

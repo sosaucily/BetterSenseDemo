@@ -18,7 +18,6 @@ root.uploadifyAdItems = (iqeid, adid, adsetid, buttonText = 'Select Image') ->
   $('#ad_ad_pic' + iqeid).uploadify(
     'uploader'    : '/flash/uploadify.swf',
     'script'      : '/ad_sets/' + adsetid + '/updateAd.js',
-    'multi'       : true,
     'auto'        : true,
     'cancelImg'   : '/images/cancel.png',
     'buttonText'  : '' + buttonText,

@@ -1,19 +1,29 @@
 <% page_title "Account Management"%>
+<%= javascript_include_tag %w(jquery-ui betterVideoUpload swfobject jquery.uploadify.v2.1.4) %>
 <h1>Account Home</h1>
 <h4><%= @account.company_name %></h4>
 <%= link_to 'Edit Account Details', '/account/edit' %>
-<div class="span-16 last redhr"></div>
-<div class="span-16 last">
+<div class="span-20 last redhr"></div>
+<div class="span-20 last">
 	<b><u>Primary Account Admin:</u></b><br />
-	<div class="span-16 last grayBox">
+	<div class="span-20 last grayBox">
 		<%= @account.fname %> <%= @account.lname %>
 	</div>
-    <div class="span-16 last redhr"></div>
+	
+	<div class="span-20 last redhr"></div>
+	
+	<b><u>Upload New Video:</u></b><br />
+	<%= render :partial => "shared/upload_video" %>
+	
+    <div class="span-20 last redhr"></div>
+	
 	<b><u>Recent Campaigns</u> - <%= link_to 'Manage Campaigns', '/campaigns' %></b><br /><br />
 	<%= render :partial => "shared/show_campaign", :collection => @campaigns %>
 	
-	<div class="span-16 last redhr"></div>
+	<div class="span-20 last redhr"></div>
+	
 	<b><u>Recent Ads</u> - <%= link_to 'Manage Ads', '/ads' %></b><br /><br />
 	<%= render :partial => "shared/show_ad", :collection => @ads %>
+	
 </div>	
 <%= if admin_signed_in? then link_to(' | Back', accounts_path) end %>

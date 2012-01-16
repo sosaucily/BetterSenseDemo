@@ -6,6 +6,10 @@ module VideosHelper
     #
     KalturaFu.check_for_client_session
     media = KalturaFu::Session.client.media_service.list(filter)
+    if media.objects.nil?
+      logger.debug("Could not find a single video instance for Video named: " + video_name.to_s)
+      return nil
+    end
     case media.objects.count
     when 1
       logger.debug("Kaltura search returned video with ID: " + media.objects[0].id)
