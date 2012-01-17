@@ -63,6 +63,7 @@ class VideosController < ApplicationController
       logger.info ("creating video with params: " + @video.inspect)
       if @video.save
         render :nothing => true, :status => :ok
+        @video.send_to_backend(@video)
         return true
       end
     else
