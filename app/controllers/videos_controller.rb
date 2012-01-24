@@ -117,5 +117,23 @@ class VideosController < ApplicationController
       format.xml  { head :ok }
     end
   end
-
+  
+  # GET /videos/1/order
+  def order
+    @video = Video.find(params[:video_id])
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  # GET /videos/1/update_status
+  def update_status
+    @video = Video.find(params[:video_id])
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+  
 end

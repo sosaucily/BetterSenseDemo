@@ -1,0 +1,13 @@
+<% 
+	order_status = @video.order_status
+	case order_status
+	when nil
+		@video.order_status = "ordered"
+		@video.save
+		@video.order_video(@video, 'basic')
+	else
+		alert ('An Order has already been placed for this video.')
+	end
+%>
+$('#status_<%=@video.id.to_s%>}').html("<%=@video.status%>")
+$('#order_status_<%=@video.id.to_s%>}').html("<%=@video.order_status || 'Not Ordered'%>")

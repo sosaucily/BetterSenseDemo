@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111118221437) do
+ActiveRecord::Schema.define(:version => 20120118185527) do
 
   create_table "accounts", :force => true do |t|
     t.string   "fname"
@@ -86,6 +86,22 @@ ActiveRecord::Schema.define(:version => 20111118221437) do
     t.decimal  "assigned_cpm"
     t.integer  "account_id"
   end
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "iqeinfos", :force => true do |t|
     t.text     "results"
@@ -188,6 +204,7 @@ ActiveRecord::Schema.define(:version => 20111118221437) do
     t.string   "vid_file_content_type"
     t.integer  "vid_file_file_size"
     t.datetime "vid_file_updated_at"
+    t.string   "status",                :default => "new"
   end
 
   create_table "zone_types", :force => true do |t|

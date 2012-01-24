@@ -1,0 +1,34 @@
+<table id="ver-minimalist">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Video Status</th>
+      <th scope="col">Order Status</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Video Status</th>
+      <th scope="col">Order Status</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </tfoot>
+  <tbody>
+<% @videos.each do |my_video| %>
+	<tr class="<%= cycle('vodd', 'veven') %>">
+		<td><%= my_video.name %></td>
+		<td><%= my_video.description %></td>
+		<td><div id="status_<%= my_video.id.to_s %>"><%= my_video.status %></div></td>
+		<td><div id="order_status_<%= my_video.id.to_s %>"><%= my_video.order_status || "Not Ordered" %></div></td>
+		<td><%= link_to 'Order', "http://localhost:3000/videos/" + my_video.id.to_s + "/order", :remote=>true %></td>
+		<td><%= link_to 'Update Status', "http://localhost:3000/videos/" + my_video.id.to_s + "/update_status", :remote=>true %></td>
+	</tr>
+<% end %>
+  </tbody>
+</table>

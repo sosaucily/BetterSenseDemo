@@ -58,6 +58,8 @@ gem 'kaltura_fu', :git => 'git@github.com:jesses16/kaltura_fu.git'
 
 #gem 'kaltura_fu'
 
+gem 'delayed_job_active_record'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

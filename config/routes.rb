@@ -63,10 +63,13 @@ BetterSenseDemo::Application.routes.draw do
 
   match "videos/:video_id/iqeinfos/:id/:action", :controller => 'iqeinfos', :action => /[a-zA-Z]+/i
 
+  match "videos/:video_id/order", :controller => 'videos', :action => 'order'
+  match "videos/:video_id/update_status", :controller => 'videos', :action => 'update_status'
+    
   resources :videos do
     resources :iqeinfos
   end
-
+  
   get "home/index"
   match "about", :controller => 'home', :action => 'about'
   get "team", :controller => 'home', :action => 'team'
