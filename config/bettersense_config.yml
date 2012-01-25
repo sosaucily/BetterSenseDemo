@@ -10,7 +10,8 @@ development:
     video_demo_1: "http://localhost:3000/videos/1"
     backend_key: "HxmfdCjuqozranEkavx6"
     backend_base_url: "http://localhost:8080"
-    backend_video_url: "/video/"# {"display_name":"Auf der Jahnhohe","account_id":1,"friendly_id":10001,"video_description":"","video_meta_tags":[""]}
+    backend_video_url: "/video/"
+    backend_report_url: "/reports/"
     poll_for_video_status_change_seconds: "30"
     send_video_to_backend_seconds: "15"
 
