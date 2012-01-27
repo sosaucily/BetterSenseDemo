@@ -1,5 +1,13 @@
 BetterSenseDemo::Application.routes.draw do
 
+  get "cart/new"
+
+  get "cart/create"
+
+  get "cart/show"
+
+  get "cart/destroy"
+
   devise_for :users
   devise_for :admins
   
@@ -40,6 +48,12 @@ BetterSenseDemo::Application.routes.draw do
   resources :networks
 
   resources :accounts
+  
+  resources :carts
+  
+  match "carts/:cart_id/add_item", :controller => 'carts', :action => 'add_item'
+  match "carts/:cart_id/remove_item", :controller => 'carts', :action => 'remove_item'
+  match "carts/:cart_id/clear_items", :controller => 'carts', :action => 'clear_items'
   
   match "account" => 'accounts#show'
   match "account/edit" => 'accounts#edit'

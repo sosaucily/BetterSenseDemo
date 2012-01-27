@@ -7,6 +7,7 @@ class AccountsController < ApplicationController
 
   before_filter :authenticate_user!, :except => ['new','create','index']
   before_filter :check_session, :except => ['new','create','index']
+  before_filter :include_cart, :except => ['new','create','index']
   # GET /accounts
   # GET /accounts.xml
   def index

@@ -3,8 +3,6 @@
 # Author::    Jesse Smith  (mailto:js@bettersense.com)
 # Copyright:: Copyright (c) 2011 BetterSense
 
-require 'iqengines'
-
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
@@ -60,6 +58,14 @@ class ApplicationController < ActionController::Base
   
 private
 
+  def current_cart
+    Cart.find(session[:cart_id])
+  rescue ActiveRecord::RecordNotFound
+    cart = Cart.create(:account_id => session[:account_id])
+    session[:cart_id] = cart.id
+    cart
+  end
+
   #Validate the current session.
   #If Devise says the user is signed in, but they don't have a valid account_id in the session object, add it.
   #I believe this can happen if the rails session timing is different from that of Devise.
@@ -79,6 +85,12 @@ private
   def setup_session_from_User(resource)
     session[:account_id] = resource.account_id
     logger.debug "Setting account id to " + resource.account_id.to_s
+    cart = Cart.where(:account_id => resource.account_id).first_or_create(:account_id => resource.account_id)
+    session[:cart_id] = cart.id
   end
 
+  def include_cart
+    @cart = current_cart()
+  end
+  
 end

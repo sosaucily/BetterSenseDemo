@@ -1,12 +1,14 @@
 class Video < ActiveRecord::Base
   has_many :iqeinfos
   has_many :ad_sets
+  has_many :line_items, :dependent => :destroy
   belongs_to :account
 
   has_attached_file :vid_file
 
   validates :account, :account_exists => true
 
+#Do i need this??
   include VideosHelper
   
   #I'm going to need some kind of status for the videos, so in the polling I know which ones to operate on.

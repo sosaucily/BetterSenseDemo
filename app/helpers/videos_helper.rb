@@ -1,4 +1,5 @@
 module VideosHelper
+  
   #require 'kaltura'
   def getKalturaIDByName (video_name)
     filter = Kaltura::Filter::MediaEntryFilter.new
@@ -27,7 +28,6 @@ module VideosHelper
     thumb_top_marg = ( (thumb_y.to_f/2.0) - play_button_wh.to_f/2.0).to_i
     
     '<div style="width:' + thumb_x.to_s + 'px; height:' + thumb_y.to_i.to_s + 'px; position:relative;"><div style="width:' + thumb_x.to_s + 'px; height:' + thumb_y.to_i.to_s + 'px; position:absolute; z-index:1;">' + kaltura_thumbnail(kal_entry_id, thumb_options) + '</div><div style="width:' + play_button_wh.to_s + 'px; height:' + play_button_wh.to_i.to_s + 'px; position:absolute; z-index:2; margin-left:' + thumb_left_marg.to_s + 'px; margin-top:' + thumb_top_marg.to_s + 'px;"><img width="' + play_button_wh.to_s + '" height="' + play_button_wh.to_s + '" src="http://localhost:3000/images/play_button_50_50.png" /></div></div>'
-    
   end
   
 end

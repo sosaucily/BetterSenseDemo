@@ -1,0 +1,11 @@
+<b><u>Cart Items:</u></b><br />
+<div class="span-20 last grayBox">
+  <div id="cart_box" class="span-20 last">
+  </div>
+</div>
+<%= form_tag("carts/#{@cart.id}", {:remote => true, :method => "get"}) do %>
+	<%= submit_tag "init_load_cart", :hidden=>true, :id=>"init_load_cart" %>
+<% end %>
+<script type="text/javascript">
+	$('#init_load_cart').click()
+</script>

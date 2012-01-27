@@ -4,9 +4,8 @@
       <th scope="col">Name</th>
       <th scope="col">Description</th>
       <th scope="col">Video Status</th>
-      <th scope="col">Order Status</th>
-      <th scope="col"></th>
-      <th scope="col"></th>
+      <th scope="col">Add to Cart</th>
+      <th scope="col">Update Status</th>
     </tr>
   </thead>
   <tfoot>
@@ -14,9 +13,8 @@
       <th scope="col">Name</th>
       <th scope="col">Description</th>
       <th scope="col">Video Status</th>
-      <th scope="col">Order Status</th>
-      <th scope="col"></th>
-      <th scope="col"></th>
+      <th scope="col">Add to Cart</th>
+      <th scope="col">Update Status</th>
     </tr>
   </tfoot>
   <tbody>
@@ -25,9 +23,18 @@
 		<td><%= my_video.name %></td>
 		<td><%= my_video.description %></td>
 		<td><div id="status_<%= my_video.id.to_s %>"><%= my_video.status %></div></td>
-		<td><div id="order_status_<%= my_video.id.to_s %>"><%# my_video.order_status || "Not Ordered" %></div></td>
-		<td><%# link_to 'Order', "http://localhost:3000/videos/" + my_video.id.to_s + "/order", :remote=>true %></td>
-		<td><%= link_to 'Update Status', "http://localhost:3000/videos/" + my_video.id.to_s + "/update_status", :remote=>true %></td>
+		<td>
+			<%= form_tag("carts/#{@cart.id}/add_item", {:remote => true}) do %>
+				<%= hidden_field_tag 'video_id',my_video.id %>
+				<%= select_tag 'quality', "<option>basic</option><option>premium</option>".html_safe%>
+				<%= submit_tag "Add Item to Cart"%>
+			<% end %>
+		</td>
+		<td>
+			<%= form_tag("videos/#{my_video.id}/update_status", {:remote => true}) do %>
+				<%= submit_tag "Update Status"%>
+			<% end %>
+		</td>
 	</tr>
 <% end %>
   </tbody>
