@@ -31,7 +31,7 @@
 </div>
 <br />&nbsp;<br />
 <%#<div class="span-20 last">
-<%#	<%= link_to 'demo/video_analysis' do %>
+<%#	<%= link_to '/demo/video_analysis' do %>
 <%#	  <span style="font-size:16px;font-weight:bold"><u>Video Analysis</u></span>
 <%#	<% end %>
 <%#	<br />
@@ -58,7 +58,7 @@
 <%#</div>%>
 
 <div class="span-20 last">
-	<%= link_to 'demo/detected_items' do %>
+	<%= link_to '/demo/detected_items' do %>
 	  <span style="font-size:16px;font-weight:bold"><u>Video Analysis</u></span>
 	<% end %>
 	<br />
@@ -78,7 +78,7 @@
 		thumbnail_options[:size] = [thumb_x,thumb_y.to_i]
 		thumbnail_options[:second] = '45'
 	%>
-    <%= link_to '/demo/video_analysis' do %>
+    <%= link_to '/demo/detected_items' do %>
       <%= raw getThumbnailWithPlayButton("0_3byvgkh0", thumbnail_options, play_button_wh) %>
     <% end %>
   </div>
