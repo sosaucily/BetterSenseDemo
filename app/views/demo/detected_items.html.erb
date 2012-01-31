@@ -1,5 +1,5 @@
 <%= javascript_include_tag "flowplayer-3.2.6.min" %>
-<% @video = Video.find(1) %>
+<% @video = Video.where(:name => 'Casino Royale Product Placement') %>
 <p>
   <h4><%= @video.description %></h4>
 </p>
