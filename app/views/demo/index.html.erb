@@ -57,5 +57,32 @@
 <%#  </div>
 <%#</div>%>
 
+<div class="span-20 last">
+	<%= link_to 'demo/video_analysis' do %>
+	  <span style="font-size:16px;font-weight:bold"><u>Video Analysis</u></span>
+	<% end %>
+	<br />
+  <div class="span-10">
+    Demonstration of the types of items the <b>better</b>sense system can extract from a video.
+  </div>
+  <div class="span-9 prepend-1 last">
+	<%
+		vid_x = 480
+		vid_y = 360
+		play_button_wh = 40
+		thumb_x = 260
+		wh_ratio = vid_x.to_f / vid_y.to_f
+		thumb_y = (thumb_x/wh_ratio).to_f
+
+		thumbnail_options = {}
+		thumbnail_options[:size] = [thumb_x,thumb_y.to_i]
+		thumbnail_options[:second] = '45'
+	%>
+    <%= link_to '/demo/video_analysis' do %>
+      <%= raw getThumbnailWithPlayButton("0_3byvgkh0", thumbnail_options, play_button_wh) %>
+    <% end %>
+  </div>
+</div>%>
+
 </div>
 <br />

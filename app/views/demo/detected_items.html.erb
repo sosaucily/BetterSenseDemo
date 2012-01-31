@@ -1,0 +1,136 @@
+<%= javascript_include_tag "flowplayer-3.2.6.min" %>
+<% @video = Video.find(1) %>
+<p>
+  <h4><%= @video.description %></h4>
+</p>
+
+<p>
+  <a 
+    href="<%= @video.filepath %>" 
+    style="display:block;width:<%= @video.res_x.to_s %>px;height:<%= @video.res_y.to_s %>px"
+    id="player">
+  </a>
+  <script language="JavaScript">
+
+    var imageData = new Array();
+    var keywordCat = new Array();
+    <% @video.iqeinfos.each do |iqe|
+     if (iqe.imagepath != nil)
+       begin
+         patharray = iqe.imagepath.split("/")
+         seq = patharray[patharray.length-1][6..-4]
+       rescue => msg
+         logger.info("caught exception in video.show when iterating through iqeinfo images: " + msg)
+       end
+     end
+     if (seq != nil && iqe.matcheditem != nil)
+     %>
+       imageData[<%= (seq.to_i * 2) - 5  %>] = "<%= iqe.matcheditem[0..-4] %>";
+       //keywordCat[<%= (seq.to_i * 2) - 5  %>] = "<%# getAdCategories(iqe.matcheditem[0..-4]) %>";
+     <%
+     end
+   end %>
+
+    flowplayer("player", "/flash/flowplayer-3.2.7.swf", {
+      clip: {
+      // stop at the first frame and start buffering
+      autoPlay: false,
+      autoBuffering: false,
+      onStart: function() {
+        var self = this;
+        //var timer = setInterval(function() {
+        //  document.getElementById('videoTime').html(self.getTime());
+          
+          // when playback is stopped clear timer
+          //if (self.getState() == 5) clearInterval(timer);
+        //}, 1000);
+          
+        $f().onCuepoint(
+          getCuepoints($f().getClip(0)),
+          function(clip, cuepoint) {
+            <!-- document.getElementById('videoTime').html(cuepoint / 1000); -->
+            if ( (cuepoint/1000) in imageData)
+            {
+              $('#detectedData').fadeOut('fast', function() { 
+                $('#detectedData').html(imageData[cuepoint / 1000]);
+                $('#categories').html(keywordCat[cuepoint / 1000]);
+                $('#detectedData').fadeIn('slow'); 
+              });  
+            }
+          });
+      } 
+      }
+    });
+
+    function getCuepoints(clip) {
+      i = 0;
+      var cuepoints = new Array();
+      for (i=0; i < clip.duration; i++)
+      {
+        cuepoints [i] = i*1000;
+      }
+      return cuepoints;
+    }
+    
+  </script>
+</p>
+<!--  <object type="application/x-shockwave-flash" data="
+  <object> <embed src="<%# @video.filepath %>" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" /> </object>
+-->
+</p>  
+<div id="itemsHolder" style="font-size: large">
+<table id=itemsTable" style="width: 400px; border-width: initial; border: 1px; solid #868686;" >
+<tr style="height: 40px;"><td style="padding-left:7px; color:#000000; font-size:14pt; font-weight:bold;background: url('/images/GradientForBettersenseItemsTable.jpg');" >
+Items Detected In Video <span id="infoTip1" title="bettersense uses a combination of state-of-the-art CV (Computer Vision) and crowdsourcing systems to locate important objects in videos." style="font-size:10pt; font-weight:normal; color:#D20001;"><b>how?</b></span>
+</td></tr>
+<tr style="height: 40px;"><td style="padding-left:5px; color:#000000; font-size:14pt; font-weight:bold; border-color:#868686; border:1px solid #868686;" >
+<span style="font-weight:normal;">Matched Items(s):&nbsp;</span><span id="detectedData">&nbsp;</span>
+</td></tr>
+<!-- <tr><td>Advertising Categories: <br/><span id="categories"></span></td></tr> -->
+</table>
+<script type="text/javascript">
+//Tool Tip for image recognition
+    $('#infoTip1').qtip();
+</script>
+<!-- <span id="videoTime"></span> -->
+<% @video.iqeinfos.each do |iqe|
+     if (iqe.imagepath != nil)
+       begin
+         patharray = iqe.imagepath.split("/")
+         seq = patharray[patharray.length-1][6..-4]
+       rescue => msg
+         logger.info("caught exception in video.show when iterating through iqeinfo images: " + msg)
+       end
+     end
+     if (seq != nil && iqe.matcheditem != nil)
+%>
+<!-- Change to "list-item" for dev -->
+<div style="display: none"><%= iqe.matcheditem[0..-4] %></div>
+   <% end %>
+  <% end %>
+<br />
+<!-- <h2>Extracted Images from Video</h2><br /> -->
+<!--
+ # render :partial => "iqeinfos/iqeinfo",
+    #       :collection => @video.iqeinfos -->
+ 
+<!--
+<script  src="http://tag.contextweb.com/TagPublish/getjs.aspx?action=VIEWAD&cwrun=200&cwadformat=728X90&cwpid=538773&cwwidth=728&cwheight=90&cwpnet=1&cwtagid=106617"></script>
+-->
+
+</div>
+<% if (admin_signed_in?) %>
+  <h2>Video Commands</h2><br />
+  <%= form_for([@video, @video.iqeinfos.build]) do |f| %>
+    <div class="actions">
+      <input name="videoAction[]" type="checkbox" value="200importImages" />Import Images on this video<br />
+      <input name="videoAction[]" type="checkbox" value="100clearImages" />Clear Images on this video<br />
+      <input name="videoAction[]" type="checkbox" value="300iqeprocess" />Analyze Images<br />
+      <input name="videoAction[]" type="checkbox" value="400iqeprocessmissing" />Analyze Missing Images<br />
+      <%= f.submit  "Send selected commands" %>
+    </div> 
+  <% end %>
+  <%= link_to 'Edit', edit_video_path(@video) %> |
+<% end %>
+
+<%= link_to 'Back', videos_path %>
