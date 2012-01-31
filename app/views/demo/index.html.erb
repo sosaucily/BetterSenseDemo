@@ -1,16 +1,16 @@
 <h1><b>better</b>sense Demos</h1>
 <h4>View the following demos to see the <b>better</b>sense system</h4>
-<div class="span-16 last redhr"></div>
-<div class="span-16 last">
-<div class="span-16 last">
+<div class="span-20 last redhr"></div>
+<div class="span-20 last">
+<div class="span-20 last">
 	<%= link_to '/demo/kaltura_video' do %>
 	  <span style="font-size:16px;font-weight:bold"><u>Delivering Context Targeted Ads</u></span>
 	<% end %>
 	<br />
-  <div class="span-8">
+  <div class="span-10">
     A demo video showing the <b>better</b>sense content sensitive ad delivery. Served by partner Nacamar, and leveraging the Kaltura HTML5 player.
   </div>
-  <div class="span-7 prepend-1 last">
+  <div class="span-9 prepend-1 last">
 	<%
 		vid_x = 640
 		vid_y = 360
@@ -30,15 +30,15 @@
   </div>
 </div>
 <br />&nbsp;<br />
-<div class="span-16 last">
-	<%= link_to 'demo/video_analysis' do %>
-	  <span style="font-size:16px;font-weight:bold"><u>Video Analysis</u></span>
-	<% end %>
-	<br />
-  <div class="span-8">
-    Demonstration of the types of items the <b>better</b>sense system can extract from a video.
-  </div>
-  <div class="span-7 prepend-1 last">
+<%#<div class="span-20 last">
+<%#	<%= link_to 'demo/video_analysis' do %>
+<%#	  <span style="font-size:16px;font-weight:bold"><u>Video Analysis</u></span>
+<%#	<% end %>
+<%#	<br />
+<%#  <div class="span-10">
+<%#    Demonstration of the types of items the <b>better</b>sense system can extract from a video.
+<%#  </div>
+<%#  <div class="span-9 prepend-1 last">
 	<%
 		vid_x = 480
 		vid_y = 360
@@ -51,11 +51,11 @@
 		thumbnail_options[:size] = [thumb_x,thumb_y.to_i]
 		thumbnail_options[:second] = '45'
 	%>
-    <%= link_to '/demo/video_analysis' do %>
-      <%= raw getThumbnailWithPlayButton("0_3byvgkh0", thumbnail_options, play_button_wh) %>
-    <% end %>
-  </div>
-</div>
+<%#    <%= link_to '/demo/video_analysis' do %>
+<%#      <%= raw getThumbnailWithPlayButton("0_3byvgkh0", thumbnail_options, play_button_wh) %>
+<%#    <% end %>
+<%#  </div>
+<%#</div>%>
 
 </div>
 <br />
