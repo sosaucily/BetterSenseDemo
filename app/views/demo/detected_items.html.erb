@@ -1,7 +1,7 @@
 <%= javascript_include_tag "flowplayer-3.2.6.min" %>
-<% @video = Video.where(:name => 'Casino Royale Product Placement') %>
+<% @video = Video.where(:name => 'Casino Royale Product Placement').first || Video.all.first %>
 <p>
-  <h4><%= @video.description %></h4>
+  <h4><%= @video.description %></h4> - Back to <%= link_to 'Demos', '/demo/' %>
 </p>
 
 <p>
