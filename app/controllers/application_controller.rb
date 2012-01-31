@@ -65,6 +65,20 @@ private
     session[:cart_id] = cart.id
     cart
   end
+  
+  def reset_cart
+    cart = Cart.find(session[:cart_id])
+    cart.line_items.each do |item|
+      item.cart = nil
+      item.save
+    end
+    cart.line_items = []
+    cart.save
+  rescue ActiveRecord::RecordNotFound
+    cart = Cart.create(:account_id => session[:account_id])
+    session[:cart_id] = cart.id
+    cart
+  end
 
   #Validate the current session.
   #If Devise says the user is signed in, but they don't have a valid account_id in the session object, add it.
@@ -85,7 +99,7 @@ private
   def setup_session_from_User(resource)
     session[:account_id] = resource.account_id
     logger.debug "Setting account id to " + resource.account_id.to_s
-    cart = Cart.where(:account_id => resource.account_id).first_or_create(:account_id => resource.account_id)
+    cart = Cart.where(:account_id => resource.account_id).first || Cart.create(:account_id => resource.account_id)
     session[:cart_id] = cart.id
   end
 

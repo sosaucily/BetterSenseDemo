@@ -3,7 +3,8 @@ class VideosController < ApplicationController
   #before_filter :authenticate_user!, :only => ['create']
   before_filter :authenticate_admin!, :only => ['new','edit','update']
   #before_filter :check_session, :except => ['show','index','new']
-
+  #Mime::Type.register "image/png", :png
+  
   # GET /videos
   # GET /videos.xml
   def index
@@ -136,4 +137,31 @@ class VideosController < ApplicationController
     end
   end
   
+  #GET /videos/1/reports
+  def reports
+    @video = Video.find(params[:id])
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@video.account_id).call().nil? then return end
+
+    @reports = @video.available_reports()
+    
+    respond_to do |format|
+      format.html #show_reports
+    end
+  end
+  
+  def download_report
+    @video = Video.find(params[:id])
+    requested_format = params[:requested_format].to_s
+    report_name = params[:report_name] + "." + requested_format
+    #The next line are a security to validate that the object being shown is owned by the current session holder.
+    if !validate_account_id(@video.account_id).call().nil? then return end
+    
+    report_filename = Rails.root.to_s + BetterSenseDemo::APP_CONFIG["report_directory"] + @video.hashstring + "/" + report_name
+
+    #XSendFileAllowAbove on - apache  - http://www.therailsway.com/2009/2/22/file-downloads-done-right/
+    send_file report_filename, :type=>"application/txt", :x_sendfile=>true
+
+  end
+    
 end

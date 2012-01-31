@@ -5,6 +5,7 @@
       <th scope="col">Description</th>
       <th scope="col">Video Status</th>
       <th scope="col">Add to Cart</th>
+      <th scope="col">Completed Reports</th>
       <th scope="col">Update Status</th>
     </tr>
   </thead>
@@ -14,6 +15,7 @@
       <th scope="col">Description</th>
       <th scope="col">Video Status</th>
       <th scope="col">Add to Cart</th>
+      <th scope="col">Completed Reports</th>
       <th scope="col">Update Status</th>
     </tr>
   </tfoot>
@@ -28,6 +30,14 @@
 				<%= hidden_field_tag 'video_id',my_video.id %>
 				<%= select_tag 'quality', "<option>basic</option><option>premium</option>".html_safe%>
 				<%= submit_tag "Add Item to Cart"%>
+			<% end %>
+		</td>
+		<td>
+			<% reports = my_video.available_reports() %>
+			<% if reports.empty? || reports.nil? then %>
+				<%= "Report Not Ready"%>
+			<% else %>
+				<%= link_to("View Report","videos/#{my_video.id}/reports") %>
 			<% end %>
 		</td>
 		<td>

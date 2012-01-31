@@ -1,0 +1,20 @@
+<h1>Reports</h1>
+<h4>Reports for <b><%= @video.name %></b></h4>
+<%= link_to 'Back', '/account' %>
+<div class="span-20 last redhr"></div>
+<div class="span-20 last">
+
+	<% @reports.each do |report| %>
+		<b>Report <%= report.to_s %></b> - 
+		<%= form_tag("/videos/#{@video.id}/reports/#{report.to_s}") do %>
+			<%= hidden_field_tag 'requested_format',"txt" %>
+			<%= submit_tag "Download"%>
+		<% end %>
+		<div class="span-20 last">
+			<div class="grayBox">
+				<textarea class="reportBox"><%= get_report_content(@video.hashstring, report) %></textarea>
+			</div>
+		</div>
+	<% end %>
+	
+</div>

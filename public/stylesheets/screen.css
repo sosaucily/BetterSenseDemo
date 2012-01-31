@@ -1302,6 +1302,13 @@ body.one-col .grayBox {
   background-color: #F2F2F2;
 }
 /* line 112, ../../app/stylesheets/partials/_bettersense.scss */
+body.one-col .reportBox {
+  font-size: 12px;
+  width: 762px;
+  height: 300px;
+  background-color: #FFEEEE;
+}
+/* line 118, ../../app/stylesheets/partials/_bettersense.scss */
 body.one-col .blueBoxWithBorder {
   padding: .5em;
   margin: .5em;

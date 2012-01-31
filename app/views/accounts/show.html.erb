@@ -6,8 +6,10 @@
 <div class="span-20 last redhr"></div>
 <div class="span-20 last">
 	<b><u>Primary Account Admin:</u></b><br />
-	<div class="span-20 last grayBox">
+	<div class="span-20 last">
+		<div class="grayBox">
 		<%= @account.fname %> <%= @account.lname %>
+		</div>
 	</div>
 	
 	<div class="span-20 last redhr"></div>
@@ -23,9 +25,9 @@
 
     <div class="span-20 last redhr"></div>
 
-	<b><u>My Cart</u> - <%= link_to 'Order!', "/cart/#{@cart.id}/order" %></b><br /><br />
+	<b><u>My Cart</u> - <%= link_to 'Order!', "/orders/new" %></b><br /><br />
 	<div class="span-20 last">
-	<%= render :partial => "shared/cart_module" %>
+	<%= render :partial => "shared/cart_module", :locals => {:show_clear => true} %>
 	</div>
 
     <div class="span-20 last redhr"></div>

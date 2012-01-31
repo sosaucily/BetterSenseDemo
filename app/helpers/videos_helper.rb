@@ -30,4 +30,13 @@ module VideosHelper
     '<div style="width:' + thumb_x.to_s + 'px; height:' + thumb_y.to_i.to_s + 'px; position:relative;"><div style="width:' + thumb_x.to_s + 'px; height:' + thumb_y.to_i.to_s + 'px; position:absolute; z-index:1;">' + kaltura_thumbnail(kal_entry_id, thumb_options) + '</div><div style="width:' + play_button_wh.to_s + 'px; height:' + play_button_wh.to_i.to_s + 'px; position:absolute; z-index:2; margin-left:' + thumb_left_marg.to_s + 'px; margin-top:' + thumb_top_marg.to_s + 'px;"><img width="' + play_button_wh.to_s + '" height="' + play_button_wh.to_s + '" src="http://localhost:3000/images/play_button_50_50.png" /></div></div>'
   end
   
+  def get_report_content (hashstring, report_name)
+    video_report_dir = Rails.root.to_s + BetterSenseDemo::APP_CONFIG["report_directory"] + hashstring
+    IO.read(video_report_dir + "/" + report_name).html_safe
+  end
+  
+  def get_report_path_by_hash (hashstring)
+    Rails.root.to_s + BetterSenseDemo::APP_CONFIG["report_directory"] + hashstring
+  end
+  
 end

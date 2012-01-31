@@ -95,7 +95,7 @@ class Video < ActiveRecord::Base
   end
   handle_asynchronously :poll_for_video_status_change, :run_at => Proc.new { BetterSenseDemo::APP_CONFIG["poll_for_video_status_change_seconds"].to_i.seconds.from_now }
   
-  def add_to_cart (quality = 'basic')
+  def do_analyze (quality = 'basic')
     #Analyze video
     if (quality.nil? || quality != 'premium')
       quality = 'basic'
@@ -107,10 +107,27 @@ class Video < ActiveRecord::Base
     
     response = send_command_to_backend(analyze_url, video_params)
     if response.code != 200 then return end
-    
+    logger.info("Sending video for analysis: " + name + " with quality " + quality)
   end
-  handle_asynchronously :add_to_cart
+  handle_asynchronously :do_analyze
+  
+  def ready_to_order
+    !is_processing
+  end
+  
+  def available_reports
+    return [] unless is_complete
+    
+    video_report_dir = Rails.root.to_s + BetterSenseDemo::APP_CONFIG["report_directory"] + hashstring
+    if !File.directory?(video_report_dir) then
+      logger.error("Video Report Directory trying to be accessed, but it doesn't exist: " + hashstring)
+      return []
+    end
+    Dir.chdir(video_report_dir)
 
+    reports = Dir.glob("*.txt")
+  end
+  
   private
   
   def enable_reports
@@ -119,15 +136,16 @@ class Video < ActiveRecord::Base
     basic_url = BetterSenseDemo::APP_CONFIG["backend_base_url"] + BetterSenseDemo::APP_CONFIG["backend_report_url"] + hashstring + "/reports/" + name + "_basic.txt"
     premium_url = BetterSenseDemo::APP_CONFIG["backend_base_url"] + BetterSenseDemo::APP_CONFIG["backend_report_url"] + hashstring + "/reports/" + name + "_premium.txt"
     
+    video_report_dir = Rails.root.to_s + BetterSenseDemo::APP_CONFIG["report_directory"] + hashstring
     begin
-      Dir.mkdir(Rails.root.to_s + "/reports/" + hashstring)
+      Dir.mkdir(video_report_dir)
     rescue
-      logger.info ("Directory " + hashstring + " already exists")
+      logger.info ("Report Directory " + hashstring + " already exists")
     end
 
     response = send_command_to_backend(basic_url)
     begin
-      open(Rails.root.to_s + "/reports/" + hashstring + "/" + name + "_basic.txt", "wb") { |file|
+      open(video_report_dir + "/" + name + "_basic.txt", "wb") { |file|
         file.write(response.body.to_s)
       }
     rescue
@@ -136,7 +154,7 @@ class Video < ActiveRecord::Base
     
     response = send_command_to_backend(premium_url)
     begin
-      open(Rails.root.to_s + "/reports/" + hashstring + "/" + name + "_premium.txt", "wb") { |file|
+      open(video_report_dir + "/" + name + "_premium.txt", "wb") { |file|
         file.write(response.body.to_s)
       }
     rescue

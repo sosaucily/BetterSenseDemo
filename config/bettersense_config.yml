@@ -12,6 +12,7 @@ development:
     backend_base_url: "http://localhost:8080"
     backend_video_url: "/video/"
     backend_report_url: "/reports/"
+    report_directory: "/reports/"
     poll_for_video_status_change_seconds: "30"
     send_video_to_backend_seconds: "15"
     basic_cost_per_min: "2"

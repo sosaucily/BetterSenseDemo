@@ -29,10 +29,11 @@ class AccountsController < ApplicationController
   def show
     id = session[:account_id]
     @account = Account.find(id)
-    @campaigns = Campaign.find(:all, :limit => 3, :order => "updated_at desc", :conditions => "account_id = #{id}") #Show three most recently modified Campaigns in the quick view
-    @ads = Ad.find(:all, :limit => 3, :order => "updated_at desc", :conditions => "account_id = #{id}") #Show three most recently modified Ads in the quick view
+    #@campaigns = Campaign.find(:all, :limit => 3, :order => "updated_at desc", :conditions => "account_id = #{id}") #Show three most recently modified Campaigns in the quick view
+    #@ads = Ad.find(:all, :limit => 3, :order => "updated_at desc", :conditions => "account_id = #{id}") #Show three most recently modified Ads in the quick view
     @video = Video.new
     @videos = Video.find(:all, :order => "created_at desc", :conditions => "account_id = #{id}")
+    @orders = Order.find(:all, :limit => 3, :order => "updated_at desc", :conditions => "account_id = #{id}") #Show three most recently modified Ads in the quick view
     
     respond_to do |format|
       format.html # show.html.erb

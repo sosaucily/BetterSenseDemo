@@ -38,7 +38,7 @@ $logo-height: 77px;
       color: #A0A0A0; }
     a { color: #8A8A8A; } }
   .content {
-    // With 24 cols, this is 16.
+    // With 24 cols, this is 20.
     $content-column: ($blueprint-grid-columns - 4);
     // true means it's the last column in the row
     @include column($content-column, true); 
@@ -109,6 +109,12 @@ $logo-height: 77px;
     padding: .5em;
     margin: .5em;
     background-color: #F2F2F2;}
+  .reportBox {
+    font-size: 12px;
+    $my_width: $blueprint-container-size - (4.7 * 40);
+    width: $my_width;
+    height: 300px;
+    background-color: #FFEEEE;}
   .blueBoxWithBorder {
     padding: .5em;
     margin: .5em;

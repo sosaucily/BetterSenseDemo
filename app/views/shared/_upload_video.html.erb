@@ -1,5 +1,6 @@
 <%# Used as partial collection, so must keep object name matching partial name %>
-<div class="span-20 last grayBox">	
+<div class="span-20 last">
+	<div class="grayBox">	
 	<%
 	  #arr = []
 	  #puts "starting cookie is " + request.env['HTTP_COOKIE'].to_s
@@ -51,4 +52,5 @@
 		uploadifyVideo("Select the Video", video_parameters);
 	</script>
 	<p><a href="javascript:do_upload()">Upload Files</a></p>
+	</div>
 </div>
