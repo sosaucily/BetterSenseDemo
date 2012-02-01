@@ -3,7 +3,8 @@
 
 require 'rack/utils'
 
-BetterSenseDemo::Application.middleware.use Oink::Middleware
+#BetterSenseDemo::Application.middleware.use Oink::Middleware
+BetterSenseDemo::Application.middleware.use( Oink::Middleware, :logger => Rails.logger )
 
 
 class FlashSessionCookieMiddleware
