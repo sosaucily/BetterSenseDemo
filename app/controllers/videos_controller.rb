@@ -61,6 +61,7 @@ class VideosController < ApplicationController
       update_params = { :video => { "vid_file" => params["Filedata"], "name" => params["name"], "description" => params["description"]} }
       @video = Video.new(update_params[:video])
       @video.account_id = params[:source_account_id].to_i
+      @video.viewable = true
       logger.info ("creating video with params: " + @video.inspect)
       if @video.save
         render :nothing => true, :status => :ok
@@ -111,11 +112,19 @@ class VideosController < ApplicationController
     @video = Video.find(params[:id])
     #The next line are a security to validate that the object being shown is owned by the current session holder.
     if !validate_account_id(@video.account_id).call().nil? then return end
-    @video.destroy
-
+    @video.viewable = false
+    @video.save
+    @video.delete_from_backend() #This calls     @video.destroy
+    id = session[:account_id]
+    @videos = Video.where("account_id = ? AND viewable = ?", 1, true).order("created_at desc")
+    @cart = current_cart
+    if (bad_item = @cart.line_items.where(:video_id => params[:id]).first) then
+      bad_item.destroy()
+    end
     respond_to do |format|
       format.html { redirect_to(videos_url) }
       format.xml  { head :ok }
+      format.js   { render :partial => 'shared/refresh_videos',  :layout => false } #, :notice => 'XXX was successfully updated.' } }
     end
   end
   
@@ -161,7 +170,16 @@ class VideosController < ApplicationController
 
     #XSendFileAllowAbove on - apache  - http://www.therailsway.com/2009/2/22/file-downloads-done-right/
     send_file report_filename, :type=>"application/txt", :x_sendfile=>true
-
   end
-    
+  
+  
+  def refresh_videos
+    id = session[:account_id]
+    @videos = Video.where("account_id = ? AND viewable = ?", 1, true).order("created_at desc")
+    @cart = current_cart
+    respond_to do |format|
+      format.js {render :partial => 'shared/refresh_videos',  :layout => false } #, :notice => 'XXX was successfully updated.' }
+    end
+  end
+  
 end

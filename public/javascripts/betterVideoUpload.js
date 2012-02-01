@@ -1,4 +1,4 @@
-/* DO NOT MODIFY. This file was compiled Mon, 16 Jan 2012 21:15:45 GMT from
+/* DO NOT MODIFY. This file was compiled Wed, 01 Feb 2012 19:35:33 GMT from
  * /Users/jessesmith/Documents/BetterSense/www/BetterSenseDemoDev/BetterSenseDemo/app/coffeescripts/betterVideoUpload.coffee
  */
 
@@ -20,10 +20,15 @@
     root.$('#video_name').change(function() {
       root.update_video_params();
     });
+    root.clear_upload_fields = function() {
+      root.$('#video_name')[0].value = "";
+      root.$('#video_description')[0].value = "";
+    };
     root.do_upload = function() {
       if (confirm_upload()) {
         console.log("Uploading!!");
         root.$('#video_vid_file').uploadifyUpload();
+        root.clear_upload_fields();
       }
     };
     confirm_upload = function() {
@@ -69,6 +74,9 @@
       },
       'onSelect': function(event, ID, fileObj) {
         root.update_file_count(1);
+      },
+      'onComplete': function(event, ID, fileObj, response, data) {
+        root.$('#refresh_videos').click();
       }
     });
   };

@@ -1,3 +1,4 @@
+<%# This should probably all be in a render shared, rather than building the HTML from here %>
 <% if defined? @cart_error then %>
 	alert ('<%= @cart_error.to_s %>');
 <% end %>

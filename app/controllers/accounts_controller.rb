@@ -32,7 +32,7 @@ class AccountsController < ApplicationController
     #@campaigns = Campaign.find(:all, :limit => 3, :order => "updated_at desc", :conditions => "account_id = #{id}") #Show three most recently modified Campaigns in the quick view
     #@ads = Ad.find(:all, :limit => 3, :order => "updated_at desc", :conditions => "account_id = #{id}") #Show three most recently modified Ads in the quick view
     @video = Video.new
-    @videos = Video.find(:all, :order => "created_at desc", :conditions => "account_id = #{id}")
+    @videos = Video.where("account_id = ? AND viewable = ?", 1, true).order("created_at desc")
     @orders = Order.find(:all, :limit => 3, :order => "updated_at desc", :conditions => "account_id = #{id}") #Show three most recently modified Ads in the quick view
     
     respond_to do |format|
@@ -116,4 +116,5 @@ class AccountsController < ApplicationController
       redirect_to "/admins/sign_in"
     end
   end
+    
 end

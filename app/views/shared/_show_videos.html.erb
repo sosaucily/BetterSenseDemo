@@ -1,51 +1,67 @@
-<table id="ver-minimalist">
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-      <th scope="col">Video Status</th>
-      <th scope="col">Add to Cart</th>
-      <th scope="col">Completed Reports</th>
-      <th scope="col">Update Status</th>
-    </tr>
-  </thead>
-  <tfoot>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-      <th scope="col">Video Status</th>
-      <th scope="col">Add to Cart</th>
-      <th scope="col">Completed Reports</th>
-      <th scope="col">Update Status</th>
-    </tr>
-  </tfoot>
-  <tbody>
-<% @videos.each do |my_video| %>
-	<tr class="<%= cycle('vodd', 'veven') %>">
-		<td><%= my_video.name %></td>
-		<td><%= my_video.description %></td>
-		<td><div id="status_<%= my_video.id.to_s %>"><%= my_video.status %></div></td>
-		<td>
-			<%= form_tag("carts/#{@cart.id}/add_item", {:remote => true}) do %>
-				<%= hidden_field_tag 'video_id',my_video.id %>
-				<%= select_tag 'quality', "<option>basic</option><option>premium</option>".html_safe%>
-				<%= submit_tag "Add Item to Cart"%>
-			<% end %>
-		</td>
-		<td>
-			<% reports = my_video.available_reports() %>
-			<% if reports.empty? || reports.nil? then %>
-				<%= "Report Not Ready"%>
-			<% else %>
-				<%= link_to("View Report","videos/#{my_video.id}/reports") %>
-			<% end %>
-		</td>
-		<td>
-			<%= form_tag("videos/#{my_video.id}/update_status", {:remote => true}) do %>
-				<%= submit_tag "Update Status"%>
-			<% end %>
-		</td>
-	</tr>
-<% end %>
-  </tbody>
-</table>
+<div id="show_videos_module">
+	<%= form_tag("/videos/refresh_videos", {:remote => true, :method => "get"}) do %>
+		<%= submit_tag "refresh_videos", :hidden=>true, :id=>"refresh_videos" %>
+	<% end %>
+	<% if @videos.empty? then %>
+		<%= "<div>There are no videos in your library</div>".html_safe %>
+	<% else %>
+		<table id="ver-minimalist">
+		  <thead>
+		    <tr>
+		      <th scope="col">Name</th>
+		      <th scope="col">Description</th>
+		      <th scope="col">Video Status</th>
+		      <th scope="col">Add to Cart</th>
+		      <th scope="col">Completed Reports</th>
+		      <th scope="col">Update Status</th>
+		      <th></th>
+		    </tr>
+		  </thead>
+		  <tfoot>
+		    <tr>
+		      <th scope="col">Name</th>
+		      <th scope="col">Description</th>
+		      <th scope="col">Video Status</th>
+		      <th scope="col">Add to Cart</th>
+		      <th scope="col">Completed Reports</th>
+		      <th scope="col">Update Status</th>
+		      <th></th>
+		    </tr>
+		  </tfoot>
+		  <tbody>
+		<% @videos.each.select {|v| v.viewable == true }.each do |my_video| %>
+			<tr class="<%= cycle('vodd', 'veven') %>">
+				<td><%= my_video.name %></td>
+				<td><%= my_video.description %></td>
+				<td><div id="status_<%= my_video.id.to_s %>"><%= my_video.status %></div></td>
+				<td>
+					<%= form_tag("/carts/#{@cart.id}/add_item", {:remote => true}) do %>
+						<%= hidden_field_tag 'video_id',my_video.id %>
+						<%= select_tag 'quality', "<option>basic</option><option>premium</option>".html_safe%>
+						<%= submit_tag "Add Item to Cart"%>
+					<% end %>
+				</td>
+				<td>
+					<% reports = my_video.available_reports() %>
+					<% if reports.empty? || reports.nil? then %>
+						<%= "Report Not Ready"%>
+					<% else %>
+						<%= link_to("View Report","/videos/#{my_video.id}/reports") %>
+					<% end %>
+				</td>
+				<td>
+					<%= form_tag("/videos/#{my_video.id}/update_status", {:remote => true}) do %>
+						<%= submit_tag "Update Status"%>
+					<% end %>
+				</td>
+				<td>
+					<%= form_tag("/videos/#{my_video.id}", {:remote => true, :method=>'delete'}) do %>
+						<%= submit_tag "x" %>
+					<% end %>
+				</td>
+			</tr>
+		<% end %>
+		  </tbody>
+		</table>
+	<% end %>
+</div>

@@ -83,6 +83,7 @@ BetterSenseDemo::Application.routes.draw do
   match "videos/:video_id/update_status", :controller => 'videos', :action => 'update_status'
   match "videos/:id/reports", :controller => 'videos', :action => 'reports'
   match "videos/:id/reports/:report_name", :controller => 'videos', :action => 'download_report'
+  match "videos/refresh_videos", :controller => 'videos', :action => 'refresh_videos'
     
   resources :videos do
     resources :iqeinfos

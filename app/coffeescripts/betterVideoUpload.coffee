@@ -16,10 +16,16 @@ $ ->
         root.update_video_params()
         return
 
+    root.clear_upload_fields = () ->
+        root.$('#video_name')[0].value = ""
+        root.$('#video_description')[0].value = ""
+        return
+
     root.do_upload = () ->
         if confirm_upload()
             console.log "Uploading!!"
             root.$('#video_vid_file').uploadifyUpload()
+            root.clear_upload_fields()
         return
 
     confirm_upload = () ->
@@ -67,6 +73,9 @@ root.uploadifyVideo = (buttonText = 'Select Video', upload_video_data = {}) ->
       return
     'onSelect'    : (event, ID, fileObj) ->
       root.update_file_count(1)
+      return
+    'onComplete'  : (event, ID, fileObj, response, data) ->
+      root.$('#refresh_videos').click()
       return
     )
 #  $('#ad_submit' + iqeid).click (event) ->

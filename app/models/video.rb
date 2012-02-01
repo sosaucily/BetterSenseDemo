@@ -52,11 +52,12 @@ class Video < ActiveRecord::Base
     video_data = JSON.load(response.body.to_s)
     new_status = video_data['status']['bettersense_status'].to_s
     
-    #Set values if they are not yet set
-    self.hashstring ||= video_data['hashstring']
-    self.lengthmillis ||= video_data['length'].to_i
-    self.res_x ||= video_data['width'].to_i
-    self.res_y ||= video_data['height'].to_i
+    #logger.info("Current video params = " + video_data.inspect)
+    #Set values, but activerecord only updates the object if they have changed
+    self.hashstring = video_data['hashstring']
+    self.lengthmillis = video_data['length'].to_i
+    self.res_x = video_data['width'].to_i
+    self.res_y = video_data['height'].to_i
     self.save
     
     #logger.info("Body of retrieve query is: " + video_data.to_s)
@@ -110,6 +111,25 @@ class Video < ActiveRecord::Base
     logger.info("Sending video for analysis: " + name + " with quality " + quality)
   end
   handle_asynchronously :do_analyze
+  
+  def delete_from_backend()
+    #Delete video from backend, and then from Rails
+    
+    if (is_complete || is_processed) then
+      video_params = {:params=>{:action=>"destroy",:friendly_id=>id} }
+      destroy_url = BetterSenseDemo::APP_CONFIG["backend_base_url"] + BetterSenseDemo::APP_CONFIG["backend_video_url"]
+    
+      response = send_command_to_backend(destroy_url, video_params)
+      if response.code != 200 then return end
+      logger.info("Deleting video: " + name)
+    
+      self.destroy
+    else
+      #This video isn't ready to be deleted, so let's hold off
+      delete_from_backend
+    end
+  end
+  handle_asynchronously :delete_from_backend, :run_at => Proc.new { BetterSenseDemo::APP_CONFIG["delete_from_backend_seconds"].to_i.seconds.from_now }
   
   def ready_to_order
     !is_processing
