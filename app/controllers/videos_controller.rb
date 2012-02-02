@@ -115,8 +115,8 @@ class VideosController < ApplicationController
     @video.viewable = false
     @video.save
     @video.delete_from_backend() #This calls     @video.destroy
-    id = session[:account_id]
-    @videos = Video.where("account_id = ? AND viewable = ?", 1, true).order("created_at desc")
+    session_id = session[:account_id].to_i
+    @videos = Video.where("account_id = ? AND viewable = ?", session_id, true).order("created_at desc")
     @cart = current_cart
     if (bad_item = @cart.line_items.where(:video_id => params[:id]).first) then
       bad_item.destroy()
@@ -174,8 +174,8 @@ class VideosController < ApplicationController
   
   
   def refresh_videos
-    id = session[:account_id]
-    @videos = Video.where("account_id = ? AND viewable = ?", 1, true).order("created_at desc")
+    session_id = session[:account_id]
+    @videos = Video.where("account_id = ? AND viewable = ?", session_id, true).order("created_at desc")
     @cart = current_cart
     respond_to do |format|
       format.js {render :partial => 'shared/refresh_videos',  :layout => false } #, :notice => 'XXX was successfully updated.' }

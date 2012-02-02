@@ -27,13 +27,13 @@ class AccountsController < ApplicationController
   # GET /accounts/1.xml
   # GET /account
   def show
-    id = session[:account_id]
-    @account = Account.find(id)
+    session_id = session[:account_id]
+    @account = Account.find(session_id)
     #@campaigns = Campaign.find(:all, :limit => 3, :order => "updated_at desc", :conditions => "account_id = #{id}") #Show three most recently modified Campaigns in the quick view
     #@ads = Ad.find(:all, :limit => 3, :order => "updated_at desc", :conditions => "account_id = #{id}") #Show three most recently modified Ads in the quick view
     @video = Video.new
-    @videos = Video.where("account_id = ? AND viewable = ?", 1, true).order("created_at desc")
-    @orders = Order.find(:all, :limit => 3, :order => "updated_at desc", :conditions => "account_id = #{id}") #Show three most recently modified Ads in the quick view
+    @videos = Video.where("account_id = ? AND viewable = ?", session_id, true).order("created_at desc")
+    @orders = Order.find(:all, :limit => 3, :order => "updated_at desc", :conditions => "account_id = #{session_id}") #Show three most recently modified Ads in the quick view
     
     respond_to do |format|
       format.html # show.html.erb
