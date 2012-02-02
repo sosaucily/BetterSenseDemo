@@ -24,7 +24,7 @@ class Video < ActiveRecord::Base
     #Move the video to the backend folder. (Can this be done over HTTP to allow for separate machines?)
     new_video_file_name = id.to_s + vid_file_file_name[vid_file_file_name.length-4..-1]
     
-    response = RestClient.post submit_url+"/accept_video", :file_id => new_video_file_name, :video_file => File.new(Rails.root.to_s + BetterSenseDemo::APP_CONFIG["upload_video_dir"] + id.to_s + BetterSenseDemo::APP_CONFIG["upload_video_sub_dir"] + vid_file_file_name, 'rb')
+    response = RestClient.post(submit_url + "accept_video", :file_id => new_video_file_name, :video_file => File.new(Rails.root.to_s + BetterSenseDemo::APP_CONFIG["upload_video_dir"] + id.to_s + BetterSenseDemo::APP_CONFIG["upload_video_sub_dir"] + vid_file_file_name, 'rb'))
     
     #logger.info(response.to_s)
     if (response.code != 200)
