@@ -59,7 +59,7 @@ root.uploadifyVideo = (buttonText = 'Select Video', upload_video_data = {}) ->
     'cancelImg'   : '/images/cancel.png',
     'fileExt'     : '*.mp4;*.flv',
     'buttonText'  : '' + buttonText,
-    'sizeLimit'   : 20480000, #approx 10 megs?
+    'sizeLimit'   : 204800000, #approx 10 megs?
     'scriptData'  : upload_video_data,
     'folder'      : '/Users/jessesmith/Documents/BetterSense/www/BetterSenseDemoDev/BetterSenseDemo/',
     'onOpen'      : (event, ID, fileObj) ->

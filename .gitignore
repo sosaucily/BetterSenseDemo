@@ -12,3 +12,4 @@ BetterSenseDemoDev.tmproj
 config/kaltura.yml
 config/iqengines.yml
 devise/*
+reports/*

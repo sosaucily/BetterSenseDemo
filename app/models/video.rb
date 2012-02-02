@@ -178,7 +178,7 @@ class Video < ActiveRecord::Base
         file.write(response.body.to_s)
       }
     rescue
-      logger.error ("Couldn't write report_basic file!")
+      logger.error ("Couldn't write report_premium file!")
     end
     
   end

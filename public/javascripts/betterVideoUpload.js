@@ -1,4 +1,4 @@
-/* DO NOT MODIFY. This file was compiled Wed, 01 Feb 2012 19:35:33 GMT from
+/* DO NOT MODIFY. This file was compiled Thu, 02 Feb 2012 07:33:37 GMT from
  * /Users/jessesmith/Documents/BetterSense/www/BetterSenseDemoDev/BetterSenseDemo/app/coffeescripts/betterVideoUpload.coffee
  */
 
@@ -60,7 +60,7 @@
       'cancelImg': '/images/cancel.png',
       'fileExt': '*.mp4;*.flv',
       'buttonText': '' + buttonText,
-      'sizeLimit': 20480000,
+      'sizeLimit': 204800000,
       'scriptData': upload_video_data,
       'folder': '/Users/jessesmith/Documents/BetterSense/www/BetterSenseDemoDev/BetterSenseDemo/',
       'onOpen': function(event, ID, fileObj) {
