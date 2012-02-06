@@ -5,6 +5,7 @@ class Video < ActiveRecord::Base
   belongs_to :account
 
   has_attached_file :vid_file
+  has_attached_file :thumbnail, :styles => { :thumb => "100x100>" }
 
   validates :account, :account_exists => true
 
@@ -101,8 +102,13 @@ class Video < ActiveRecord::Base
     if (quality.nil? || quality != 'premium')
       quality = 'basic'
     end
-    #current_status = status
-    #order_status = "ordered"
+    
+    if self.is_processing
+      logger.info("Video is still processing, so can't order yet.  Creating new Delayed Job")
+      do_analyze
+      return
+    end
+    
     video_params = {:params=>{:action=>"analyze",:friendly_id=>id,:quality=>quality} }
     analyze_url = BetterSenseDemo::APP_CONFIG["backend_base_url"] + BetterSenseDemo::APP_CONFIG["backend_video_url"]
     
@@ -110,7 +116,7 @@ class Video < ActiveRecord::Base
     if response.code != 200 then return end
     logger.info("Sending video for analysis: " + name + " with quality " + quality)
   end
-  handle_asynchronously :do_analyze
+  handle_asynchronously :do_analyze, :run_at => Proc.new { BetterSenseDemo::APP_CONFIG["analyze_video_seconds"].to_i.seconds.from_now }
   
   def delete_from_backend()
     #Delete video from backend, and then from Rails
@@ -132,7 +138,7 @@ class Video < ActiveRecord::Base
   handle_asynchronously :delete_from_backend, :run_at => Proc.new { BetterSenseDemo::APP_CONFIG["delete_from_backend_seconds"].to_i.seconds.from_now }
   
   def ready_to_order
-    !is_processing
+    !is_processing || status == "processing"
   end
   
   def available_reports
@@ -146,6 +152,22 @@ class Video < ActiveRecord::Base
     Dir.chdir(video_report_dir)
 
     reports = Dir.glob("*.txt")
+  end
+  
+  def is_complete
+    return (status == "complete")
+  end
+  
+  def is_processed
+    return (status == "processed")
+  end
+  
+  def is_processing
+    return (status == "new" || status == "created" || status == "processing")
+  end
+  
+  def is_analyzing
+    return (status == "ordered" || status == "analyzing" || status == "analyzed")
   end
   
   private
@@ -181,22 +203,6 @@ class Video < ActiveRecord::Base
       logger.error ("Couldn't write report_premium file!")
     end
     
-  end
-  
-  def is_complete
-    return (status == "complete")
-  end
-  
-  def is_processed
-    return (status == "processed")
-  end
-  
-  def is_processing
-    return (status == "new" || status == "created" || status == "processing")
-  end
-  
-  def is_analyzing
-    return (status == "ordered" || status == "analyzing" || status == "analyzed")
   end
   
   def send_command_to_backend (url, params = nil)

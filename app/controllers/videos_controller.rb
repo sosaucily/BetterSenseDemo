@@ -1,7 +1,8 @@
 class VideosController < ApplicationController
 
   #before_filter :authenticate_user!, :only => ['create']
-  before_filter :authenticate_admin!, :only => ['new','edit','update']
+  skip_before_filter :verify_authenticity_token, :only => ['update']
+  before_filter :authenticate_admin!, :only => ['new','edit']
   #before_filter :check_session, :except => ['show','index','new']
   #Mime::Type.register "image/png", :png
   
@@ -91,17 +92,33 @@ class VideosController < ApplicationController
   # PUT /videos/1
   # PUT /videos/1.xml
   def update
-    @video = Video.find(params[:id])
-    #The next line are a security to validate that the object being shown is owned by the current session holder.
-    if !validate_account_id(@video.account_id).call().nil? then return end
-    respond_to do |format|
-      if @video.update_attributes(params[:video])
-        logger.info 'Updating Video with id ' + params[:id].to_s
-        format.html { redirect_to(@video, :notice => 'Video was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @video.errors, :status => :unprocessable_entity }
+    logger.info("remote" + params["remote_key"].to_s)
+    if (params.has_key?("remote_key") && check_remote_key(params["remote_key"]) )
+      logger.info "Updating video thumbnail from backend"
+      @video = Video.find(params[:id])
+      @video.thumbnail = params[:thumbnail]
+      respond_to do |format|
+        if @video.save
+          format.html  { head :ok }
+        else
+          format.html { head :bad_request }
+        end
+      end
+    else
+      verify_authenticity_token
+      authenticate_admin!
+      @video = Video.find(params[:id])
+      #The next line are a security to validate that the object being shown is owned by the current session holder.
+      if !validate_account_id(@video.account_id).call().nil? then return end
+      respond_to do |format|
+        if @video.update_attributes(params[:video])
+          logger.info 'Updating Video with id ' + params[:id].to_s
+          format.html { redirect_to(@video, :notice => 'Video was successfully updated.') }
+          format.xml  { head :ok }
+        else
+          format.html { render :action => "edit" }
+          format.xml  { render :xml => @video.errors, :status => :unprocessable_entity }
+        end
       end
     end
   end
@@ -140,7 +157,7 @@ class VideosController < ApplicationController
   # GET /videos/1/update_status
   def update_status
     @video = Video.find(params[:video_id])
-    
+    @cart = current_cart
     respond_to do |format|
       format.js
     end

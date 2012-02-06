@@ -27,8 +27,9 @@ class TokensController < ApplicationController
   
   #We generate a secret hash based on a random 20 b64 values.  
   #This is stored in the DB as the SHA1 hash and compared during API calls.
-  #This is a layer on to of Devise auth_token for added security
+  #This is a layer on top of Devise auth_token for added security
   def generate
+    #This is an account ID, not a user id...
     id = session[:account_id]
     @user = User.find(id)
     @user.reset_authentication_token!

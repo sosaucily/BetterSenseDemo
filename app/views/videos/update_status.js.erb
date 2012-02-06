@@ -1,2 +1,1 @@
-$('#status_<%=@video.id.to_s%>').html("<%=@video.status%>")
-$('#order_status_<%=@video.id.to_s%>').html("<%#@video.order_status || 'Not Ordered'%>")
+$('#video_module_<%=@video.id.to_s%>').html("<%= escape_javascript(render :partial => 'shared/show_video_module', :locals => {:video => @video, :cart => @cart}) %>");

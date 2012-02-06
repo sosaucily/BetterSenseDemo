@@ -1,5 +1,11 @@
 module VideosHelper
   
+  def video_info_tooltip (video)
+    info = "Description: #{video.description}<br />"
+    info += "Length: #{millis_to_HMS(video.lengthmillis)}<br />"
+    info += "Status: #{video.status}"
+  end
+  
   #require 'kaltura'
   def getKalturaIDByName (video_name)
     filter = Kaltura::Filter::MediaEntryFilter.new

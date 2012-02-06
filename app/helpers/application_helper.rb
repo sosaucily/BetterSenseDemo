@@ -26,6 +26,15 @@ module ApplicationHelper
     content_for(:title) { the_title }
   end
   
+  def millis_to_HMS(millis)
+    seconds = (millis || 0) / 1000
+		hours = seconds.to_i / 3600
+		seconds -= 3600*hours
+		minutes = seconds / 60
+		seconds -= 60*minutes
+		return "%02d:%02d:%02d" % [hours, minutes, seconds]
+	end
+  
   def get_states
     return [ 	
   		['Select a State', 'None'],

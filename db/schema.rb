@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120201000000) do
+ActiveRecord::Schema.define(:version => 20120204231027) do
 
   create_table "accounts", :force => true do |t|
     t.string   "fname"
@@ -226,15 +226,19 @@ ActiveRecord::Schema.define(:version => 20120201000000) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "filepath"
-    t.integer  "res_x",                 :default => 480
-    t.integer  "res_y",                 :default => 360
-    t.boolean  "viewable",              :default => false
+    t.integer  "res_x",                  :default => 480
+    t.integer  "res_y",                  :default => 360
+    t.boolean  "viewable",               :default => false
     t.integer  "account_id"
     t.string   "vid_file_file_name"
     t.string   "vid_file_content_type"
     t.integer  "vid_file_file_size"
     t.datetime "vid_file_updated_at"
-    t.string   "status",                :default => "new"
+    t.string   "status",                 :default => "new"
+    t.string   "thumbnail_file_name"
+    t.string   "thumbnail_content_type"
+    t.integer  "thumbnail_file_size"
+    t.datetime "thumbnail_updated_at"
   end
 
   create_table "zone_types", :force => true do |t|

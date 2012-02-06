@@ -23,6 +23,11 @@ class ApplicationController < ActionController::Base
       return lambda {return nil}
     end
   end
+  
+  def check_remote_key(key)
+    logger.info ("Comparing " + key + " with " + BetterSenseDemo::APP_CONFIG["backend_key"])
+    return (BetterSenseDemo::APP_CONFIG["backend_key"] == key)
+  end
 
   # Redirect after login using Devise
   # Params:
@@ -54,7 +59,6 @@ class ApplicationController < ActionController::Base
   def stored_location_for(resource)
     return nil
   end
-
   
 private
 
