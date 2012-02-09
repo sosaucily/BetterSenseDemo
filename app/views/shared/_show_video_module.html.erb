@@ -1,4 +1,4 @@
-<%= "#{video.name} - " %><a href="javascript:$('#submit_delete_<%=video.id.to_s%>').click()">Delete</a>
+<b><%= "#{video.name}" %></b> - <a href="javascript:$('#submit_delete_<%=video.id.to_s%>').click()">Delete</a>
 <%= form_tag("/videos/#{video.id}", {:remote => true, :method=>'delete', :hidden=>true}) do %>
 	<%= submit_tag "", :id => "submit_delete_#{video.id.to_s}" %>
 <% end %>
@@ -11,7 +11,7 @@
 	<%= form_tag("/carts/#{cart.id}/add_item", {:remote => true}) do %>
 		<%= hidden_field_tag 'video_id',video.id %>
 		<%= select_tag 'quality', "<option>basic</option><option>premium</option>".html_safe%>
-		<%= submit_tag "Add to Cart"%>
+		<%= submit_tag "Add to Cart", :class=> "submit_button" %>
 	<% end %>
 <% elsif video.is_analyzing %>
 	<span>Ordering - Building Report</span><a href="javascript:$('#submit_refresh_<%=video.id.to_s%>').click()">Refresh</a>
