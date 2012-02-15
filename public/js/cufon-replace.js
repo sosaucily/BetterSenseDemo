@@ -1,0 +1,1 @@
+Cufon.replace('.button1, .button2, .button3, .link, h1, h2, h3, h4, h5, h6, #slider a, .title ', { fontFamily: 'Myriad Pro', hover:true});

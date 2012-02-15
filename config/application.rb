@@ -53,5 +53,6 @@ module BetterSenseDemo
         Rails.logger.error("No Internet Connection Available, some functionality (Kaltura) will be disabled")
       end
     end
+    Sass::Plugin.options[:never_update] = true
   end
 end

@@ -1,0 +1,11 @@
+.layouts-nav li a,
+.button1,
+.button2,
+.button3,
+#constuction-box,
+#intro-box,
+#newsletter-alt-form input[type=text],
+#newsletter-alt-form input[type=submit]
+{
+	behavior: url(js/PIE.htc);
+}

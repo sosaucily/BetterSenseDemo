@@ -27,6 +27,16 @@ module VideosHelper
     return nil
   end
   
+  def getThumbnailWithPlayButtonForLightbox (kal_entry_id, thumb_options, play_button_wh)
+    thumb_x = thumb_options[:size].first
+    thumb_y = thumb_options[:size].last
+    thumb_left_marg = (thumb_x.to_f/2.0 - play_button_wh.to_f/2.0).to_i
+    thumb_top_marg = ( (thumb_y.to_f/2.0) - play_button_wh.to_f/2.0).to_i
+    
+    thumb_src = kaltura_thumbnail(kal_entry_id, thumb_options)
+    thumb_src[thumb_src.index('src="')+5..-5]
+  end
+    
   def getThumbnailWithPlayButton (kal_entry_id, thumb_options, play_button_wh)
     thumb_x = thumb_options[:size].first
     thumb_y = thumb_options[:size].last

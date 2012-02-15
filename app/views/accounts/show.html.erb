@@ -1,5 +1,62 @@
 <% page_title "Account Management"%>
 <%= javascript_include_tag %w(jquery-ui betterVideoUpload swfobject jquery.uploadify.v2.1.4) %>
+					<div class="indent1">
+						<div class="wrapper">
+							<article class="grid_4 alpha">
+								<h4 class="h4-bg">Your Account</h4>
+								<div class="border">
+									<strong><u><%= @account.company_name %></u></strong><br />
+									<strong>Primary Account Admin:</strong> <%= @account.fname %> <%= @account.lname %><br />
+								</div>
+								<a href='/account/edit'>
+									<div class="box">
+										<figure><img src="/images/template/icon2.png" alt="" /></figure>
+										<strong>Edit Account Info</strong> <br/>Modify account information.
+									</div>
+								</a>
+								<div class="box">
+									<figure><img src="/images/template/icon4.png" alt="" /></figure>
+									<strong>Upload New Video</strong>  <br>Click to upload a video.
+								</div>
+								<div class="box">
+									<figure><img src="/images/template/icon4.png" alt="" /></figure>
+									<strong>Dolor pratsensme lorem</strong>  penatiters masre  urient montestes. <a href="#">[...]</a>
+								</div>
+							</article>
+							<article class="grid_8 omega">
+								<h4 class="h4-bg1">Overview of Our Main Business Courses</h4>
+								<div class="wrapper">
+									<div class="grid_4 alpha">
+										<div class="wrapper">
+											<figure class="none"><img src="/images/template/image1.jpg" alt="" /></figure>
+											<strong>Risk management</strong><br>At nequ eget nisus leo vele necoulum antepsum prin se faucibus oposuere cub.
+										</div>
+										<div class="wrapper pad">
+											<figure class="none"><img src="/images/template/image2.jpg" alt="" /></figure>
+											<strong>Insurance service</strong><br>At nequ eget nisus leo vele necoulum antepsum prin se faucibus oposuere cub.
+										</div>
+									</div>
+									<div class="grid_4 omega">
+										<div class="wrapper">
+											<figure class="none"><img src="/images/template/image3.jpg" alt="" /></figure>
+											<strong>Clients relationship</strong><br>At nequ eget nisus leo vele necoulum antepsum prin se faucibus oposuere cub.
+										</div>
+										<div class="wrapper pad">
+											<figure class="none"><img src="/images/template/image4.jpg" alt="" /></figure>
+											<strong>Strategic planning</strong><br>At nequ eget nisus leo vele necoulum antepsum prin se faucibus oposuere cub.
+										</div>
+									</div>
+								</div>
+								<h4 class="h4-bg2 margin1">Providing Leading Business Services</h4>
+								Nean necoulum antepsum prin faucibus oposuere cubind isse sollicitu dinvelit sed l pharetr.unt se arra selorta diam eim velit. Fusc ismod conse quat aris accue. 
+								<p>Lorem ipsum dolor sit consectetue adicing elit. Pellentesque sed dolor. Aliqua ngue fermentumser nisl. Mauris accuml dia. Sed in lacus ut enim adipiscing aliqIn pde aliquet sit amet euismod inuctor ut ligula. Aliquam dapibus tincidunt metus. Praesent justo dolor lobortis quis lobortis dignissim ste pulvinar ac lorem. Vestibulum sed ante. Donec sagittis euismod pur.</p>
+								<a href="more.html" class="button2 button-margin">Read  More</a>
+							</article>
+						</div>
+					</div>
+					
+					
+					
 <h1>Account Home</h1>
 <h4><%= @account.company_name %></h4>
 <%= link_to 'Edit Account Details', '/account/edit' %>

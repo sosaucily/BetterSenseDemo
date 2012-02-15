@@ -1,35 +1,74 @@
-<h3>Content Sensitive Video Advertising</h3>
-<div><b>better</b>sense adopts the most successful web-based ad method: Keyword advertising, and introduces it into the largest advertising market: TV and Online Video.<br /><br />
-We analyze the content of videos instead of text using advanced image-recognition techniques and display ads accurately fitting to the detected items.
+<div class="slider-bg">
+	<div id="slider">
+		<div class="slide1">
+			<h1>Content</h1>
+			<h4>sensitive video advertising</h4>
+			<b>better</b>sense introduces Keyword advertising to the world of online video
+			<!-- <p><a href="#">read more</a></p>-->
+		</div>
+		<div class="slide2">
+			<h1>Complement</h1>
+			<h4>your advertising reach</h4>
+			 with compelling contextual in-video ads that work in parallel to your existing ad systems
+			<!--<p><a href="#">read more</a></p>-->
+		</div>
+		<div class="slide3">
+			<h1>Analyzing</h1>
+			<h4>video content</h4>
+			with high-tech systems including image-recognition to optimize ads fitting to the exact video content on screen
+			<!--<p><a href="#">read more</a></p>-->
+		</div>
+	</div>
+	<div class="links-bg">
+		<a href="#" id="prev"><img src="images/prev-link.gif" alt="" /></a><a href="#" id="next"><img src="images/next-link.gif" alt="" /></a>
+	</div>
 </div>
-<div class="span-20 last redhr"></div>
-<div class="span-10">
-<h4>Video Publishers: Complementary Ad Income</h4>
-    Use the <b>better</b>sense technology in parallel to your existing ad systems to gain additional ad revenues and improve the quality and focus of your reach.
+<div class="indent">
+	<div class="wrapper">
+		<article class="grid_4 alpha">
+			<h4 class="h4-bg">What We Do?</h4>
+			<b>better</b>sense adopts the most successful web-based ad method: Keyword advertising, and introduces it into the largest advertising market: TV and Online Video.
+			<p>We analyze the content of videos instead of text using advanced image-recognition techniques and display ads accurately fitting to the detected items.</p>
+			<a href="more.html" class="button2">Read  More</a>
+		</article>
+		<article class="grid_4">
+			<h4 class="h4-bg1">Contact Info</h4>
+			<b>better</b>sense adopts the most successful web-based ad method: Keyword advertising, and introduces it into the largest advertising market: TV and Online Video.
+			<p>We analyze the content of videos instead of text using advanced image-recognition techniques and display ads accurately fitting to the detected items.</p>
+			<a href="more.html" class="button2">Read  More</a>
+		</article>
+		<article class="grid_4 omega">
+			<h4 class="h4-bg2">What`s New?</h4>
+			<strong class="title">Mon, July 18</strong>
+			At nequ eget nisus leo vel nean necoulum antepsum prin faucibus oposuere cusollicitu dinvelit sed l pharearra selorta.
+			<strong class="title title-pad">Wed, July 09</strong>
+			Fusc ismod conse quat aris acnt ipsumlor sit consectetue adicing elit. Pellesque sed dolor. Aliqua ngue fermentum nisl.<br>
+			<a href="more.html" class="button2">All News</a>
+		</article>
+	</div>
 </div>
-<div class="span-10 last">
-<h4>Advertisers: Superior Performance</h4>
-    Display your ads in reference to the content of videos and achieve a better acceptance and advertising impact.
-</div>
-<div class="span-20 last redhr"></div>
-<div class="span-10">
-  <img src="images/Picture_film_3steps_309-337_transparent_clear_cut.png" height="353" alt="Demexco!"/>
-</div>
-<div class="span-10 last">
-  <div class="grayBox">
-    <%= link_to '/demo' do %>
-      <h4><u>Demo Page</u></h4>
-    <% end %>
-    Please visit our <%= link_to 'Demo', '/demo' %> page to see what <b>better</b>sense has to offer.
-  </div><div class="redhr"></div>
-  <div class="grayBox">
-    <h4>Contact Information:</h4>
-    Tel. +1 (415) 857-3673<br />
-	Tel. +49 8151 972 10 0<br />
-    info@bettersense.com<br />
-  </div><div class="redhr"></div>
-  <h4>Thanks for visiting us at our exhibition stand at Dmexco!</h4>
-  <b>Better</b>sense hosted a booth at Dmexco 2011 in Cologne, Germany.  Thanks for all that attended, met our team, and saw the demonstration of our technology.<br />&nbsp;<br />
-</div><br /><br />
+<script type="text/javascript">
+  $(document).ready(function(){
+		if ($("#slider").length) {	
+			$('#slider').cycle({ 
+				fx:     'fade', 
+				speed:  'slow', 
+				timeout: 6000, 
+				speed: 2000,
+				next:   '#next', 
+				prev:   '#prev',
+				after: onAfter
+			});
+		}
+		$(function() {
+			$('#prev img, #next img').animate({opacity:'1.0'},{queue:false,duration:0});
+			$('#prev, #next').hover(function(){
+				$(this).find('img').animate({opacity:'0.0'},{queue:false,duration:500});
+			}, function(){
+				$(this).find('img').animate({opacity:'1.0'},{queue:false,duration:500});
+			});	
+		});
+	});
+ </script>
 <!-- end #content -->
 

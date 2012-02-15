@@ -7,15 +7,38 @@
   <meta name="keywords" content="Video Content Sensitive Advertising Metadata">
 
 <%= favicon_link_tag %>
-<%= stylesheet_link_tag 'screen.css', :media => 'screen, projection' %>
-<%= stylesheet_link_tag 'print.css', :media => 'print' %>
-<%= stylesheet_link_tag 'buttons.css', :media => 'screen, projection' %>
-<!--[if lt IE 8]><%= stylesheet_link_tag 'ie.css', :media => 'screen, projection' %><![endif]-->
-<%= stylesheet_link_tag 'scaffold.css' %>
+<%= stylesheet_link_tag "reset.css", :media => 'all' %>
+<%= stylesheet_link_tag "grid.css", :media => 'all' %>
+<%= stylesheet_link_tag "style.css", :media => 'all' %>
+<%= stylesheet_link_tag "prettyPhoto.css", :media => "all" %>
+<%# Blueprint %>
+<%# stylesheet_link_tag 'screen.css', :media => 'screen, projection' %>
+<%# stylesheet_link_tag 'print.css', :media => 'print' %>
+<!--[if lt IE 8]><%# stylesheet_link_tag 'ie.css', :media => 'screen, projection' %><![endif]-->
+<%# stylesheet_link_tag 'scaffold.css' %>
+<%# /Blueprint %>
+<%# stylesheet_link_tag 'buttons.css', :media => 'screen, projection' %>
 <%= stylesheet_link_tag 'jquery.qtip.css' %>
 <%= stylesheet_link_tag 'uploadify.css' %>
 <%= javascript_include_tag :defaults %>
 <%= yield :additional_javascripts %>
+<%# javascript_include_tag 'superfish' %>
+<%# javascript_include_tag 'supersubs' %>
+<%# javascript_include_tag 'kwicks-1.5.1.pack' %>
+
+<%= javascript_include_tag '/js/script' %>
+<%= javascript_include_tag '/js/cufon-yui' %>
+<%= javascript_include_tag '/js/Myriad_Pro_400.font.js' %>
+<%= javascript_include_tag '/js/cufon-replace' %>
+
+<!--[if lt IE 9]>
+	<script type="text/javascript" src="js/html5.js"></script>
+	<link rel="stylesheet" href="css/ie/ie.css" type="text/css" media="all">
+<![endif]-->
+<!--[if lt IE 7]>
+	<script type="text/javascript" src="http://info.template-help.com/files/ie6_warning/ie6_script_other.js"></script>
+<![endif]-->
+
 <%# javascript_include_tag 'jquery_ujs' if Rails.env.development? %>
 <%# Moved this out of the layout so Kaltura pages don't clash with JQuery-UI %>
 <%# javascript_include_tag "jquery-ui-1.8.16.custom.min" %>
@@ -24,5 +47,6 @@
 <%= render "shared/header" %>
 <%= yield %>
 <%= render "shared/footer" %>
+	  <script type="text/javascript"> Cufon.now(); </script>
 </body>
 </html>

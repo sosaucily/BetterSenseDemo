@@ -1,23 +1,49 @@
-<body class="bp one-col">
+<body>
+	<div class="container_12">
+		<div class="wrapper">
+			<div class="grid_12">
+				<header>
+					<div class="extra-wrap">
+						<div class="grid_12 alpha omega">
+							<div class="prefix_2">
+								<div class="logo1">
+									<a href="/"></a>
+								</div>
+								<div class="logo2">
+									<a href="/"></a>
+								</div>
+							</div>
+						</div><br/>
+						<div class="grid_12 alpha omega prefix_2">
+							<nav>
 
-<div class="container">
-
-<!-- end #menu --> 
-<!--
-  <div style="clear: both;">&nbsp;</div> 
-  <div style="clear: both;">&nbsp;</div> 
-  <div style="clear: both;">&nbsp;</div> 
--->
-  <br /> <br /> <br />
-  <a href="/">
-    <div class="header">
-      <div class="logo">
-      </div>
-    </div>
-  </a>
+								<ul class="sf-menu">
+									<li><a href="/" class="current">home</a></li>
+									<li><%= link_to 'demo', '/demo' %>
+										<ul>
+											<li><%= link_to 'demo home','/demo'%></li>
+											<li><%= link_to 'Video Content Sensitive Advertising','/demo/detected_items'%></li>
+											<li><%= link_to 'Delivering Context Targeted Ads','/demo/kaltura_video' %></li>
+										</ul>
+									</li>
+										<li><%= link_to 'account', '/account' %>
+										<ul>
+											<li><%= link_to 'account home','/account'%></li>
+											<li><%= link_to 'library','/account#library'%></li>
+											<li><%= link_to 'orders','/orders' %></li>
+										</ul>
+									</li>
+									<li><%= link_to 'team','/team'%></li>
+									<li><%= link_to 'contact','/contact'%></li>
+								</ul>
+							</nav>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</header>
 
 <!-- end #header --> 
-  <div class="content"> 
+				<section id="content">
 
-  <p class="notice" id="notice"><%= notice %></p>
-  <p class="alert" id="alert"><%= alert %></p>
+					<%= "<p class=\"info-box\" id=\"notice\">#{notice}</p>".html_safe unless notice.nil? %>
+					<%= "<p class=\"error-box\" id=\"alert\">#{alert}</p>".html_safe unless alert.nil? %>
