@@ -1,4 +1,4 @@
-/* DO NOT MODIFY. This file was compiled Thu, 02 Feb 2012 07:33:37 GMT from
+/* DO NOT MODIFY. This file was compiled Thu, 16 Feb 2012 01:05:42 GMT from
  * /Users/jessesmith/Documents/BetterSense/www/BetterSenseDemoDev/BetterSenseDemo/app/coffeescripts/betterVideoUpload.coffee
  */
 
@@ -30,6 +30,12 @@
         root.$('#video_vid_file').uploadifyUpload();
         root.clear_upload_fields();
       }
+    };
+    root.do_clear_cart = function() {
+      root.$('#clear_cart').click();
+    };
+    root.do_cart_order = function() {
+      root.$('#cart_order').click();
     };
     confirm_upload = function() {
       if (root.file_count === 0) {

@@ -28,6 +28,14 @@ $ ->
             root.clear_upload_fields()
         return
 
+	root.do_clear_cart = () ->
+        root.$('#clear_cart').click()
+        return
+
+    root.do_cart_order = () ->
+        root.$('#cart_order').click()
+        return
+
     confirm_upload = () ->
         if root.file_count is 0
           alert "Please select a video file to upload."
@@ -59,7 +67,7 @@ root.uploadifyVideo = (buttonText = 'Select Video', upload_video_data = {}) ->
     'cancelImg'   : '/images/cancel.png',
     'fileExt'     : '*.mp4;*.flv',
     'buttonText'  : '' + buttonText,
-    'sizeLimit'   : 204800000, #approx 10 megs?
+    'sizeLimit'   : 204800000, 
     'scriptData'  : upload_video_data,
     'folder'      : '/Users/jessesmith/Documents/BetterSense/www/BetterSenseDemoDev/BetterSenseDemo/',
     'onOpen'      : (event, ID, fileObj) ->

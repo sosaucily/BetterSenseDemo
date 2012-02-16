@@ -1,15 +1,6 @@
 <%# Used as partial collection, so must keep object name matching partial name %>
-<div class="span-20 last">
-	<div class="grayBox">	
-	<%
-	  #arr = []
-	  #puts "starting cookie is " + request.env['HTTP_COOKIE'].to_s
-	  #puts "entire env session " + request.env.to_s
-	  #request.env['HTTP_COOKIE'].each_byte{|c| arr.push(c.to_s)}
-	  #request.env['HTTP_COOKIE'].each_char{|c| arr.push(c[0].to_s)}
-	  #my_session = arr.join("x")
-	%>
-	<%= form_for(@video, :html => { :multipart => true }) do |f| %>
+<br />
+	<%= form_for(@video, :html => { :multipart => true, :id =>"default_form" }) do |f| %>
 	  <% if @video.errors.any? %>
 	    <div id="error_explanation">
 	      <h2><%= pluralize(@video.errors.count, "error") %> prohibited this video from being saved:</h2>
@@ -21,23 +12,21 @@
 	      </ul>
 	    </div>
 	  <% end %>
-
-	<div class="span-20 last">
-		<div class="span-20 last">
-			  <div id="video_vid_file" name="video[vid_file]">
-			  </div>
-	  		  <div class="field">
-			    <%= f.label :name %><br />
-			    <%= f.text_field :name %>
-			  </div>
-			  <div class="field">
-			    <%= f.label :description %><br />
-			    <%= f.text_field :description %>
-			  </div>
-			  <div class="actions">
-			    <%= f.submit :hidden => true %>
-			  </div>
-		</div>
+	
+	<div>
+		  <div id="video_vid_file" name="video[vid_file]">
+		  </div><br />
+  		  <div class="field">
+		    <%= f.label :name %><br />
+		    <%= f.text_field :name %>
+		  </div>
+		  <div class="field">
+		    <%= f.label :description %><br />
+		    <%= f.text_field :description %>
+		  </div>
+		  <div class="actions">
+		    <%= f.submit :hidden => true %>
+		  </div>
 	</div>
 	<% end %>
 	<%
@@ -47,10 +36,6 @@
 	
 	<script type="text/javascript">
 		video_parameters = <%= video_upload_params.to_json.html_safe %>;
-		console.log ("New vid params ");
-		console.log (video_parameters);
-		uploadifyVideo("Select the Video", video_parameters);
+		uploadifyVideo("Select Video", video_parameters);
 	</script>
-	<p><a href="javascript:do_upload()">Upload Files</a></p>
-	</div>
-</div>
+	<a href="javascript:do_upload()" class="button2med">Upload Video</a>

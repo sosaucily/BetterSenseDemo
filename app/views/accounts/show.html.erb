@@ -8,94 +8,67 @@
 									<strong><u><%= @account.company_name %></u></strong><br />
 									<strong>Primary Account Admin:</strong> <%= @account.fname %> <%= @account.lname %><br />
 								</div>
-								<a href='/account/edit'>
+								<a id="box_link" href='/account/'>
 									<div class="box">
-										<figure><img src="/images/template/icon2.png" alt="" /></figure>
-										<strong>Edit Account Info</strong> <br/>Modify account information.
+										<figure><img src="/images/template/icon3.png" alt="" /></figure>
+										<strong>Dashboard</strong><br />View account details.
 									</div>
 								</a>
-								<div class="box">
-									<figure><img src="/images/template/icon4.png" alt="" /></figure>
-									<strong>Upload New Video</strong>  <br>Click to upload a video.
+								<a id="box_link" href='/account/edit'>
+									<div class="box">
+										<figure><img src="/images/template/icon2.png" alt="" /></figure>
+										<strong>Edit Account</strong> <br/>Modify account information.
+									</div>
+								</a>
+								<div class="box" id="upload_parent">
+									<div id="upload_box">
+										<figure><img src="/images/template/icon4.png" alt="" /></figure>
+										<strong>Upload New Video</strong>  <br>Click to upload a video.<br>
+										<div id="upload_break"><br /></div>
+									</div>
+									<div id="upload_module">
+										<%= render :partial => "shared/upload_video" %>
+									</div>
 								</div>
-								<div class="box">
-									<figure><img src="/images/template/icon4.png" alt="" /></figure>
-									<strong>Dolor pratsensme lorem</strong>  penatiters masre  urient montestes. <a href="#">[...]</a>
+								<div class="box" id="cart_parent">
+									<div id="parent_cart_box">
+										<figure><img src="/images/template/shopping_cart.png" alt="" /></figure>
+										<strong>Shopping Cart</strong>  <br>Your current shopping cart.<br>
+										<div id="parent_cart_break"><br /></div>
+									</div>
+									<div id="parent_cart_module">
+										<%= render :partial => "shared/cart_module", :locals => {:show_clear => true} %>
+									</div>
 								</div>
 							</article>
 							<article class="grid_8 omega">
-								<h4 class="h4-bg1">Overview of Our Main Business Courses</h4>
-								<div class="wrapper">
-									<div class="grid_4 alpha">
-										<div class="wrapper">
-											<figure class="none"><img src="/images/template/image1.jpg" alt="" /></figure>
-											<strong>Risk management</strong><br>At nequ eget nisus leo vele necoulum antepsum prin se faucibus oposuere cub.
-										</div>
-										<div class="wrapper pad">
-											<figure class="none"><img src="/images/template/image2.jpg" alt="" /></figure>
-											<strong>Insurance service</strong><br>At nequ eget nisus leo vele necoulum antepsum prin se faucibus oposuere cub.
-										</div>
-									</div>
-									<div class="grid_4 omega">
-										<div class="wrapper">
-											<figure class="none"><img src="/images/template/image3.jpg" alt="" /></figure>
-											<strong>Clients relationship</strong><br>At nequ eget nisus leo vele necoulum antepsum prin se faucibus oposuere cub.
-										</div>
-										<div class="wrapper pad">
-											<figure class="none"><img src="/images/template/image4.jpg" alt="" /></figure>
-											<strong>Strategic planning</strong><br>At nequ eget nisus leo vele necoulum antepsum prin se faucibus oposuere cub.
-										</div>
-									</div>
-								</div>
-								<h4 class="h4-bg2 margin1">Providing Leading Business Services</h4>
-								Nean necoulum antepsum prin faucibus oposuere cubind isse sollicitu dinvelit sed l pharetr.unt se arra selorta diam eim velit. Fusc ismod conse quat aris accue. 
-								<p>Lorem ipsum dolor sit consectetue adicing elit. Pellentesque sed dolor. Aliqua ngue fermentumser nisl. Mauris accuml dia. Sed in lacus ut enim adipiscing aliqIn pde aliquet sit amet euismod inuctor ut ligula. Aliquam dapibus tincidunt metus. Praesent justo dolor lobortis quis lobortis dignissim ste pulvinar ac lorem. Vestibulum sed ante. Donec sagittis euismod pur.</p>
-								<a href="more.html" class="button2 button-margin">Read  More</a>
+								<h4 class="h4-bg1">Your Video Library</h4>
+								<%= render :partial => "shared/show_videos" %>
 							</article>
 						</div>
 					</div>
-					
-					
-					
-<h1>Account Home</h1>
-<h4><%= @account.company_name %></h4>
-<%= link_to 'Edit Account Details', '/account/edit' %>
-<div class="span-20 last redhr"></div>
-<div class="span-20 last">
-	<b><u>Primary Account Admin:</u></b><br />
-	<div class="span-20 last">
-		<div class="grayBox">
-		<%= @account.fname %> <%= @account.lname %>
-		</div>
-	</div>
-	
-	<div class="span-20 last redhr"></div>
-	
-	<b><u>Upload New Video:</u></b><br />
-	<%= render :partial => "shared/upload_video" %>
-
-	<div class="span-20 last redhr"></div>
-	
-	<b><u>My Videos:</u></b><br />
-
-	<%= render :partial => "shared/show_videos" %>
-
-    <div class="span-20 last redhr"></div>
-
-	<b><u>My Cart</u> - <%= link_to 'Order!', "/orders/new" %></b><br /><br />
-	<div class="span-20 last">
-	<%= render :partial => "shared/cart_module", :locals => {:show_clear => true} %>
-	</div>
-
-    <div class="span-20 last redhr"></div>
-	
-	<b><u>Recent Campaigns</u> - <%= link_to 'Manage Campaigns', '/campaigns' %></b><br /><br />
-	<%# render :partial => "shared/show_campaign", :collection => @campaigns %>
-	
-	<div class="span-20 last redhr"></div>
-	
-	<b><u>Recent Ads</u> - <%= link_to 'Manage Ads', '/ads' %></b><br /><br />
-	<%# render :partial => "shared/show_ad", :collection => @ads %>
-	
-</div>	
-<%= if admin_signed_in? then link_to(' | Back', accounts_path) end %>
+					<script type="text/javascript">
+						$('#upload_box').click ( function() { 
+							$('#upload_module').slideToggle('slow', function() {
+								is_upload_slid_up = (!is_upload_slid_up)
+						  	});
+							$('#upload_break').slideToggle('fast');
+							if (is_upload_slid_up) $('#upload_parent').addClass("box_extended")
+							else $('#upload_parent').removeClass("box_extended");
+						} );
+						$('#parent_cart_box').click ( function() { 
+							$('#parent_cart_module').slideToggle('slow', function() {
+								is_cart_slid_up = (!is_cart_slid_up)
+						  	});
+							$('#parent_cart_break').slideToggle('fast');
+							if (is_cart_slid_up) $('#cart_parent').addClass("box_extended");
+							else $('#cart_parent').removeClass("box_extended");
+						} );
+						$(function () {
+							$('#upload_module').slideUp(0); 
+							$('#upload_break').slideUp(0);
+							$('#parent_cart_module').slideUp(0); 
+							$('#parent_cart_break').slideUp(0);
+							is_cart_slid_up = is_upload_slid_up = true
+						} );
+					</script>

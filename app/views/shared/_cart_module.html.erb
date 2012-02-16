@@ -1,7 +1,5 @@
-<b><u>Cart:</u></b><br />
-<div class="grayBox">
-  <div id="cart_box">
-  </div>
+<br />
+<div id="cart_box">
 </div>
 <%= form_tag("/carts/#{@cart.id}?show_clear=#{show_clear}", {:remote => true, :method => "get"}) do %>
 	<%= submit_tag "init_load_cart", :hidden=>true, :id=>"init_load_cart" %>

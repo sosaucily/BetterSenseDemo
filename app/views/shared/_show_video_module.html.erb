@@ -1,17 +1,17 @@
-<b><%= "#{video.name}" %></b> - <a href="javascript:$('#submit_delete_<%=video.id.to_s%>').click()">Delete</a>
+<strong><%= "#{video.name}" %></strong> - <a href="javascript:$('#submit_delete_<%=video.id.to_s%>').click()">Delete</a>
 <%= form_tag("/videos/#{video.id}", {:remote => true, :method=>'delete', :hidden=>true}) do %>
 	<%= submit_tag "", :id => "submit_delete_#{video.id.to_s}" %>
 <% end %>
 <br />
-<span id="video_info_<%=video.id.to_s%>" title="<%= video_info_tooltip(video).html_safe %>" style="font-size:10pt; font-weight:normal; color:#D20001;"><img width="160" height="120" src="<%= if video.thumbnail_file_name.nil? then 'images/loading.gif' else video.thumbnail.url(:thumb) end %>" align="left" /></span><br />
+<span id="video_info_<%=video.id.to_s%>" title="<%= video_info_tooltip(video).html_safe %>" style="font-size:10pt; font-weight:normal; color:#D20001;"><img width="160" height="120" src="<%= if video.thumbnail_file_name.nil? then 'images/loading.gif' else video.thumbnail.url(:thumb) end %>"  /></span><br />
 <% if video.is_complete %>
 	<%= link_to("View Report","/videos/#{video.id}/reports") %>
 <%# A processing video can be ordered. %>
 <% elsif video.ready_to_order %>
-	<%= form_tag("/carts/#{cart.id}/add_item", {:remote => true}) do %>
+	<%= form_tag("/carts/#{cart.id}/add_item", {:remote => true, :id=>"default_form"}) do %>
 		<%= hidden_field_tag 'video_id',video.id %>
 		<%= select_tag 'quality', "<option>basic</option><option>premium</option>".html_safe%>
-		<%= submit_tag "Add to Cart", :class=> "submit_button" %>
+		<%= submit_tag "Add to Cart", :class=> "submit_button button2sm" %>
 	<% end %>
 <% elsif video.is_analyzing %>
 	<span>Ordering - Building Report</span><a href="javascript:$('#submit_refresh_<%=video.id.to_s%>').click()">Refresh</a>

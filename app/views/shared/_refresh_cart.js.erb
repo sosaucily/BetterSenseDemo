@@ -4,12 +4,15 @@
 <% end %>
 cart_html = "";
 <% @cart.line_items.each do |item| %>
-	cart_html += '<%= form_tag("/carts/#{@cart.id}/remove_item", {:remote => true}) { %><%= label_tag 'video_name', item.video.name %> - <%= label_tag 'quality', item.quality %> - <%= label_tag 'price', '$' + item.get_price().to_s %> - <%= hidden_field_tag 'item_id', item.id %><%= submit_tag "X", :class => "submit_button" %><% } %>';
+	cart_html += '<%= form_tag("/carts/#{@cart.id}/remove_item", {:remote => true}) { %><div class="cart_line_item" style="display:inline;"><strong><%= label_tag 'video_name', item.video.name %></strong> <%= label_tag 'quality', item.quality %> - <%= label_tag 'price', '$' + item.get_price().to_s %> <%= hidden_field_tag 'item_id', item.id %><%= content_tag :button, :type=>"submit", :class => "submit_button trashbutton" do image_tag "/images/template/trash.png" end %></div><% } %>';
 	<%# Rails.logger.info ("cart html is" + html_form) %>
 <% end %>
-cart_html += '<br /><%="Total: $#{@cart.total_price}"%>';
+cart_html += '<br /><%="Total: <strong>$#{@cart.total_price}</strong>".html_safe %>';
+
+cart_html += '<br /><%= link_to 'Order!', "/orders/new", :class=>"button2med" %>';
+
 <% if !(defined? @show_clear) || @show_clear then %>
-	cart_html += '<%= form_tag("/carts/#{@cart.id}/clear_items", {:remote => true}) { submit_tag "Clear Cart", :id => "clear_cart", :class=> "submit_button" } %>';
+	cart_html += '<br /><br /><%= form_tag("/carts/#{@cart.id}/clear_items", {:remote => true}) { %><%= submit_tag("Clear Cart", :id => "clear_cart", :hidden=>true) %> <%= link_to "Clear Cart", "javascript:do_clear_cart()", :class=>"button2med" %><% } %>';
 <% end %>
 
 $('#cart_box').html(cart_html);
