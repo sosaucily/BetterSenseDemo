@@ -1,7 +1,7 @@
 <%= javascript_include_tag "flowplayer-3.2.6.min" %>
 <% @video = Video.where(:name => 'Casino Royale Product Placement').first || Video.all.first %>
 <p>
-  <h4><%= @video.description %></h4> - Back to <%= link_to 'Demos', '/demo/' %>
+  <h4><%= @video.description %></h4> - Back to <%= link_to 'Demos', '/demo' %>
 </p>
 
 <p>
@@ -14,18 +14,20 @@
 
     var imageData = new Array();
     var keywordCat = new Array();
-    <% @video.iqeinfos.each do |iqe|
-     if (iqe.imagepath != nil)
+    <% num_iqes = @video.iqeinfos.last.id.to_i - @video.iqeinfos.first.id.to_i
+	 first_iqe = @video.iqeinfos.first.id.to_i
+	 @video.iqeinfos.each do |iqe|
+     if (iqe.matcheditem != nil)
        begin
-         patharray = iqe.imagepath.split("/")
-         seq = patharray[patharray.length-1][6..-4]
+         #patharray = iqe.imagepath.split("/")
+         seq = iqe.id.to_i - first_iqe + 1
        rescue => msg
          logger.info("caught exception in video.show when iterating through iqeinfo images: " + msg)
        end
      end
      if (seq != nil && iqe.matcheditem != nil)
      %>
-       imageData[<%= (seq.to_i * 2) - 5  %>] = "<%= iqe.matcheditem[0..-4] %>";
+       imageData[<%= (seq.to_i * 2) - 5  %>] = "<%= iqe.matcheditem %>";
        //keywordCat[<%= (seq.to_i * 2) - 5  %>] = "<%# getAdCategories(iqe.matcheditem[0..-4]) %>";
      <%
      end

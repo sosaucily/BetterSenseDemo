@@ -1300,8 +1300,8 @@ select#quality {
 }
 	.projects li {
 		float:left;
-		width:278px;
-		margin:0 23px 23px 0;
+		width:940px;
+		margin:0 0 23px 0;
 		color:#787878;
 		font-size:0.928em;
 		line-height:1.3846em;
@@ -1325,6 +1325,22 @@ select#quality {
 		}
 		.projects .last1 {
 			margin-bottom:0;
+		}
+		
+		.projects .thumb_column {
+			display:inline-block;
+			margin-right:50px;
+		}
+
+		.projects .thumb_column:hover {
+			/*zoom: 1;
+			filter: alpha(opacity=575);
+			opacity: 0.75;*/
+		}
+		
+		.projects .description_column {
+			display:inline-block;
+			width:300px;
 		}
 		
 .devise_links a {

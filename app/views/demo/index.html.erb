@@ -7,7 +7,7 @@
 					vid_x = 640
 					vid_y = 360
 					play_button_wh = 40
-					thumb_x = 260
+					thumb_x = 380
 					wh_ratio = vid_x.to_f / vid_y.to_f
 					thumb_y = (thumb_x/wh_ratio).to_f
 
@@ -16,135 +16,27 @@
 					thumbnail_options[:second] = '3'
 
 				%>
-				<a href="http://medianac.nacamar.de//p/461/thumbnail/entry_id/0_32kvjv16/vid_sec/3/width/260/height/146" class="lightbox-image" rel="prettyphoto[rel]" title="Project Name 1 <br> Fusce suscipit varius mi sociistoque"><img src="<%= raw getThumbnailWithPlayButtonForLightbox("0_32kvjv16", thumbnail_options, play_button_wh) %>" alt=""></a>
-				<span>Project Name 1</span>
-				Fusce suscipit varius mi sociistoque
+				<div class="thumb_column"><a href="demo/kaltura_video"><%= raw getThumbnailWithPlayButton("0_32kvjv16", thumbnail_options, play_button_wh) %></a></div>
+				<div class="description_column"><span>Delivering Context-Targeted Ads</span><hr>
+				A demo video showing the <b>better</b>sense content sensitive ad delivery. Served by partner Nacamar, and leveraging the Kaltura HTML5 player.</div>
 			</li>
 			<li>
-				<a href="/images/template/tfile_gall_1_6-big.jpg" class="lightbox-image" rel="prettyphoto[rel]" title="Project Name 2 <br> Suscipit varius mi sociistoque amet port"><img src="/images/template/tfile_gall_1_6.jpg" alt=""></a>
-				<span>Project Name 2</span>
-				Suscipit varius mi sociistoque amet port
-			</li>
-			<li class="last">
-				<a href="/images/template/tfile_gall_1_7-big.jpg" class="lightbox-image" rel="prettyphoto[rel]" title="Project Name 3 <br> Haslelus scipit varius mi sociistoque amet"><img src="/images/template/tfile_gall_1_7.jpg" alt=""></a>
-				<span>Project Name 3</span>
-				Haslelus scipit varius mi sociistoque amet
-			</li>
-			<li>
-				<a href="/images/template/tfile_gall_1_8-big.jpg" class="lightbox-image" rel="prettyphoto[rel]" title="Project Name 4 <br> Сerpit varius mi sociistoque ster"><img src="/images/template/tfile_gall_1_8.jpg" alt=""></a>
-				<span>Project Name 4</span>
-				Сerpit varius mi sociistoque ster
-			</li>
-			<li>
-				<a href="/images/template/tfile_gall_1_9-big.jpg" class="lightbox-image" rel="prettyphoto[rel]" title="Project Name 5 <br> Fusce suscipit varius mi sociistoque"><img src="/images/template/tfile_gall_1_9.jpg" alt=""></a>
-				<span>Project Name 5</span>
-				Fusce suscipit varius mi sociistoque
-			</li>
-			<li class="last">
-				<a href="/images/template/tfile_gall_1_10-big.jpg" class="lightbox-image" rel="prettyphoto[rel]" title="Project Name 6 <br> Lorem cipit varius mi sociistoque sters sres"><img src="/images/template/tfile_gall_1_10.jpg" alt=""></a>
-				<span>Project Name 6</span>
-				Lorem cipit varius mi sociistoque sters sres
-			</li>
-			<li class="last1">
-				<a href="/images/template/tfile_gall_1_11-big.jpg" class="lightbox-image" rel="prettyphoto[rel]" title="Project Name 7 <br> Fusce suscipit varius mi sociistoque"><img src="/images/template/tfile_gall_1_11.jpg" alt=""></a>
-				<span>Project Name 7</span>
-				Fusce suscipit varius mi sociistoque
-			</li>
-			<li class="last1">
-				<a href="/images/template/tfile_gall_1_12-big.jpg" class="lightbox-image" rel="prettyphoto[rel]" title="Project Name 8 <br> Ceripit varius mi sociistoque lorem amet"><img src="/images/template/tfile_gall_1_12.jpg" alt=""></a>
-				<span>Project Name 8</span>
-				Ceripit varius mi sociistoque lorem amet
+				<%
+					vid_x = 480
+					vid_y = 360
+					play_button_wh = 40
+					thumb_x = 380
+					wh_ratio = vid_x.to_f / vid_y.to_f
+					thumb_y = (thumb_x/wh_ratio).to_f
+
+					thumbnail_options = {}
+					thumbnail_options[:size] = [thumb_x,thumb_y.to_i]
+					thumbnail_options[:second] = '45'
+				%>
+				<div class="thumb_column"><a href="demo/detected_items"><%= raw getThumbnailWithPlayButton("0_3byvgkh0", thumbnail_options, play_button_wh) %></a></div>
+				<div class="description_column"><span>Video Analysis</span><hr>
+				Demonstration of the types of items the <b>better</b>sense system can extract from a video.</div>
 			</li>
 		</ul>
 	</div>
 </div>
-
-
-<h1><b>better</b>sense Demos</h1>
-<h4>View the following demos to see the <b>better</b>sense system</h4>
-<div class="span-20 last redhr"></div>
-<div class="span-20 last">
-<div class="span-20 last">
-	<%= link_to '/demo/kaltura_video' do %>
-	  <span style="font-size:16px;font-weight:bold"><u>Delivering Context Targeted Ads</u></span>
-	<% end %>
-	<br />
-  <div class="span-10">
-    A demo video showing the <b>better</b>sense content sensitive ad delivery. Served by partner Nacamar, and leveraging the Kaltura HTML5 player.
-  </div>
-  <div class="span-9 prepend-1 last">
-	<%
-		vid_x = 640
-		vid_y = 360
-		play_button_wh = 40
-		thumb_x = 260
-		wh_ratio = vid_x.to_f / vid_y.to_f
-		thumb_y = (thumb_x/wh_ratio).to_f
-
-		thumbnail_options = {}
-		thumbnail_options[:size] = [thumb_x,thumb_y.to_i]
-		thumbnail_options[:second] = '3'
-
-	%>
-    <%= link_to '/demo/kaltura_video' do %>
-      <%= raw getThumbnailWithPlayButton("0_32kvjv16", thumbnail_options, play_button_wh) %>
-    <% end %>
-  </div>
-</div>
-<br />&nbsp;<br />
-<%#<div class="span-20 last">
-<%#	<%= link_to '/demo/video_analysis' do %>
-<%#	  <span style="font-size:16px;font-weight:bold"><u>Video Analysis</u></span>
-<%#	<% end %>
-<%#	<br />
-<%#  <div class="span-10">
-<%#    Demonstration of the types of items the <b>better</b>sense system can extract from a video.
-<%#  </div>
-<%#  <div class="span-9 prepend-1 last">
-	<%
-		vid_x = 480
-		vid_y = 360
-		play_button_wh = 40
-		thumb_x = 260
-		wh_ratio = vid_x.to_f / vid_y.to_f
-		thumb_y = (thumb_x/wh_ratio).to_f
-
-		thumbnail_options = {}
-		thumbnail_options[:size] = [thumb_x,thumb_y.to_i]
-		thumbnail_options[:second] = '45'
-	%>
-<%#    <%= link_to '/demo/video_analysis' do %>
-<%#      <%= raw getThumbnailWithPlayButton("0_3byvgkh0", thumbnail_options, play_button_wh) %>
-<%#    <% end %>
-<%#  </div>
-<%#</div>%>
-
-<div class="span-20 last">
-	<%= link_to '/demo/detected_items' do %>
-	  <span style="font-size:16px;font-weight:bold"><u>Video Analysis</u></span>
-	<% end %>
-	<br />
-  <div class="span-10">
-    Demonstration of the types of items the <b>better</b>sense system can extract from a video.
-  </div>
-  <div class="span-9 prepend-1 last">
-	<%
-		vid_x = 480
-		vid_y = 360
-		play_button_wh = 40
-		thumb_x = 260
-		wh_ratio = vid_x.to_f / vid_y.to_f
-		thumb_y = (thumb_x/wh_ratio).to_f
-
-		thumbnail_options = {}
-		thumbnail_options[:size] = [thumb_x,thumb_y.to_i]
-		thumbnail_options[:second] = '45'
-	%>
-    <%= link_to '/demo/detected_items' do %>
-      <%= raw getThumbnailWithPlayButton("0_3byvgkh0", thumbnail_options, play_button_wh) %>
-    <% end %>
-  </div>
-</div>
-
-</div>
-<br />

@@ -1,9 +1,18 @@
 module VideosHelper
   
   def video_info_tooltip (video)
-    info = "Description: #{video.description}<br />"
+    info = "<strong>#{video.name}</strong><br />"
+    info += "Description: #{video.description}<br />"
     info += "Length: #{millis_to_HMS(video.lengthmillis)}<br />"
     info += "Status: #{video.status}"
+  end
+  
+  def display_video_name_short (video, len = 19)
+    name = video.name
+    if (name.length > len)
+      name = name[0..len-3] + "..."
+    end
+    return name
   end
   
   #require 'kaltura'
@@ -43,7 +52,7 @@ module VideosHelper
     thumb_left_marg = (thumb_x.to_f/2.0 - play_button_wh.to_f/2.0).to_i
     thumb_top_marg = ( (thumb_y.to_f/2.0) - play_button_wh.to_f/2.0).to_i
     
-    '<div style="width:' + thumb_x.to_s + 'px; height:' + thumb_y.to_i.to_s + 'px; position:relative;"><div style="width:' + thumb_x.to_s + 'px; height:' + thumb_y.to_i.to_s + 'px; position:absolute; z-index:1;">' + kaltura_thumbnail(kal_entry_id, thumb_options) + '</div><div style="width:' + play_button_wh.to_s + 'px; height:' + play_button_wh.to_i.to_s + 'px; position:absolute; z-index:2; margin-left:' + thumb_left_marg.to_s + 'px; margin-top:' + thumb_top_marg.to_s + 'px;"><img width="' + play_button_wh.to_s + '" height="' + play_button_wh.to_s + '" src="/images/play_button_50_50.png" /></div></div>'
+    '<div style="width:' + thumb_x.to_s + 'px; height:' + thumb_y.to_i.to_s + 'px; position:relative;"><div style="width:' + thumb_x.to_s + 'px; height:' + thumb_y.to_i.to_s + 'px; position:absolute; z-index:1;">' + kaltura_thumbnail(kal_entry_id, thumb_options) + '</div><div class="thumb_play_button" style="width:' + play_button_wh.to_s + 'px; height:' + play_button_wh.to_i.to_s + 'px; position:absolute; z-index:2; margin-left:' + thumb_left_marg.to_s + 'px; margin-top:' + thumb_top_marg.to_s + 'px;"><img width="' + play_button_wh.to_s + '" height="' + play_button_wh.to_s + '" src="/images/play_button_50_50.png" /></div></div>'
   end
   
   def get_report_content (hashstring, report_name)

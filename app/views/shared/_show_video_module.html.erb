@@ -1,4 +1,5 @@
-<strong><%= "#{video.name}" %></strong> - <a href="javascript:$('#submit_delete_<%=video.id.to_s%>').click()">Delete</a>
+<%# Trim here to a certain number of charaters if any word is over x chars, or if the name is over x chars %>
+<div style="width:140px;"><strong><%= "#{display_video_name_short(video, 19)}" %></strong></div> - <a href="javascript:$('#submit_delete_<%=video.id.to_s%>').click()">Delete</a>
 <%= form_tag("/videos/#{video.id}", {:remote => true, :method=>'delete', :hidden=>true}) do %>
 	<%= submit_tag "", :id => "submit_delete_#{video.id.to_s}" %>
 <% end %>
