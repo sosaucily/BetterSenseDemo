@@ -1,7 +1,8 @@
 <%= javascript_include_tag "flowplayer-3.2.6.min" %>
 <% @video = Video.where(:name => 'Casino Royale Product Placement').first || Video.all.first %>
 <p>
-  <h4><%= @video.description %></h4> - Back to <%= link_to 'Demos', '/demo' %>
+  <h4><%= @video.description %></h4>
+  As the video plays, a list of the detected items will appear in the box below.
 </p>
 
 <p>
@@ -116,9 +117,11 @@ Items Detected In Video <span id="infoTip1" title="bettersense uses a combinatio
  # render :partial => "iqeinfos/iqeinfo",
     #       :collection => @video.iqeinfos -->
  
+<%#
 <!--
 <script  src="http://tag.contextweb.com/TagPublish/getjs.aspx?action=VIEWAD&cwrun=200&cwadformat=728X90&cwpid=538773&cwwidth=728&cwheight=90&cwpnet=1&cwtagid=106617"></script>
 -->
+%>
 
 </div>
 <% if (admin_signed_in?) %>
@@ -134,5 +137,3 @@ Items Detected In Video <span id="infoTip1" title="bettersense uses a combinatio
   <% end %>
   <%= link_to 'Edit', edit_video_path(@video) %> |
 <% end %>
-
-<%= link_to 'Back', videos_path %>

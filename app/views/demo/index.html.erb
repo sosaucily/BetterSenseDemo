@@ -2,8 +2,9 @@
 	<h4 class="h4-bg1">The best technology available in a cost-effective package</h4>
 	<div class="wrapper">
 		<ul class="projects">
+			<%#
 			<li>
-				<%
+				<%#
 					vid_x = 640
 					vid_y = 360
 					play_button_wh = 40
@@ -15,12 +16,13 @@
 					thumbnail_options[:size] = [thumb_x,thumb_y.to_i]
 					thumbnail_options[:second] = '3'
 
-				%>
-				<div class="thumb_column"><a href="demo/kaltura_video"><%= raw getThumbnailWithPlayButton("0_32kvjv16", thumbnail_options, play_button_wh) %></a></div>
+				?>
+				<div class="thumb_column"><a href="demo/kaltura_video"><%= raw getThumbnailWithPlayButton("0_32kvjv16", thumbnail_options, play_button_wh) ?></a></div>
 				<div class="description_column"><span>Delivering Context-Targeted Ads</span><hr>
-				A demo video showing the <b>better</b>sense content sensitive ad delivery. Served by partner Nacamar, and leveraging the Kaltura HTML5 player.</div>
+				A demo video showing the <strong>better</strong>sense content sensitive ad delivery. Served by partner Nacamar, and leveraging the Kaltura HTML5 player.</div>
 			</li>
-			<li>
+			%>
+			<li class="last">
 				<%
 					vid_x = 480
 					vid_y = 360
