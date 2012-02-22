@@ -72,8 +72,11 @@ blockquote {
 	padding:20px 4px 20px 10px;
 	font-size:1.142em; 
 	line-height:1.5625em;
-	color:#83c00b; 
+	color:#111; 
 	quotes:none;
+	/*text-align:justify;
+	text-justify:inter-word; */
+	font-style:italic;
 }
 blockquote.left {background:url(../images/template/divider-bg1.gif) right top repeat-y; width:33%; float:left; margin-right:20px; padding-right:30px; padding-left:0;}
 blockquote.right {background:url(../images/template/divider-bg1.gif) left top repeat-y; width:33%; float:right; margin-left:0px; padding-left:40px; background-position:15px 0;}
@@ -149,12 +152,15 @@ var {color:black;}
 	color:#191919;
 	font-weight:bold;
 	display:block;
+	/*line-height:.6em;*/
 }
+
 #alert {
 	font-size:20px;
 	color:#191919;
 	font-weight:bold;
 	display:block;
+	/*ine-height:.6em;*/
 }
 
 h1 {
@@ -1195,25 +1201,19 @@ select#quality {
 }
 
 .slide1 {
-	background:url(../images/slide/bettersense-logo-541x450.jpg) left top no-repeat;
+	background:url(../images/slide/bettersense-logo-541x450-4.jpg) left top no-repeat;
 }
 .slide2 {
-	background:url(../images/slide/Dart-541x450.jpg) left top no-repeat;
+	background:url(../images/slide/Performance-Algorithm-541x450-4.jpg) left top no-repeat;
 }
 .slide3 {
-	background:url(../images/slide/Film-5-steps-541x450.jpg) left top no-repeat;
+	background:url(../images/slide/Sample-animated-item-541x450-3.jpg) left top no-repeat;
 }
 .slide4 {
-	background:url(../images/slide/Film-5-steps-version-2-541x450.jpg) left top no-repeat;
+	background:url(../images/slide/Dart-541x450.jpg) left top no-repeat;
 }
 .slide5 {
 	background:url(../images/slide/Film-blanco-541x450.jpg) left top no-repeat;
-}
-.slide6 {
-	background:url(../images/slide/Performance-Algorithm-541x450.jpg) left top no-repeat;
-}
-.slide7 {
-	background:url(../images/slide/Sample-animated-item-541x450.jpg) left top no-repeat;
 }
 	
 	
@@ -1309,6 +1309,9 @@ select#quality {
 .box:hover {
 	background:#f0f0f0;
 }
+.disabled:hover {
+	background:#fff;
+}
 .box_extended {
 	background:#f0f0f0;
 }
@@ -1354,6 +1357,9 @@ select#quality {
 	padding: 0px 10px 10px 20px ;	
 }
 
+.demo_body {
+	font-size:1.4em;
+}
 
 .projects {
 }

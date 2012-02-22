@@ -1,8 +1,8 @@
 <%= javascript_include_tag "flowplayer-3.2.6.min" %>
 <% @video = Video.where(:name => 'Casino Royale Product Placement').first || Video.all.first %>
 <p>
-  <h4><%= @video.description %></h4>
-  As the video plays, a list of the detected items will appear in the box below.
+  <h4>Casino Royale Demo<%# @video.description %></h4>
+  <div class="demo_body">As the video plays, the detected items will appear in the box below.</div>
 </p>
 
 <p>
