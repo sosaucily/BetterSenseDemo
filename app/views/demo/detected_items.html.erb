@@ -28,7 +28,7 @@
      end
      if (seq != nil && iqe.matcheditem != nil)
      %>
-       imageData[<%= (seq.to_i * 2) - 5  %>] = "<%= iqe.matcheditem %>";
+       imageData[<%= (seq.to_i * 2) - 5  %>] = "<%= iqe.matcheditem[0..-4] %>";
        //keywordCat[<%= (seq.to_i * 2) - 5  %>] = "<%# getAdCategories(iqe.matcheditem[0..-4]) %>";
      <%
      end
@@ -82,8 +82,8 @@
 -->
 </p>  
 <div id="itemsHolder" style="font-size: large">
-<table id=itemsTable" style="width: 400px; border-width: initial; border: 1px; solid #868686;" >
-<tr style="height: 40px;"><td style="padding-left:7px; color:#000000; font-size:14pt; font-weight:bold;background: url('/images/GradientForBettersenseItemsTable.jpg');" >
+<table id=itemsTable" style="width: 480px; border-width: initial; border: 1px; solid #868686;" >
+<tr style="height: 40px;"><td style="padding-left:7px; color:#000000; font-size:14pt; font-weight:bold;" >
 Items Detected In Video <span id="infoTip1" title="bettersense uses a combination of state-of-the-art CV (Computer Vision) and crowdsourcing systems to locate important objects in videos." style="font-size:10pt; font-weight:normal; color:#D20001;"><b>how?</b></span>
 </td></tr>
 <tr style="height: 40px;"><td style="padding-left:5px; color:#000000; font-size:14pt; font-weight:bold; border-color:#868686; border:1px solid #868686;" >
