@@ -21,7 +21,7 @@
 							</article>
 							<article class="grid_8 omega">
 								<h4 class="h4-bg1">Get in Touch</h4>
-									<div id="contact_form"><form action="" id="contact-form" method="post" class="main-contacts">
+									<div id="contact_form"><form action="/contact/create" id="contact-form" method="post" class="main-contacts">
 										<fieldset>
 											<input type="hidden" name="owner_email" id="owner_email" value="admin@bettersense.com" />
 											<input type="hidden" name="serverProcessorType" id="serverProcessorType" value="php" />
@@ -49,11 +49,17 @@
 												<label class="error" for="message" id="message_error2">*The message is too short.</label>
 											</div>
 											<div class="alignright">
-												<a href="#" id="clear" class="button1" ><span>Clear</span></a><a href="#" id="submit" class="button2" ><span>Submit</span></a>
+												<a href="#" id="clear" class="button1" ><span>Clear</span></a><a href="javascript:send_contact()" id="submit" class="button2" ><span>Submit</span></a>
 											</div>
 										</fieldset>
+										<input hidden="hidden" id="contact_submit" name="commit" type="submit" value="" />
 									</form>
 								</div>
 							</article>
 						</div>
 					</div>
+					<script type="text/javascript">
+						send_contact = function() {
+					        $('#contact_submit').click();
+					    };
+					</script>
