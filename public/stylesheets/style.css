@@ -148,19 +148,21 @@ var {color:black;}
 
 /* notice bar */
 #notice {
-	font-size:20px;
+	font-size:18px;
 	color:#191919;
 	font-weight:bold;
 	display:block;
+	padding-bottom:0px;
 	/*line-height:.6em;*/
 }
 
 #alert {
-	font-size:20px;
+	font-size:18px;
 	color:#191919;
 	font-weight:bold;
 	display:block;
-	/*ine-height:.6em;*/
+	padding-bottom:0px;
+	/*line-height:.6em;*/
 }
 
 h1 {

@@ -166,6 +166,7 @@ $(function(){
 		}else{
 			fileExtension = serverProcessorType;
 		}
+		/*
 		var mailHandlerURL = "bin/MailHandler." + fileExtension;
 		$.ajax({
 			type: "POST",
@@ -182,6 +183,10 @@ $(function(){
 					});
 			}
 		});
+		*/
+		
+		//This triggers the submit form on the page.
+		$('#contact_submit').click();
 				
 		return false;
 	});

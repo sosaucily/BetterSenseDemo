@@ -1,0 +1,7 @@
+<p>Incoming Message from Website Contact Page</p>
+<p>Name: <%= @contact_info["name"] %></p>
+<p>Date: <%= Time.now.strftime("%c") %></p>
+<p>Phone: <%= @contact_info["phone"] %></p>
+<p>Email: <%= @contact_info["email"] %></p>
+<p>Message:<br />
+<pre><%= sanitize @contact_info["message"]%></pre></p>

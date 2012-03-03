@@ -73,9 +73,10 @@ BetterSenseDemo::Application.routes.draw do
   match "betterpic", :controller => 'betterpic', :action => 'index'
   match "betterpic/:iqeinfo_id", :controller => 'betterpic', :action => 'update'
 
-  get "contact/index"
+  #get "contact/index"
+  match "contact", :controller => 'contact', :action => 'create', :via => [:post]
 
-  match "contact", :controller => 'contact', :action => 'index'
+  match "contact", :controller => 'contact', :action => 'index', :via => [:get]
 
   match "videos/:video_id/iqeinfos/:id/:action", :controller => 'iqeinfos', :action => /[a-zA-Z]+/i
 

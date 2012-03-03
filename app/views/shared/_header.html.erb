@@ -43,9 +43,10 @@
 				</header>
 
 <!-- end #header --> 
+<%= "<div class=\"info-box\" id=\"notice\"><p class=\"icon\"><img src=\"/images/template/icon-info.png\" alt=\"\"></p>#{notice}</p></div>".html_safe unless notice.nil? %>
+
+<%# "<p class=\"info-box\" id=\"notice\">#{notice}</p>".html_safe unless notice.nil? %>
+<%= "<div class=\"error-box\" id=\"alert\"><p class=\"icon\"><img src=\"/images/template/icon-error.png\" alt=\"\"></p>#{alert}</p></div>".html_safe unless alert.nil? %>
+<%# "<p class=\"error-box\" id=\"alert\">#{alert}</p>".html_safe unless alert.nil? %>
 				<section id="content">
-				    <%= "<div class=\"info-box\" id=\"notice\"><p class=\"icon\"><img src=\"/images/template/icon-info.png\" alt=\"\"></p>#{notice}</p></div>".html_safe unless notice.nil? %>
-				    
-					<%# "<p class=\"info-box\" id=\"notice\">#{notice}</p>".html_safe unless notice.nil? %>
-					<%= "<div class=\"error-box\" id=\"alert\"><p class=\"icon\"><img src=\"/images/template/icon-error.png\" alt=\"\"></p>#{alert}</p></div>".html_safe unless alert.nil? %>
-					<%# "<p class=\"error-box\" id=\"alert\">#{alert}</p>".html_safe unless alert.nil? %>
+
