@@ -19,6 +19,9 @@ development:
     analyze_video_seconds: "15"
     basic_cost_per_min: "2"
     premium_cost_per_min: "5"
+    web_contact_email_address: "js@bettersense.com"
+    web_email_smtp_user_name: "wp1187079-jesse_bettersense11"
+    web_email_smtp_password: "playtime"
 
 test:
     base_url: "http://107.20.141.244"
@@ -41,6 +44,9 @@ test:
     analyze_video_seconds: "15"
     basic_cost_per_min: "2"
     premium_cost_per_min: "5"
+    web_contact_email_address: "js@bettersense.com"
+    web_email_smtp_user_name: "wp1187079-jesse_bettersense11"
+    web_email_smtp_password: "playtime"
 
 production:
     base_url: "http://www.bettersense.com"
@@ -63,3 +69,6 @@ production:
     analyze_video_seconds: "60"
     basic_cost_per_min: "2"
     premium_cost_per_min: "5"
+    web_contact_email_address: "sf@bettersense.com"
+    web_email_smtp_user_name: "wp1187079-jesse_bettersense11"
+    web_email_smtp_password: "playtime"

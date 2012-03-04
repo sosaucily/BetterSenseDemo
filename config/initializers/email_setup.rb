@@ -2,8 +2,8 @@ ActionMailer::Base.smtp_settings = {
   :address              => "wp237.webpack.hosteurope.de",
   :port                 => 587,
   :domain               => "bettersense.com",
-  :user_name            => "wp1187079-jesse_bettersense11",
-  :password             => "playtime",
+  :user_name            => BetterSenseDemo::APP_CONFIG["web_email_smtp_user_name"],
+  :password             => BetterSenseDemo::APP_CONFIG["web_email_smtp_password"],
   :authentication       => "plain",
   :enable_starttls_auto => true
 }

@@ -1,6 +1,6 @@
 class GeneralMailer < ActionMailer::Base
   default :from => "webadmin@bettersense.com"
-  default :to => "js@bettersense.com"
+  default :to => BetterSenseDemo::APP_CONFIG["web_contact_email_address"]
   
   def website_contact_form(contact_info)
     @contact_info = contact_info #For use in view
