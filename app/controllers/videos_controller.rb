@@ -157,10 +157,19 @@ class VideosController < ApplicationController
   # GET /videos/1/update_status
   def update_status
     @video = Video.find(params[:video_id])
+    page_status = params[:video_page_status]
     @cart = current_cart
+    #Only need to update the page (via js) if the status of the video has changed
+    #This doesn't work on the page... Can't figure out the JS
+    #logger.debug "Comparing status=" + @video.status + " with page status=" + page_status
+    #if @video.status == page_status then
+    #  return head :ok
+    #else
+    #  logger.debug "They are different, so refreshing video thumb"
     respond_to do |format|
       format.js
     end
+    #end
   end
   
   #GET /videos/1/reports

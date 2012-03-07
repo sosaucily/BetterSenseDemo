@@ -20,16 +20,17 @@
 	<span>Please Wait...</span>
 <% end %>
 <%= form_tag("/videos/#{video.id}/update_status", {:remote => true, :hidden=>true}) do %>
+	<%= hidden_field_tag 'video_page_status', video.status %>
 	<%= submit_tag "", :id => "submit_refresh_#{video.id.to_s}" %>
 <% end %>	
 <script type="text/javascript">
 //Tool Tip for Video thumbnail
 	$('#video_info_<%=video.id.to_s%>').qtip();
+	//if (typeof window['timer_<%=video.id.to_s%>'] != 'undefined') clearTimeout(window['timer_<%=video.id.to_s%>']); 
 	<% if video.is_processing %>
 		function refresh_video() {
-			var t=setTimeout("$('#submit_refresh_<%=video.id.to_s%>').click()",10000);
+			var timer_<%=video.id.to_s%> = setTimeout("$('#submit_refresh_<%=video.id.to_s%>').click();",10000);
 		}
 		refresh_video();
 	<% end %>
 </script>						
-<%# "Video Length: #{millis_to_HMS(video.lengthmillis)}" %>

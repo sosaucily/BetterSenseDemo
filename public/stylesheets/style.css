@@ -1363,6 +1363,21 @@ select#quality {
 	font-size:1.4em;
 }
 
+.demos {
+}
+
+	.demos span {
+		color:#191919;
+		text-transform:uppercase;
+		display:block;
+		font-size:1.4em;
+		padding:24px 0 0 0;
+	}
+	
+	.demos .demo_video_480 {
+		padding-left: 30px;
+	}
+
 .projects {
 }
 	.projects li {
@@ -2743,3 +2758,91 @@ a > .sf-sub-indicator {  /* give all except IE6 the correct values */
 			#advanced ul ul ul li a {
 				color:#939393;
 			}
+
+/*Video Table*/
+  #ver-minimalist
+  {
+        font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+        font-size: 12px;
+        margin: 0px;
+        width: 100%;
+        text-align: left;
+        border-collapse: collapse;
+  }
+  #ver-minimalist th
+  {
+        padding: 4px 2px;
+        font-weight: normal;
+        font-size: 12px;
+        border-bottom: 2px solid #6678b1;
+        border-right: 10px solid #fff;
+        border-left: 10px solid #fff;
+        color: #039;
+  }
+  #ver-minimalist td
+  {
+        padding: 6px 2px 0px 2px;
+        border-right: 10px solid #fff;
+        border-left: 10px solid #fff;
+        color: #669;
+  }
+
+  #ver-minimalist .vodd
+  {
+        background: #e8edff;
+  }
+
+  #ver-minimalist .veven
+  {
+        background: #ffffff;
+  }
+
+  #ver-minimalist thead th 
+  {
+        background: #ffffff; 
+  }
+
+  #ver-minimalist tfoot th
+  {
+        font-style: normal;
+  }
+
+/*Category Bars*/
+.categoryBar
+{
+		background-color:#F2F2F2;
+		height:0px;
+		opacity:0.7;
+		border-color: #3C3C3C;
+		border-style: solid;
+		border-width: 1px; 
+		margin-left:0px;
+		padding-left:11px;
+		/*
+		#margin-right:1px;
+		#margin-top:200px;
+		#border-top-left-radius:35px 20px;
+		#border-top-right-radius:35px 20px;
+		*/
+		
+}
+
+.categoryBarFirst
+{
+		margin-left:22px;
+}
+	
+#categoryTable
+{
+		background-color: #394172;
+}
+
+.dataTables_wrapper .vodd
+{
+		background-color: #EFCACA;
+}
+
+.dataTables_wrapper .veven
+{
+		background-color: #F4D9D9;
+}
