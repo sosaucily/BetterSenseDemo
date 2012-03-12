@@ -9,7 +9,7 @@
 <% @video = Video.where(:name => 'Casino Royale').first || Video.all.first %>
 <%= javascript_include_tag "flowplayer-3.2.6.min" %>
 <%= javascript_include_tag 'jquery.dataTables.min'%>
-<%= javascript_include_tag 'better_category_animations'%>
+<%# javascript_include_tag 'better_category_animations'%>
 <script type="text/javascript">
 	var video_metadata = <%= @demo_video_metadata.to_json.html_safe %>
 </script>
@@ -41,12 +41,14 @@
 				</div>
 				<div class="demo_info_box" id="demo_info_box"></div>
 			</div>
+			<!--
 			<div class="grid_7 alpha">
 				<div id="keyword_table_div"></div><br />
 			</div>
 			<div class="grid_7 alpha">
 				<div id="scene_table_div"></div><br />
 			</div>
+			-->
 		</div>
 		<div class="grid_5 omega">
 			<div class="grid_5">

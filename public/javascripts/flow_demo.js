@@ -37,8 +37,8 @@ flowplayer("player", "/flash/flowplayer-3.2.7.swf", {
 				curr_demo_value = $('#demo_info_box').html()
 				$('#demo_info_box').html(curr_demo_value + '<span id="elem_' + (cuepoint/1000) + '" style="display:none;">' + 
 					'Scene ' + scene_count + ': ' + curr_scene["startTime"] + " - " + curr_scene["stopTime"] + "<br />" + 
-					'Top Keyword: ' + curr_scene["keywords"][0]["keyword"] + '&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ' + 'Top Category: ' + curr_scene["categories"][0]["category"] + "<br />" + 
-					'&nbsp;&nbsp;Relevance: ' + curr_scene["keywords"][0]["relevance"] + '&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Relevance: ' + curr_scene["categories"][0]["relevance"] + 
+					'Top Keyword: ' + curr_scene["keywords"][0]["keyword"] + '&nbsp; &nbsp; &nbsp; ' + 'Top Category: ' + curr_scene["categories"][0]["category"] + "<br />" + 
+					'&nbsp;&nbsp;Relevance: ' + curr_scene["keywords"][0]["relevance"] + '&nbsp; &nbsp; &nbsp; Relevance: ' + curr_scene["categories"][0]["relevance"] + 
 					'</span><br /><br />');
 				$('#elem_' + (cuepoint/1000)).fadeIn();
 				$('#demo_info_box').scrollTop(9999999);
