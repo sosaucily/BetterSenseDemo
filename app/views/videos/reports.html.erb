@@ -5,16 +5,22 @@
 <div class="span-20 last">
 
 	<% @reports.each do |report| %>
-		<b>Report <%= report.to_s %></b> - 
-		<%= form_tag("/videos/#{@video.id}/reports/#{report.to_s}") do %>
-			<%= hidden_field_tag 'requested_format',"txt" %>
-			<%= submit_tag "Download"%>
-		<% end %>
-		<div class="span-20 last">
-			<div class="grayBox">
-				<textarea class="reportBox"><%= get_report_content(@video.hashstring, report) %></textarea>
+		<%
+		report_content = get_report_content(@video.hashstring, report)
+		#Don't include empty reports
+		if !report_content.empty? then
+		%>
+			<b>Report <%= report.to_s %></b> - 
+			<%= form_tag("/videos/#{@video.id}/reports/#{report.to_s}") do %>
+				<%= hidden_field_tag 'requested_format',report.to_s[-3..-1] %>
+				<%= submit_tag "Download"%>
+			<% end %>
+			<div class="span-20 last">
+				<div class="grayBox">
+					<textarea class="reportBox"><%= report_content %></textarea>
+				</div>
 			</div>
-		</div>
+		<% end %>
 	<% end %>
 	
 </div>

@@ -5,10 +5,14 @@
 	
 	Use API to make the connection?
 %>
-<% @video = Video.where(:name => 'Casino Royale Product Placement').first || Video.all.first %>
+<% logger.debug "Running demo with metadata object: " + @demo_video_metadata.to_json %>
+<% @video = Video.where(:name => 'Casino Royale').first || Video.all.first %>
 <%= javascript_include_tag "flowplayer-3.2.6.min" %>
 <%= javascript_include_tag 'jquery.dataTables.min'%>
 <%= javascript_include_tag 'better_category_animations'%>
+<script type="text/javascript">
+	var video_metadata = <%= @demo_video_metadata.to_json.html_safe %>
+</script>
 <div class="indent1 padding">
 	<div class="wrapper demos">
 		<div class="grid_7 alpha">
@@ -20,14 +24,6 @@
 						style="display:block;width:<%= @video.res_x.to_s %>px;height:<%= @video.res_y.to_s %>px"
 						id="player">
 					</a>
-					<script language="JavaScript">
-						flowplayer("player", "/flash/flowplayer-3.2.7.swf", {
-						    clip: {
-						    // stop at the first frame and start buffering
-						    autoPlay: false,
-						    autoBuffering: false
-						} } );
-					</script>
 				<%# 
 				  vid_x = 480
 				  vid_y = 360
@@ -37,6 +33,13 @@
 				%>
 				<%# raw kaltura_player_embed('0_3byvgkh0', kaltura_options) %>
 				</div>
+			</div>
+			<div class="grid_7 alpha demo_info">
+				<div class="demo_info_title"><span>Metadata by <strong>better</strong>sense</span></div>
+				<div class="demo_info_keyword">
+					<span>Current keyword: </span><span id="curr_keyword"></span>
+				</div>
+				<div class="demo_info_box" id="demo_info_box"></div>
 			</div>
 			<div class="grid_7 alpha">
 				<div id="keyword_table_div"></div><br />
@@ -73,3 +76,4 @@
 		</div>
 	</div>
 </div>
+<%= javascript_include_tag 'flow_demo'%>

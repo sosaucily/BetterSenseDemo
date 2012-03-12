@@ -152,6 +152,8 @@ class Video < ActiveRecord::Base
     Dir.chdir(video_report_dir)
 
     reports = Dir.glob("*.txt")
+    reports << Dir.glob("*.xml")
+    reports.flatten
   end
   
   def is_complete

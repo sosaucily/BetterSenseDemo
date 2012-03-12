@@ -1375,7 +1375,45 @@ select#quality {
 	}
 	
 	.demos .demo_video_480 {
-		padding-left: 30px;
+		/*padding-left: 30px;*/
+		padding:15px 30px 15px 30px;
+		background:#e6e6e6;
+	}
+
+	.demos .demo_info span {
+		padding: 6px 0 6px 0;
+		display:inline-block;
+		padding-left: 1px;
+	}
+	
+	.demos .demo_info_title {
+		margin: 10px 0 0 0;
+		border:1px solid #aaaaaa;
+		border-bottom-width: 0px;
+	}
+	
+	.demos .demo_info_keyword {
+		border:1px solid #aaaaaa;
+	}
+	
+	.demos .demo_info_keyword #curr_keyword {
+		padding-left: 5px;
+	}
+	
+	.demos .demo_info_box {
+		height: 200px;
+		margin-top: 10px;
+		border:1px solid #aaaaaa;
+		overflow: auto;
+	}
+	
+	.demos .demo_info_box span {
+		height: 0px;
+		margin-top: 0px;
+		padding: 0 0 0 0;
+		display:inline;
+		text-transform:none;
+		color:#787878;
 	}
 
 .projects {

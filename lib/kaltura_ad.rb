@@ -7,7 +7,7 @@
 # This class is used to build ads in the correct format for the Kaltura HTML5 Player
 
 class KalturaAd
-  #Included to provide access to gain access to the code markdown system.
+  #Included to provide access to the code markdown system.
   include ApplicationHelper
 
   # Initialize default ad parameters 
