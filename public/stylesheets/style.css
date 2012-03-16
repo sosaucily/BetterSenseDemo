@@ -1368,7 +1368,7 @@ select#quality {
 
 	.demos span {
 		color:#191919;
-		text-transform:uppercase;
+		/*text-transform:uppercase;*/
 		display:block;
 		font-size:1.4em;
 		padding:24px 0 0 0;
@@ -1414,6 +1414,17 @@ select#quality {
 		display:inline;
 		text-transform:none;
 		color:#787878;
+		font-size:1.2em;
+	}
+	
+	.demos .demo_how_it_works_image {
+		padding: 10px 0 0 0px;
+	}
+	
+	.demos .demo_how_it_works_text {
+		font-size:1.3em;
+		padding-right: 13px;
+		line-height:1.3846em;
 	}
 
 .projects {
