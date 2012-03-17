@@ -32,7 +32,7 @@ flowplayer("player", "/flash/flowplayer-3.2.7.swf", {
                 $('#curr_keyword').html(window.video_metadata["video_metadata"]["frames"]["elem_" + (cuepoint/1000)]["keyword"] + " - " +  window.video_metadata["video_metadata"]["frames"]["elem_" + (cuepoint / 1000)]["relevance"]);
 				//$('#curr_keyword').html("hi");
                 //$('#categories').html(keywordCat[cuepoint / 1000]);
-                $('#curr_keyword').fadeIn('slow'); 
+                $('#curr_keyword').fadeIn('fast'); 
               });  
             }
 			

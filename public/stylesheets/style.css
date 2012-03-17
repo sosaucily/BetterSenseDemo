@@ -1401,7 +1401,7 @@ select#quality {
 	}
 	
 	.demos .demo_info_box {
-		height: 200px;
+		height: 225px;
 		margin-top: 10px;
 		border:1px solid #aaaaaa;
 		overflow: auto;
@@ -1418,13 +1418,24 @@ select#quality {
 	}
 	
 	.demos .demo_how_it_works_image {
-		padding: 10px 0 0 0px;
+		padding: 0px 0 0 0px;
 	}
 	
 	.demos .demo_how_it_works_text {
 		font-size:1.3em;
 		padding-right: 13px;
 		line-height:1.3846em;
+	}
+	
+	.demos .demo_element_description span {
+		color:#191919;
+		text-transform:uppercase;
+		display:block;
+		font-size:1.4em;
+		padding:8px 0 0 0;
+	}
+	.demos .demo_element_description #first {
+		padding:0 0 0 0;
 	}
 
 .projects {
