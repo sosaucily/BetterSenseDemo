@@ -3,6 +3,9 @@ require 'rexml/document'
 class DemoVideoMetadata
   
   def initialize(hashstring, xml_data_file)
+    #This is used to improve the viewer experience
+    viewer_offset = 1
+    
     video_report_dir = Rails.root.to_s + BetterSenseDemo::APP_CONFIG["report_directory"] + hashstring
     report_content = IO.read(video_report_dir + "/" + xml_data_file).html_safe
     doc = REXML::Document.new(report_content)
@@ -34,7 +37,7 @@ class DemoVideoMetadata
     end
     
     doc.elements.each('betterMetadata/keywordByFrame/frame') do |ele|
-      @video_metadata[:frames]["elem_" + string_to_seconds(ele.attributes['time']).to_s] = { :keyword => ele.elements['keyword'].text.strip, :relevance => ele.elements['keyword'].attributes['relevance'], :time => ele.attributes['time'] }
+      @video_metadata[:frames]["elem_" + (string_to_seconds(ele.attributes['time']) - viewer_offset).to_s] = { :keyword => ele.elements['keyword'].text.strip, :relevance => ele.elements['keyword'].attributes['relevance'], :time => ele.attributes['time'] }
     end
   end
   
