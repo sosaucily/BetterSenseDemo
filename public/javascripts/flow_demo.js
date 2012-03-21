@@ -74,13 +74,13 @@ flowplayer("player", "/flash/flowplayer-3.2.8.swf", {
 	          getCuepoints($f().getClip(0)),
 	          function(clip, cuepoint) {
 				//console.log ("cue - prev_cue = " + (cuepoint - prev_cuepoint));
-				console.log ("Current Cuepoint: " + cuepoint.time)
+				//console.log ("Current Cuepoint: " + cuepoint)
 				if ( ( (cuepoint - prev_cuepoint) > 1000) || ( (cuepoint - prev_cuepoint) < 0 ) ) {
 					setDemoTextToTime(cuepoint);
 				}
 				prev_cuepoint = cuepoint;
 	            //This will act every second of video, with the variable "cuepoint" holding the current number of millis
-				console.log("at cuepoint: " + cuepoint);
+				//console.log("at cuepoint: " + cuepoint);
 				//console.log(window.video_metadata);
 	            if ( ("elem_" + (cuepoint/1000)) in v_meta["frames"])
 	            {
@@ -103,7 +103,7 @@ flowplayer("player", "/flash/flowplayer-3.2.8.swf", {
 
 function setDemoTextToTime(new_cuetime) {
 	window.scene_count = 0;
-	console.log("in new method");
+
 	updated_content = getDemoBoxHeader("inline");
 	for (curr_time = 0; curr_time <= new_cuetime; curr_time += 1000)
 	{
@@ -116,13 +116,13 @@ function setDemoTextToTime(new_cuetime) {
 			}
 		}
 	}
-	console.log("in new method - 2");
+	
 	$('#demo_info_box').html( updated_content );
-	console.log("in new method - 3");
+	
 	/*$('#initial_demo_text').toggle(function() {
 		$('#demo_info_box').find("span").css('display','none').toggle();
 	});*/
-	console.log("in new method - 4");
+	
 	$('#demo_info_box').scrollTop(9999999);
 }
 
