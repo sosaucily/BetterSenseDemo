@@ -1401,7 +1401,7 @@ select#quality {
 	}
 	
 	.demos .demo_info_box {
-		height: 265px;
+		height: 280px;
 		margin-top: 10px;
 		border:1px solid #aaaaaa;
 		overflow: auto;
@@ -1429,7 +1429,7 @@ select#quality {
 	}
 	
 	.demos .demo_element_description span {
-		color:#191919;
+		color:#787878;
 		/*text-transform:uppercase;*/
 		display:block;
 		font-size:1.4em;
@@ -1437,6 +1437,12 @@ select#quality {
 	}
 	.demos .demo_element_description #first {
 		padding:0 0 0 0;
+	}
+	
+	.demos .demo_glossary_title {
+		color:#191919;
+		font-size:1.4em;
+		text-align: center;
 	}
 
 .projects {
