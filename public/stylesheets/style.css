@@ -1442,7 +1442,7 @@ select#quality {
 	.demos .demo_glossary_title {
 		color:#191919;
 		font-size:1.4em;
-		text-align: center;
+		/*text-align: center;*/
 	}
 
 .projects {

@@ -2,6 +2,7 @@ class DemoController < ApplicationController
 
 
   def index
+    redirect_to "/demo/video_analysis"
   end
 
   def servePage
