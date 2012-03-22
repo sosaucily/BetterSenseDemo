@@ -1401,7 +1401,7 @@ select#quality {
 	}
 	
 	.demos .demo_info_box {
-		height: 280px;
+		height: 250px;
 		margin-top: 10px;
 		border:1px solid #aaaaaa;
 		overflow: auto;
@@ -1419,7 +1419,7 @@ select#quality {
 	}
 	
 	.demos .demo_how_it_works_image {
-		padding: 0px 0 0 0px;
+		padding: 0px 0 4px 0px;
 	}
 	
 	.demos .demo_how_it_works_text {
@@ -1436,12 +1436,13 @@ select#quality {
 		padding:8px 0 0 0;
 	}
 	.demos .demo_element_description #first {
-		padding:0 0 0 0;
+		padding:2px 0 0 0;
 	}
 	
 	.demos .demo_glossary_title {
 		color:#191919;
 		font-size:1.4em;
+		padding: 4px 0 0 0;
 		/*text-align: center;*/
 	}
 
