@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  source_ip: MyString
+  session_id: MyString
+  path: MyString
+
+two:
+  source_ip: MyString
+  session_id: MyString
+  path: MyString

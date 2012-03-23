@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120204231027) do
+ActiveRecord::Schema.define(:version => 20120323180758) do
 
   create_table "accounts", :force => true do |t|
     t.string   "fname"
@@ -195,6 +195,14 @@ ActiveRecord::Schema.define(:version => 20120204231027) do
 
 # Could not dump table "t1" because of following StandardError
 #   Unknown type '' for column 'a'
+
+  create_table "traffic_watchers", :force => true do |t|
+    t.string   "source_ip"
+    t.string   "session_id"
+    t.string   "path"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false

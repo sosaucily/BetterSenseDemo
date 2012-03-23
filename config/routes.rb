@@ -1,5 +1,7 @@
 BetterSenseDemo::Application.routes.draw do
 
+  get "traffic_watcher/index"
+
   resources :orders
 
   get "cart/new"

@@ -62,6 +62,8 @@ gem 'delayed_job_active_record'
 
 gem 'daemons'
 
+gem 'geocode'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
