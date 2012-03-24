@@ -94,6 +94,7 @@ BetterSenseDemo::Application.routes.draw do
   
   get "home/index"
   get "about", :controller => 'home', :action => 'about'
+  get "how", :controller => 'home', :action => 'how'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

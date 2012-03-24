@@ -1225,6 +1225,9 @@ select#quality {
 .indent1 {
 	padding:48px 0 62px 0
 }
+.no_bottom {
+	padding-bottom:0px;
+}
 
 .title {
 	font-size:2.0714em;
@@ -1457,14 +1460,16 @@ select#quality {
 		line-height:1.3846em;
 		background:#fff;
 		padding:15px 10px 15px 10px;
-		background:url(../images/template/list2-li-bg.gif) left bottom repeat-x;
+		height:225px;
+		/*position:relative;*/
+		/*background:url(../images/template/list2-li-bg.gif) left bottom repeat-x;*/
 	}
 		.projects li span {
 			color:#191919;
 			text-transform:uppercase;
 			display:block;
 			font-size:1.4em;
-			padding:24px 0 0 0;
+			padding:0px 0 0 0;
 		}
 			.projects li:hover {
 				/*background:#19191a;*/
@@ -1473,28 +1478,110 @@ select#quality {
 					/*color:#fff;*/
 				}
 		.projects .last {
-			background:none;
+			margin-bottom:0;
+			height:150px;
+			margin-top:30px;
+			vertical-align:bottom;
+			position:relative;
+		}
+		.projects .odd {
+
+			background:#e6e6e6;
+		}
+		.projects .vert_parent {
+			display:inline-block;
+			position:absolute;
+			height:225px;
+		}
+		.projects .number_element {
+			display:inline;
+			font-size:8em;
+			position:absolute;
+			top:50%;
+			margin-top:-20px;
+		}
+		.projects .even .thumb_column {
+			margin-left:710px;
+			margin-right:0px;
+		}
+		.projects .odd .thumb_column {
+		}
+		.projects .odd .description_column {
+			margin-left:335px;
 		}
 		.projects .last1 {
 			margin-bottom:0;
 		}
-		
 		.projects .thumb_column {
 			display:inline-block;
-			margin-right:50px;
-			padding:15px 15px 15px 15px;
+			margin:0px 50px 0 115px;
+			padding:6px 6px 6px 6px;
 			background:#e6e6e6;
+			top:50%;
+			background-color:#FFF;
+			border-radius: 5px 10px 5px 10px;
 		}
 
 		.projects .thumb_column:hover {
-			/*zoom: 1;
-			filter: alpha(opacity=575);
-			opacity: 0.75;*/
 		}
 		
 		.projects .description_column {
 			display:inline-block;
-			width:300px;
+			width:570px;
+			position:absolute;
+			top:50%;
+			margin-left:115px;
+			margin-top:-60px;
+		}
+		.projects .how_image_1 {
+			width:200px;
+			height:223px;
+			margin-top:0px;
+			background-image:url(../images/How_1_Film_Funnel_200.jpg);
+		}
+		.projects .thumb_parent_1 {
+			margin-top:-6px;
+		}
+		.projects .how_image_2 {
+			width:200px;
+			height:177px;
+			margin-top:0px;
+			background-image:url(../images/How_2_Frame_strip_200.jpg);
+		}
+		.projects .thumb_parent_2 {
+			margin-top:15px;
+		}
+		.projects .how_image_3 {
+			width:200px;
+			height:174px;
+			background-image:url(../images/How_3_Chart_200.jpg);
+		}
+		.projects .thumb_parent_3 {
+			margin-top:20px;
+		}
+		.projects .how_image_4 {
+			width:200px;
+			height:189px;
+			background-image:url(../images/How_4_Max_Value_200.jpg);
+		}
+		.projects .thumb_parent_4 {
+			margin-top:15px;
+		}
+		.projects .how_image_5 {
+			width:200px;
+			height:191px;
+			background-image:url(../images/How_5_compare_ads_200.jpg);
+		}
+		.projects .thumb_parent_5 {
+			margin-top:10px;
+		}
+		.projects .how_image_6 {
+			width:200px;
+			height:113px;
+			background-image:url(../images/How_6_Laptop_Ad_200.jpg);
+		}
+		.projects .thumb_parent_6 {
+			margin-top:0px;
 		}
 		
 .devise_links a {
@@ -2400,7 +2487,7 @@ a.aToolTipCloseBtn {
 nav {
 	padding:0px 0 0 0;
 	margin-top:-20px;
-	margin-left:59px;
+	margin-left:30px;
 }
 .sf-menu {
 	margin:			0;
@@ -2414,7 +2501,7 @@ nav {
 	z-index:50
 }
 .sf-menu li {
-	padding-right:19px;
+	padding-right:12px;
 	float:left;
 	font-size:1.5em;
 	line-height:1.2307em;
