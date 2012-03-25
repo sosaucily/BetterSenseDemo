@@ -44,6 +44,9 @@
 <%# Moved this out of the layout so Kaltura pages don't clash with JQuery-UI %>
 <%# javascript_include_tag "jquery-ui-1.8.16.custom.min" %>
 <%= csrf_meta_tag %>
+<% if Rails.env == "production" then %>
+	<%= javascript_include_tag 'google_analytics' %>
+<% end %>
 </head>
 <%= render "shared/header" %>
 <%= yield %>
