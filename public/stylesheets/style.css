@@ -1507,7 +1507,7 @@ select#quality {
 		.projects .odd .thumb_column {
 		}
 		.projects .odd .description_column {
-			margin-left:335px;
+			margin-left:345px;
 		}
 		.projects .last1 {
 			margin-bottom:0;
@@ -1517,6 +1517,7 @@ select#quality {
 			margin:0px 50px 0 115px;
 			padding:6px 6px 6px 6px;
 			background:#e6e6e6;
+			position:absolute;
 			top:50%;
 			background-color:#FFF;
 			border-radius: 5px 10px 5px 10px;
@@ -1540,7 +1541,7 @@ select#quality {
 			background-image:url(../images/How_1_Film_Funnel_200.jpg);
 		}
 		.projects .thumb_parent_1 {
-			margin-top:-6px;
+			margin-top:-118px;
 		}
 		.projects .how_image_2 {
 			width:200px;
@@ -1549,7 +1550,7 @@ select#quality {
 			background-image:url(../images/How_2_Frame_strip_200.jpg);
 		}
 		.projects .thumb_parent_2 {
-			margin-top:15px;
+			margin-top:-100px;
 		}
 		.projects .how_image_3 {
 			width:200px;
@@ -1557,7 +1558,7 @@ select#quality {
 			background-image:url(../images/How_3_Chart_200.jpg);
 		}
 		.projects .thumb_parent_3 {
-			margin-top:20px;
+			margin-top:-95px;
 		}
 		.projects .how_image_4 {
 			width:200px;
@@ -1565,7 +1566,7 @@ select#quality {
 			background-image:url(../images/How_4_Max_Value_200.jpg);
 		}
 		.projects .thumb_parent_4 {
-			margin-top:15px;
+			margin-top:-100px;
 		}
 		.projects .how_image_5 {
 			width:200px;
@@ -1573,7 +1574,7 @@ select#quality {
 			background-image:url(../images/How_5_compare_ads_200.jpg);
 		}
 		.projects .thumb_parent_5 {
-			margin-top:10px;
+			margin-top:-102px;
 		}
 		.projects .how_image_6 {
 			width:200px;
@@ -1581,7 +1582,7 @@ select#quality {
 			background-image:url(../images/How_6_Laptop_Ad_200.jpg);
 		}
 		.projects .thumb_parent_6 {
-			margin-top:0px;
+			margin-top:-80px;
 		}
 		
 .devise_links a {
