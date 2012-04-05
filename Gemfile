@@ -22,8 +22,6 @@ gem 'devise'
 
 gem 'algorithms'
 
-#gem 'fastercsv'
-
 gem 'compass', '~> 0.11.5'
 
 gem 'capistrano'
@@ -40,23 +38,11 @@ gem "paperclip", "~> 2.3"
 
 gem 'will_paginate', '~> 3.0'
 
-#gem 'ruby-debug'
-
 gem 'oink'
 
 gem 'redcarpet'
 
-#gem 'mongoid'
-
-#gem 'bson_ext'
-
-#gem 'kaltura'
-
-#gem 'kaltura_fu', :path => '/Users/jessesmith/Documents/BetterSense/www/kaltura_fu'
-
 gem 'kaltura_fu', :git => 'git@github.com:jesses16/kaltura_fu.git'
-
-#gem 'kaltura_fu'
 
 gem 'delayed_job_active_record'
 

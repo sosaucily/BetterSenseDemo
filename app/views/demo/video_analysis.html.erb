@@ -5,7 +5,7 @@
 	
 	Use API to make the connection?
 %>
-<% logger.debug "Running demo with metadata object: " + @demo_video_metadata.to_json %>
+<%# logger.debug "Running demo with metadata object: " + @demo_video_metadata.to_json %>
 <% @video = Video.where(:name => 'Casino Royale').first || Video.all.first %>
 <%= javascript_include_tag "flowplayer-3.2.8.min" %>
 <%= javascript_include_tag 'jquery.dataTables.min'%>
