@@ -1480,7 +1480,7 @@ select#quality {
 				}
 		.projects .last {
 			margin-bottom:0;
-			height:150px;
+			height:225px;
 			margin-top:30px;
 			vertical-align:bottom;
 			position:relative;
@@ -1559,7 +1559,8 @@ select#quality {
 			background-image:url(../images/How_3_Chart_200.jpg);
 		}
 		.projects .thumb_parent_3 {
-			margin-top:-95px;
+			margin-top:-118px;
+			padding:30px 6px 30px 6px;
 		}
 		.projects .how_image_4 {
 			width:200px;
@@ -1575,7 +1576,8 @@ select#quality {
 			background-image:url(../images/How_5_compare_ads_200.jpg);
 		}
 		.projects .thumb_parent_5 {
-			margin-top:-102px;
+			margin-top:-118px;
+			padding:22px 6px 22px 6px;
 		}
 		.projects .how_image_6 {
 			width:200px;
