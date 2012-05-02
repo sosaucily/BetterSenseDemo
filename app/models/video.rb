@@ -179,7 +179,9 @@ class Video < ActiveRecord::Base
     logger.info("running enable_reports")
     basic_url = BetterSenseDemo::APP_CONFIG["backend_base_url"] + BetterSenseDemo::APP_CONFIG["backend_report_url"] + hashstring + "/reports/" + name + "_basic.txt"
     premium_url = BetterSenseDemo::APP_CONFIG["backend_base_url"] + BetterSenseDemo::APP_CONFIG["backend_report_url"] + hashstring + "/reports/" + name + "_premium.txt"
-    
+    basic_url_xml = BetterSenseDemo::APP_CONFIG["backend_base_url"] + BetterSenseDemo::APP_CONFIG["backend_report_url"] + hashstring + "/reports/" + name + "_basic.xml"
+    premium_url_xml = BetterSenseDemo::APP_CONFIG["backend_base_url"] + BetterSenseDemo::APP_CONFIG["backend_report_url"] + hashstring + "/reports/" + name + "_premium.xml"
+
     video_report_dir = Rails.root.to_s + BetterSenseDemo::APP_CONFIG["report_directory"] + hashstring
     begin
       Dir.mkdir(video_report_dir)
@@ -199,6 +201,24 @@ class Video < ActiveRecord::Base
     response = send_command_to_backend(premium_url)
     begin
       open(video_report_dir + "/" + name + "_premium.txt", "wb") { |file|
+        file.write(response.body.to_s)
+      }
+    rescue
+      logger.error ("Couldn't write report_premium file!")
+    end
+
+    response = send_command_to_backend(basic_url_xml)
+    begin
+      open(video_report_dir + "/" + name + "_basic.xml", "wb") { |file|
+        file.write(response.body.to_s)
+      }
+    rescue
+      logger.error ("Couldn't write report_basic file!")
+    end
+    
+    response = send_command_to_backend(premium_url_xml)
+    begin
+      open(video_report_dir + "/" + name + "_premium.xml", "wb") { |file|
         file.write(response.body.to_s)
       }
     rescue
