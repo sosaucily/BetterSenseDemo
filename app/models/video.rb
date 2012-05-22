@@ -115,6 +115,8 @@ class Video < ActiveRecord::Base
     response = send_command_to_backend(analyze_url, video_params)
     if response.code != 200 then return end
     logger.info("Sending video for analysis: " + name + " with quality " + quality)
+    #Set status of video to be something like "analyzing," so the "add to cart" button goes away right away.
+    #Should we also trigger the poll_for_change now? or does that happen after it has completed analysis?
   end
   handle_asynchronously :do_analyze, :run_at => Proc.new { BetterSenseDemo::APP_CONFIG["analyze_video_seconds"].to_i.seconds.from_now }
   
@@ -132,6 +134,7 @@ class Video < ActiveRecord::Base
       self.destroy
     else
       #This video isn't ready to be deleted, so let's hold off
+      logger.info("Video isn't ready to be deleted, so spinning on delayed job: " + name)
       delete_from_backend
     end
   end

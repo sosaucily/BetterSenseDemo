@@ -1,0 +1,61 @@
+
+<% page_title("How") %>
+<%= javascript_include_tag "flowplayer-3.2.8.min" %>
+<script type="text/javascript">
+	$(function() {
+		flowplayer("player", "/flash/flowplayer-3.2.8.swf", {
+			playlist: [
+				{
+					url: "/processedVideos/manual/about_bettersense.m4v"
+					//duration: 72
+				}
+			],
+			plugins: 
+			{
+				controls: {
+					url: '/flash/flowplayer.controls-3.2.8.swf',
+					fullscreen: false
+				}
+			}, //Close Plugins
+			clip: {
+			    // stop at the first frame and start buffering
+				autoPlay: false,
+				autoBuffering: true
+	       
+		   }//Close CLIP
+		});
+	});
+</script>
+<div class="indent1 padding">
+	<div class="wrapper demos">
+		<div class="grid_9 alpha">
+			<div class="grid_9 alpha">
+				<h4 class="h4-bg1">About <strong>better</strong>sense</h4>
+				<div class="demo_video_640">
+					<a
+						style="display:block;width:640px;height:360px"
+						id="player">
+					</a>
+				<%# 
+				  vid_x = 480
+				  vid_y = 360
+				  kaltura_options = {}
+				  video_size = [vid_x,vid_y]
+				  kaltura_options[:size] = video_size
+				%>
+				<%# raw kaltura_player_embed('0_3byvgkh0', kaltura_options) %>
+				</div>
+			</div>
+		</div>
+		<div class="grid_3 omega">
+			<div class="grid_3">
+				<h4 class="h4-bg1">Check Out</h4>
+				<strong class="title">How it Works</strong>
+				See an outline of how the <strong>better</strong>sense process works. <%= link_to 'See How', '/how', :class=>"button2" %>
+				<strong class="title title-pad">Demos</strong>
+				We've posted some demo videos showing what our solution can do.  Take a look. <%= link_to 'Watch the Demo', '/demo', :class=>"button2" %>
+			</div>
+		</div>
+	</div>
+</div>
+

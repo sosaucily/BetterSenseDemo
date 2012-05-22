@@ -1270,6 +1270,12 @@ select#quality {
 	width:326px;
 }
 
+.image_thumb_border {
+	border:1px solid #e9e9e9;
+	width:160px;
+	height:100px;
+}
+
 .team {
 	width:100%;
 	overflow:hidden;
@@ -1379,6 +1385,11 @@ select#quality {
 	
 	.demos .demo_video_480 {
 		/*padding-left: 30px;*/
+		padding:15px 30px 15px 30px;
+		background:#e6e6e6;
+	}
+	
+	.demos .demo_video_640 {
 		padding:15px 30px 15px 30px;
 		background:#e6e6e6;
 	}
