@@ -31,6 +31,7 @@ BetterSenseDemo::Application.routes.draw do
 
   match "demo" => 'demo#index'
   match "demo/:demo_name" => 'demo#servePage'
+  match "product-video" => 'demo#about_video'
 
   match "regclick" => 'ads#regclick'
   match "regimpress" => 'ads#regimpress'
