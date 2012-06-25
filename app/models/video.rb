@@ -8,6 +8,7 @@ class Video < ActiveRecord::Base
   has_attached_file :thumbnail, :styles => { :thumb => "100x100>" }
 
   validates :account, :account_exists => true
+  before_destroy :destroy_report_files
 
 #Do i need this??
   include VideosHelper
@@ -88,6 +89,7 @@ class Video < ActiveRecord::Base
     elsif (is_complete || is_processed)
       logger.info ("Video is in a stable status, done status polling.")
       if (is_complete)
+        #Could send email here that the report is complete?
         enable_reports
       end
     else
@@ -117,6 +119,7 @@ class Video < ActiveRecord::Base
     logger.info("Sending video for analysis: " + name + " with quality " + quality)
     #Set status of video to be something like "analyzing," so the "add to cart" button goes away right away.
     #Should we also trigger the poll_for_change now? or does that happen after it has completed analysis?
+    poll_for_video_status_change
   end
   handle_asynchronously :do_analyze, :run_at => Proc.new { BetterSenseDemo::APP_CONFIG["analyze_video_seconds"].to_i.seconds.from_now }
   
@@ -177,6 +180,22 @@ class Video < ActiveRecord::Base
   
   private
   
+  def destroy_report_files
+    video_report_dir = Rails.root.to_s + BetterSenseDemo::APP_CONFIG["report_directory"] + hashstring
+    available_reports.each do |report|
+      begin
+        File.delete report
+      rescue
+        logger.info("Unable to delete report during video destruction: " + report)
+      end
+    end
+    begin    
+      Dir.delete(video_report_dir)
+    rescue
+      logger.info("Unable to delete report directory during video destruction for video: " + id.to_s)
+    end
+  end
+  
   def enable_reports
     #Transfer the reports to a local folder for the user to download and be accessible from a javascript API
     logger.info("running enable_reports")
@@ -207,6 +226,7 @@ class Video < ActiveRecord::Base
         file.write(response.body.to_s)
       }
     rescue
+      #Currently this happens every time the video wasn't processed as premium
       logger.error ("Couldn't write report_premium file!")
     end
 
@@ -225,6 +245,7 @@ class Video < ActiveRecord::Base
         file.write(response.body.to_s)
       }
     rescue
+      #Currently this happens every time the video wasn't processed as premium
       logger.error ("Couldn't write report_premium file!")
     end
     
