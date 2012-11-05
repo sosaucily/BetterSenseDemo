@@ -50,6 +50,8 @@ gem 'daemons'
 
 gem 'geocode'
 
+gem 'thin'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
