@@ -42,7 +42,7 @@ gem 'oink'
 
 gem 'redcarpet'
 
-gem 'kaltura_fu', :git => 'git@github.com:jesses16/kaltura_fu.git'
+gem 'kaltura_fu', :git => 'git://github.com/jesses16/kaltura_fu.git'
 
 gem 'delayed_job_active_record'
 

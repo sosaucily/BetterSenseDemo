@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:jesses16/kaltura_fu.git
+  remote: git://github.com/jesses16/kaltura_fu.git
   revision: 26a97bb1c27281f02be2d0d1469944cc21597100
   specs:
     kaltura_fu (1.0.0.beta1)
