@@ -7,7 +7,7 @@ class DemoVideoMetadata
     viewer_offset = 1
     
     video_report_dir = Rails.root.to_s + BetterSenseDemo::APP_CONFIG["report_directory"] + hashstring
-    report_content = IO.read(video_report_dir + "/" + xml_data_file).html_safe
+    report_content = IO.read(video_report_dir + "/" + xml_data_file)#.html_safe
     doc = REXML::Document.new(report_content)
     root = doc.root
     @video_metadata = {:topVideoKeywords => [],:topVideoCategories => [],:scenes => {},:frames => {}}
