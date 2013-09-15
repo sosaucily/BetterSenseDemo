@@ -13,3 +13,4 @@ config/kaltura.yml
 config/iqengines.yml
 devise/*
 reports/*
+.idea
